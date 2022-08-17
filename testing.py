@@ -11,6 +11,11 @@ sct = mss.mss()
 
 custom_config = "--oem 3 --psm 6"
 a = MarketUI()
+a.await_purchase_result()
+
+quit()
+
+
 while 1:
     print(a.purchase_errored())
 

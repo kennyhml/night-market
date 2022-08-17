@@ -28,6 +28,11 @@ class Database:
     def get_items(self):
         return self.item_data
 
+
+    def items_sold_at(self, vendor):
+        return [item for item in self.item_data if item['trader'] == vendor]
+
+
     def data_to_item(self, entry) -> Item:
         return Item(
             name=entry,
