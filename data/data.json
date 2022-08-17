@@ -1,0 +1,82 @@
+{
+    "Toilet paper": {
+        "trader": "therapist",
+        "price": "5544",
+        "buy_at": "5100",
+        "refresh": 0,
+        "currency": "RUB"
+
+    },
+
+    "OFZ 30x160mm shell": {
+        "trader": "therapist",
+        "price": "35280",
+        "buy_at": "34500",
+        "refresh": 4,
+        "currency": "RUB"
+
+    },
+
+    "Round pliers": {
+        "trader": "therapist",
+        "price": "17010",
+        "buy_at": "16200",
+        "refresh": 3,
+        "currency": "RUB"
+
+    },
+    
+    "Axel parrot figurine": {
+        "trader": "therapist",
+        "price": "32130",
+        "buy_at": "31500",
+        "refresh": 2,
+        "currency": "RUB"
+
+    },
+
+    "Old firesteel": {
+        "trader": "therapist",
+        "price": "39943",
+        "buy_at": "39900",
+        "refresh": 3,
+        "currency": "RUB"
+
+    },
+
+    "Golden egg": {
+        "trader": "therapist",
+        "price": "42840",
+        "buy_at": "42000",
+        "refresh": 2,
+        "currency": "RUB"
+
+    },
+
+    "Can of Dr. Lupo's coffee beans": {
+        "trader": "therapist",
+        "price": "32760",
+        "buy_at": "32200",
+        "refresh": 3,
+        "currency": "RUB"
+
+    },
+
+    "Ratchet wrench": {
+        "trader": "therapist",
+        "price": "78120",
+        "buy_at": "76000",
+        "refresh": 2,
+        "currency": "RUB"
+
+    },
+
+    "Military gyrotachometer": {
+        "trader": "therapist",
+        "price": "39060",
+        "buy_at": "38300",
+        "refresh": 3,
+        "currency": "RUB"
+
+    }
+}
