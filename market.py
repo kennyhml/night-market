@@ -5,6 +5,7 @@ from screen import mask, process_tess_image
 from tarkov import Discord, TarkovBot, lg
 import pyautogui as pg
 import time
+from PIL import Image
 import pytesseract as tes
 
 tes.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -134,13 +135,11 @@ class MarketUI(TarkovBot):
         self.check_status()
         self.notify("Buying available item...")
         self.click(0.3)
+        self.move_to(1779, 118)
 
         # Wait for the red exit button of the prompt
         while not pg.pixelMatchesColor(1171, 460, (64, 13, 11), tolerance=20):
             self.sleep(0.1)
-            if self.captcha_appeared():
-                solver = CaptchaSolver()
-                solver.get_captcha_target()
 
         # Grab the amount of items to check if we need to hit the "all" button
         amount = int(self.get_amount())
@@ -150,46 +149,93 @@ class MarketUI(TarkovBot):
 
         # Y to confirm, check purchase succeeded, return item quantity
         self.press("Y")
-        return self.get_purchase_status(), amount
+        success, fixed_amount = self.await_purchase_result()
+        return success, fixed_amount if fixed_amount else amount
 
-    def get_purchase_status(self):
+    def await_purchase_result(self):
         """Checks if a purchase fails, succeeds or errors."""
-        while not (
-            self.purchase_succeeded()
-            or self.purchase_failed()
-            or self.purchase_errored()
-        ):
-            self.sleep(0.1)
-            if self.captcha_appeared():
-                solver = CaptchaSolver()
-                solver.get_captcha_target()
+        self.check_status()
+        self.notify("Awaiting purchase result...")
+        # wait for either result to show up
+        while True:
+            success = self.purchase_succeeded()
+            failure = self.purchase_failed()
+            error = self.purchase_errored()
+
+            # no special error occurred
+            if success or failure:
+                return success, None
+
+            if error:
                 break
 
-        if self.purchase_errored():
-            self.get_error()
+            self.sleep(0.1)
+            if self.captcha_appeared():
+                self.notify("A captcha has appeared!")
+                solver = CaptchaSolver()
+                solver.get_captcha_target()
+                solver.confirm()
+                return False, None
 
-        return self.purchase_succeeded()
+        error, new = self.purchase_errored()
+        if error:
+            self.notify("Purchase result is an error message!")
+            if new:
+                self.notify(f"The amount bought was {new}")
+                self.press("esc")
+                self.sleep(0.3)
+
+        return True, new
 
     def get_error(self):
         pg.screenshot("images/temp/error.png", region=(708, 456, 497, 176))
         processed = mask("images/temp/error.png")
 
-        error =  tes.image_to_string(processed,config="--psm 8 -l eng").strip()
+        error = tes.image_to_string(processed, config="--psm 8 -l eng").strip()
         self.discord.send_message(error)
         self.press("esc")
+        self.sleep(1)
 
     def purchase_errored(self):
+        if (
+            pg.locateOnScreen(
+                "images/not_enough_money.png",
+                region=(752, 466, 154, 36),
+                confidence=0.7,
+            )
+            is not None
+        ):
+            raise NoMoneyLeft
+
+        if new_amount := self.too_many_items_error():
+            return True, new_amount
+
+    def too_many_items_error(self):
         """Checks whether a purchase resulted in an error. this could be:
         - Tried to buy more items than available
         - Not enough money (should trigger inventory emptying)
         - Other unknwon errors?
         """
-        return (
+        if (
             pg.locateOnScreen(
-                "images/error.png", region=(708, 456, 497, 176), confidence=0.6
+                "images/too_many_items.png", region=(915, 554, 90, 45), confidence=0.7
             )
             is not None
-        )
+        ):
+            path = "images/temp/amount.png"
+            self.notify("Error: Not all items were left!")
+
+            pg.screenshot("images/temp/amount.png", region=(1005, 522, 81, 20))
+            img = Image.open("images/temp/amount.png")
+            w, h = img.size
+            img = img.resize((w * 6, h * 6), 1)
+            img.save(path)
+            text: str = tes.image_to_string(
+                mask(path),
+                config="-c tessedit_char_whitelist=1234567890 --psm 10 -l eng",
+            ).strip()
+            print(text)
+            return "".join(char for char in [c for c in text if c.isdigit()])
 
     def purchase_failed(self):
         """Checks if a purchase failed by matching for the red icon"""
@@ -304,11 +350,17 @@ class MarketUI(TarkovBot):
                 status_region = self.purchase_grid[box_nr]
                 price_region = self.price_grid[box_nr]
 
-                # get the status screenshot and process it with tesseract
-                pg.screenshot(f"images/{box_nr}_status.png", region=status_region)
-                status = tes.image_to_string(
-                    pg.screenshot(region=status_region)
-                ).strip()
+                # get the status
+                status = None
+                if pg.locateOnScreen(
+                    "images/purchase.png", region=status_region, confidence=0.7
+                ):
+                    status = "PURCHASE"
+
+                elif pg.locateOnScreen(
+                    "images/out of stock.png", region=status_region, confidence=0.7
+                ):
+                    status = "Out of stock"
 
                 # evaluate the status
                 if status == "PURCHASE":
@@ -329,7 +381,6 @@ class MarketUI(TarkovBot):
 
                         # wait for the items to refresh...
                         counter = 0
-                        self.move_to(1771, 152)
                         while not self.topslot_is_loaded():
                             self.sleep(0.1)
                             counter += 1
@@ -522,3 +573,7 @@ class MarketDidntOpenError(Exception):
 
 class FilterDidntOpen(Exception):
     """Raised when the filter ui could not be opened"""
+
+
+class NoMoneyLeft(Exception):
+    """Raised when out of money"""

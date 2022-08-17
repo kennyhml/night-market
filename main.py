@@ -20,7 +20,13 @@ def main():
         market.open()
         market.search_item(item)
         market.get_available_purchases(item)
-        
+
+
+
+
+
+
+
     market.notify("Completed a cycle of all items!")
 
 

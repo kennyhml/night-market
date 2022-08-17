@@ -55,7 +55,6 @@ class TarkovBot:
 
         pg.moveTo(x,y)
         return
-
         lg.info(f"Moving to {x, y}")
         humanclicker.move_to_point((x, y), duration=(0.05))
 
@@ -100,6 +99,22 @@ class TarkovBot:
         command = 'echo | set /p nul=' + text.strip() + '| clip'
         os.system(command)
 
+    def overlaps(self, C1, C2, eps):
+        return all(abs(c2 - c1) < eps for c2, c1 in zip(C2, C1))
+
+    def filter_close_points(self, points: set) -> set:
+        diff = 20
+        filtered = set()
+
+        while points:
+            circle = points.pop()
+            for other in points:
+                if self.overlaps(circle, other, diff):
+                    break
+            else:
+                filtered.add(circle)
+
+        return filtered
 
 class Discord:
     def __init__(self) -> None:
