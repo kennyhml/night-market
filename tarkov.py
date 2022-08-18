@@ -1,7 +1,7 @@
 from threading import Thread
 from pyclick import humanclicker
 import pyautogui as pg
-import time 
+import time
 import logging as lg
 import datetime
 import psutil
@@ -9,13 +9,14 @@ import inspect
 import os
 import requests
 
+
 class TarkovBot:
     """Main Tarkov bot handle
     ---------------------------
     Controls the bots workflow with class attributes such as:
     - running: `bool` - bot is active
     - paused: `bool` - bot is paused
-    
+
     Owns main utility methods such as mouse movements, clicks,
     key presses, sleeps...
 
@@ -23,6 +24,7 @@ class TarkovBot:
     --------
     - Terminated: `Exception` if the bot is no longer running.
     """
+
     version = "0.1.0"
     running = True
     paused = False
@@ -53,7 +55,7 @@ class TarkovBot:
         self.check_status()
         x, y = pg._normalizeXYArgs(x, y)
 
-        pg.moveTo(x,y)
+        pg.moveTo(x, y)
         return
         lg.info(f"Moving to {x, y}")
         humanclicker.move_to_point((x, y), duration=(0.05))
@@ -96,8 +98,12 @@ class TarkovBot:
 
     def set_clipboard(str, text):
         """Puts the passed text into the clipboard to allow for pasting"""
-        command = 'echo | set /p nul=' + text.strip() + '| clip'
+        command = "echo | set /p nul=" + text.strip() + "| clip"
         os.system(command)
+
+    @staticmethod
+    def rect_to_center(rect):
+        return (((rect[0] + (0.5 * rect[2])), round(rect[1] + (0.5 * rect[3]))))
 
     def overlaps(self, C1, C2, eps):
         return all(abs(c2 - c1) < eps for c2, c1 in zip(C2, C1))
@@ -116,11 +122,11 @@ class TarkovBot:
 
         return filtered
 
+
 class Discord:
     def __init__(self) -> None:
         self.url = "https://discord.com/api/webhooks/991429513340780626/Hm4wv4-7G9XJaBiIiAN28mU5d79mG9vSmdsj5luutodvRetwJdOD7Z_fFJzB1tg6W3_m"
         self.avatar = "https://lostarkcodex.com/icons/use_9_242.webp"
-
 
     def send_message(self, message):
         data = {
@@ -135,27 +141,23 @@ class Discord:
             "content": message,
             "avatar_url": self.url,
         }
-    
+
         file = {"file": (image, open(image, "rb"))}
-        Thread(target=lambda: requests.post(self.url, data=data, files=file), name="Posting to discord!").start()
-        
-
-
-
-
-
-
-
-
-
+        Thread(
+            target=lambda: requests.post(self.url, data=data, files=file),
+            name="Posting to discord!",
+        ).start()
 
 
 now = datetime.datetime.now()
 now_str = now.strftime("%d-%m-%H-%M")
-lg.basicConfig(level=lg.INFO, filename=f"logs\logs - {now_str}.log", filemode="w",
-            format= "%(asctime)s - %(levelname)s - %(message)s")
+lg.basicConfig(
+    level=lg.INFO,
+    filename=f"logs\logs - {now_str}.log",
+    filemode="w",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 
 class BotTerminated(Exception):
     """Raised when the bot is terminated"""
-

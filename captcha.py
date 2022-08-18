@@ -1,5 +1,5 @@
-
 import difflib
+from time import time
 import pyautogui as pg
 from screen import mask
 from tarkov import Discord, TarkovBot
@@ -55,7 +55,7 @@ CAPTCHA_ITEMS = {
     "Pack of sugar": path + "pack_of_sugar.png",
     "Aseptic bandage": path + "aseptic_bandage.png",
     "Graphics card": path + "graphics_card.png",
-    "": path + ".png",
+    "Wrench": path + "wrench.png",
     "": path + ".png",
     "": path + ".png",
     "": path + ".png",
@@ -77,6 +77,8 @@ class CaptchaSolver(TarkovBot):
 
     def solve(self):
         """Solves the captcha"""
+        start = time()
+
         # process the captcha and get the desired item
         target_item = self.get_captcha_target()
         self.discord.send_message(f"Captcha target item: {target_item}")
@@ -87,6 +89,8 @@ class CaptchaSolver(TarkovBot):
         # convert all occurrences into points, tick them all
         filtered_points = self.find_all_occurrences(image)
         self.check_all_items(filtered_points)
+        self.discord.send_message(f"Captcha took {round(time() - start, 2)}s to solve.")
+        self.confirm()
 
     def get_captcha_target(self):
         """Processes the image of the captcha and returns the filtered item"""
@@ -129,7 +133,7 @@ class CaptchaSolver(TarkovBot):
         )
 
         closest_match = difflib.get_close_matches(
-            target, list(CAPTCHA_ITEMS), n=1, cutoff=0.3
+            target, list(CAPTCHA_ITEMS), n=1, cutoff=0.5
         )
 
         if closest_match:
@@ -168,17 +172,13 @@ class CaptchaSolver(TarkovBot):
         # get a list of all matches, note that this function will match the same image
         # muliple times on the same location!
         occurrences = list(
-            pg.locateAllOnScreen(image, region=(590, 48, 739, 992), confidence=0.8)
+            pg.locateAllOnScreen(image, region=(590, 48, 739, 992), confidence=0.85)
         )
+
         # convert the matched boxes into their center coordinates, this makes it easier to
         # filter out points that are close to each other and click them in the end
-        item_centers = [
-            (
-                round(item[0] + (0.5 * item[2])),
-                round(item[1] + (0.5 * item[3])),
-            )
-            for item in occurrences
-        ]
+        item_centers = [self.rect_to_center(item) for item in occurrences]
+
         # returns the list of filtered points
         return self.filter_close_points(set(item_centers))
 
@@ -186,10 +186,11 @@ class CaptchaSolver(TarkovBot):
         """Check all the items"""
         self.check_status()
         self.notify("Ticking all points...")
+        self.notify(f"Checking {len(positions)} items...")
 
         for position in positions:
             self.move_to(position)
-            self.click(0.5)
+            self.click(0.3)
 
     def confirm(self):
         """Confirm the captcha"""
@@ -204,11 +205,17 @@ class CaptchaSolver(TarkovBot):
         # hope that the button was found, click it
         if confirm:
             self.move_to(confirm)
-            self.click(1)
-            self.sleep(1)
+            self.click(0.5)
+            while pg.locateOnScreen(
+                "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7, grayscale=True
+            ):
+                pass
+
             return
 
         # now we are in trouble
         self.discord.send_message(
             "WARNING! Could not locate the confirmation button!!!"
         )
+
+

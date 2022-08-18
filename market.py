@@ -91,9 +91,13 @@ class MarketUI(TarkovBot):
         filter = Filter(item)
         filter.configurate()
 
+        while self.items_listed():
+            pass
+
         # await items listed
         while not self.items_listed():
-            self.sleep(0.1)
+            pass
+
         self.notify(f"Searching for {item.name} took {round(time.time() - start, 2)}s")
 
     def items_listed(self) -> bool:
@@ -127,25 +131,30 @@ class MarketUI(TarkovBot):
         self.notify(f"Quantity: {result}")
         return result
 
-    def do_purchase(self):
+    def do_purchase(self, point):
         """Cursor should already be on the purchase button on this point!
         Hits the button, awaits until the confirm prompt loads and gets the
         available amount, if amount > 1 then include pressing all.
         """
         self.check_status()
         self.notify("Buying available item...")
-        self.click(0.3)
+        self.move_to(point)
+        self.click(0.2)
         self.move_to(1779, 118)
 
         # Wait for the red exit button of the prompt
         while not pg.pixelMatchesColor(1171, 460, (64, 13, 11), tolerance=20):
-            self.sleep(0.1)
+            if self.captcha_appeared():
+                self.notify("A captcha has appeared!")
+                captcha = CaptchaSolver()
+                captcha.solve()
+                return False, None
 
         # Grab the amount of items to check if we need to hit the "all" button
         amount = int(self.get_amount())
         if amount > 1:
             self.move_to(1146, 490)
-            self.click(0.3)
+            self.click(0.2)
 
         # Y to confirm, check purchase succeeded, return item quantity
         self.press("Y")
@@ -156,6 +165,7 @@ class MarketUI(TarkovBot):
         """Checks if a purchase fails, succeeds or errors."""
         self.check_status()
         self.notify("Awaiting purchase result...")
+
         # wait for either result to show up
         while True:
             success = self.purchase_succeeded()
@@ -172,9 +182,8 @@ class MarketUI(TarkovBot):
             self.sleep(0.1)
             if self.captcha_appeared():
                 self.notify("A captcha has appeared!")
-                solver = CaptchaSolver()
-                solver.get_captcha_target()
-                solver.confirm()
+                captcha = CaptchaSolver()
+                captcha.solve()
                 return False, None
 
         error, new = self.purchase_errored()
@@ -207,7 +216,7 @@ class MarketUI(TarkovBot):
         ):
             raise NoMoneyLeft
 
-        if new_amount := self.too_many_items_error():
+        if (new_amount := self.too_many_items_error()) is not None:
             return True, new_amount
 
     def too_many_items_error(self):
@@ -299,7 +308,7 @@ class MarketUI(TarkovBot):
                 # post the data
                 self.discord.send_message(
                     f"Purchased {amount} x `{item.name}` for **{price}** ₽!\n"
-                    f"Profit: {(int(item.price) - int(price)) * amount} ₽!"
+                    f"Profit: {(int(item.price) - int(price)) * int(amount)} ₽!"
                 )
             except Exception as e:
                 self.notify(f"Unhandled exception posting to discord!\n{e}")
@@ -314,13 +323,25 @@ class MarketUI(TarkovBot):
         )
 
     def refresh(self):
+
         while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
             self.sleep(0.1)
+            self.notify("Waiting to be able to refresh...")
 
         self.move_to(1839, 118)
-        self.click(0.4)
+        self.click(0.2)
+
         while not self.items_listed():
-            self.sleep(0.1)
+            self.sleep(0.01)
+            self.notify("Waiting for listed items...")
+
+    def item_available(self, region):
+        return pg.locateOnScreen("images/purchase.png", region=region, confidence=0.7)
+
+    def item_out_of_stock(self, region):
+        return pg.locateOnScreen(
+            "images/out of stock.png", region=region, confidence=0.7
+        )
 
     def get_available_purchases(self, item: Item):
         """Main purchase finding function, checks the status of each item slot
@@ -350,29 +371,17 @@ class MarketUI(TarkovBot):
                 status_region = self.purchase_grid[box_nr]
                 price_region = self.price_grid[box_nr]
 
-                # get the status
-                status = None
-                if pg.locateOnScreen(
-                    "images/purchase.png", region=status_region, confidence=0.7
-                ):
-                    status = "PURCHASE"
-
-                elif pg.locateOnScreen(
-                    "images/out of stock.png", region=status_region, confidence=0.7
-                ):
-                    status = "Out of stock"
-
-                # evaluate the status
-                if status == "PURCHASE":
+                # get item status
+                if self.item_available(status_region):
 
                     # screenshot the price and move to the purchase button
                     pg.screenshot(f"images/{box_nr}_price.png", region=price_region)
-                    self.move_to(
-                        round(status_region[0] + (0.5 * status_region[2])),
-                        round(status_region[1] + (0.5 * status_region[3])),
-                    )
+
                     # attempt to purchase the item, get success state and quantity
-                    success, amount = self.do_purchase()
+                    success, amount = self.do_purchase(
+                        self.rect_to_center(status_region)
+                    )
+                    self.notify(f"Purchase succeeded: {success}\nQuanitity: {amount}")
 
                     # add the purchase to our purchases to post to discord later
                     if success:
@@ -384,7 +393,7 @@ class MarketUI(TarkovBot):
                         while not self.topslot_is_loaded():
                             self.sleep(0.1)
                             counter += 1
-                            if counter > 4:
+                            if counter > 3:
                                 break
                         else:
                             self.notify("Another item took the top slot!")
@@ -395,12 +404,12 @@ class MarketUI(TarkovBot):
                     self.notify("Purchase failed!")
 
                 # item is already out of stock, just skip and get the next instead
-                elif status == "Out of stock":
+                elif self.item_out_of_stock(status_region):
                     self.notify(f"Box {box_nr + 1} is out of stock! Skipping...")
                     box_nr += 1
 
                 else:
-                    self.notify(f"No items!")
+                    self.notify(f"No items available for purchase!")
                     break
 
         # post purchases to discord if there were any
@@ -442,7 +451,7 @@ class SearchBar(TarkovBot):
             "images/max_price.png", region=(753, 51, 40, 21), confidence=0.7
         ):
             self.move_to(x)
-            self.click(0.4)
+            self.click(0.3)
 
     def search_item(self):
         """Searches for the items name"""
@@ -453,22 +462,30 @@ class SearchBar(TarkovBot):
 
         # move into searchbar
         self.move_to(197, 124)
-        self.click(0.5)
+        self.click(0.3)
 
         # put name into clipboard and paste it into searchbar
         self.set_clipboard(self.item.name)
         pg.hotkey("ctrl", "v")
-        self.sleep(0.4)
+        self.sleep(0.2)
         self.move_to(84, 165)
-        self.sleep(0.4)
+        self.sleep(0.2)
 
         # await items found
         while self.is_searching():
-            self.sleep(0.1)
+            pass
+
+        while (
+            not pg.pixelMatchesColor(85, 163, (206, 205, 195), tolerance=15)
+            and not pg.pixelMatchesColor(85, 166, (199, 198, 188), tolerance=15)
+            and not pg.pixelMatchesColor(85, 161, (221, 221, 215), tolerance=15)
+            and not pg.pixelMatchesColor(90, 164, (200, 199, 190), tolerance=15)
+        ):
+            pass
 
         # click the found item bar to make them display
         self.notify("Item found!")
-        self.click(0.6)
+        self.click(0.4)
 
 
 class Filter(TarkovBot):
@@ -514,7 +531,7 @@ class Filter(TarkovBot):
 
         self.notify("Opening the filter ui...")
         self.move_to(481, 86)
-        self.click(0.4)
+        self.click(0.2)
 
         while not self.filter_is_open():
             self.sleep(0.1)
@@ -537,9 +554,9 @@ class Filter(TarkovBot):
 
         # get currency point from currency dict and set it
         self.move_to(654, 124)
-        self.click(0.3)
+        self.click(0.2)
         self.move_to(self.CURRENCIES[self.item.currency])
-        self.click(0.3)
+        self.click(0.2)
 
     def set_price(self):
         """Sets the max price of the item"""
@@ -548,14 +565,14 @@ class Filter(TarkovBot):
 
         # set price, again by using copy paste to speed things up
         self.move_to(797, 153)
-        self.click(0.3)
+        self.click(0.1)
         self.set_clipboard(str(self.item.buy_at))
         pg.hotkey("ctrl", "v")
 
     def confirm_search(self):
         """Confirm the filter"""
         self.move_to(611, 439)
-        self.click(0.4)
+        self.click(0.1)
 
     def configurate(self):
         """Sets all filter settings."""
