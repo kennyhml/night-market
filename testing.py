@@ -4,25 +4,23 @@ from PIL import Image
 import pyautogui as pg
 import json
 import mss
-from market import MarketUI
+from market.market import MarketUI
+from market.purchase import Purchase, PurchaseHandler
+from tarkov import TarkovBot
 
 sct = mss.mss()
 
-while 1:
-    print(
-        pg.locateOnScreen(
-            "Images/captcha.png",
-            region=(577, 45, 775, 1007),
-            confidence=0.7,
-            grayscale=True,
-        )
-    )
+from PIL import Image
+import requests
+from io import BytesIO
 
-custom_config = "--oem 3 --psm 6"
-a = MarketUI()
-a.await_purchase_result()
+
+a = PurchaseHandler()
+a.get_item_amount()
 
 quit()
+
+
 
 
 while 1:

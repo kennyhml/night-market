@@ -8,6 +8,8 @@ import psutil
 import inspect
 import os
 import requests
+from mss import mss, tools
+import discord
 
 
 class TarkovBot:
@@ -40,8 +42,6 @@ class TarkovBot:
     def sleep(self, t):
         """Sleep wrapper to check for termination / paused"""
         self.check_status()
-
-        lg.info(f"Sleepin for {t}s")
         time.sleep(t)
 
     def move_to(self, x=None, y=None) -> None:
@@ -81,6 +81,17 @@ class TarkovBot:
         lg.info(f"Pressing {key}")
 
         pg.press(key)
+
+    def get_screenshot(self, path, region):
+        x1, y1, x2, y2 = region
+        
+        with mss() as sct:
+            region= {'top': y1, 'left': x1, 'width': x2, 'height': y2}
+            # Grab the data
+            img = sct.grab(region)
+
+            # Save to the picture file
+            tools.to_png(img.rgb, img.size, output=path)
 
     def game_running(self) -> bool:
         """Checks if tarkov is running"""
@@ -148,6 +159,32 @@ class Discord:
             name="Posting to discord!",
         ).start()
 
+
+    def send_purchase_embed(self, purchase):
+        embed = discord.Embed(
+            type="rich",
+            title=f'Purchased {purchase.item.name}!',
+            description=f'You just hit a lick on {purchase.item.name}',
+            color=0x9807f2,
+        )
+        print(f"images/items/{purchase.image}.png")
+        file = discord.File(f"images/items/{purchase.image}.png", filename="image.png")
+
+        embed.set_thumbnail(url="attachment://image.png")
+        embed.add_field(name="Bought for:ㅤㅤㅤ" ,value=purchase.bought_at)
+        embed.add_field(name="Item value:ㅤㅤㅤ" ,value=purchase.item.price)
+        embed.add_field(name='\u200b', value='\u200b')
+        embed.add_field(name="Quantity:ㅤㅤㅤ" ,value=purchase.amount)
+        embed.add_field(name="Profit made:ㅤㅤㅤ" ,value=purchase.profit)
+        embed.add_field(name='\u200b', value='\u200b')
+
+        embed.set_footer(
+            text="Powered by night market"
+        )
+        webhook = discord.Webhook.from_url(
+            self.url, adapter=discord.RequestsWebhookAdapter()
+        )
+        webhook.send(file=file, avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg", embed=embed) 
 
 now = datetime.datetime.now()
 now_str = now.strftime("%d-%m-%H-%M")

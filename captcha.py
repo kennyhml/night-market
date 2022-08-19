@@ -43,7 +43,7 @@ CAPTCHA_ITEMS = {
     "Morphine injector": path + "morphine_injector.png",
     "Electric drill": path + "electric_drill.png",
     "Pliers": path + "pliers.png",
-    "Duct tape": path + "duct_tape.png",
+    "Insulating tape": path + "insulating_tape.png",
     "Broken GPhone X smartphone": path + "broken_gphone_x_smartphone.png",
     "Golden Star balm": path + "golden_star_balm.png",
     "Toilet paper": path + "toilet_paper.png",
@@ -56,8 +56,8 @@ CAPTCHA_ITEMS = {
     "Aseptic bandage": path + "aseptic_bandage.png",
     "Graphics card": path + "graphics_card.png",
     "Wrench": path + "wrench.png",
-    "": path + ".png",
-    "": path + ".png",
+    "Xenomorph sealing foam": path + "xenomorph_sealing_foam.png",
+    "Can of condensed milk": path + "can_of_condensed_milk.png",
     "": path + ".png",
     "": path + ".png",
     "": path + ".png",
@@ -102,7 +102,7 @@ class CaptchaSolver(TarkovBot):
         path = "images/temp/captcha.png"
 
         # upscale the image for better matches
-        pg.screenshot(path, region=(620, 63, 680, 980))
+        self.get_screenshot(path, region=(620, 63, 680, 980))
         self.discord.send_image(path, "A captcha has appeared:")
 
         # mask the image, upscale it a little
@@ -190,7 +190,7 @@ class CaptchaSolver(TarkovBot):
 
         for position in positions:
             self.move_to(position)
-            self.click(0.3)
+            self.click(0.2)
 
     def confirm(self):
         """Confirm the captcha"""
@@ -205,7 +205,7 @@ class CaptchaSolver(TarkovBot):
         # hope that the button was found, click it
         if confirm:
             self.move_to(confirm)
-            self.click(0.5)
+            self.click(0.3)
             while pg.locateOnScreen(
                 "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7, grayscale=True
             ):

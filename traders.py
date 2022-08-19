@@ -70,7 +70,7 @@ class SellUi(TarkovBot):
                 self.click(0.05)
         self.confirm_sell()
         self.sleep(1)
-        
+
     def post_current_money(self):
         pg.screenshot("images/temp/money.png", region=(1596, 168, 131, 34))
         discord = Discord()
@@ -81,4 +81,5 @@ class SellUi(TarkovBot):
     def confirm_sell(self):
         self.move_to(964,182)
         self.click(0.4)
+
 
