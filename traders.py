@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-from tarkov import Discord, TarkovBot
+from tarkov import TarkovBot
+from nightmart_bot import Discord
 import pyautogui as pg
 
 
@@ -76,7 +77,6 @@ class SellUi(TarkovBot):
         discord = Discord()
 
         discord.send_image("images/temp/money.png", "**Current money:**")
-
 
     def confirm_sell(self):
         self.move_to(964,182)

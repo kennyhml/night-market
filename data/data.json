@@ -4,7 +4,8 @@
         "price": "5544",
         "buy_at": "5100",
         "refresh": 0,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 1
 
     },
 
@@ -13,7 +14,8 @@
         "price": "35280",
         "buy_at": "34500",
         "refresh": 4,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 2
 
     },
 
@@ -22,7 +24,8 @@
         "price": "17010",
         "buy_at": "16200",
         "refresh": 3,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 1
 
     },
     
@@ -31,7 +34,8 @@
         "price": "32130",
         "buy_at": "31500",
         "refresh": 2,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 2
 
     },
 
@@ -40,7 +44,8 @@
         "price": "39943",
         "buy_at": "39900",
         "refresh": 3,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 1
 
     },
 
@@ -49,7 +54,8 @@
         "price": "42840",
         "buy_at": "42000",
         "refresh": 2,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 1
 
     },
 
@@ -58,7 +64,8 @@
         "price": "32760",
         "buy_at": "32200",
         "refresh": 3,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 1
 
     },
 
@@ -67,7 +74,8 @@
         "price": "78120",
         "buy_at": "76000",
         "refresh": 2,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 2
 
     },
 
@@ -76,7 +84,8 @@
         "price": "39060",
         "buy_at": "38300",
         "refresh": 3,
-        "currency": "RUB"
+        "currency": "RUB",
+        "size": 2
 
     }
 }

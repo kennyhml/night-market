@@ -2,7 +2,8 @@ import difflib
 from time import time
 import pyautogui as pg
 from screen import mask
-from tarkov import Discord, TarkovBot
+from tarkov import TarkovBot
+from nightmart_bot import Discord
 from PIL import Image
 import pytesseract as tes
 import cv2 as cv
@@ -110,7 +111,7 @@ class CaptchaSolver(TarkovBot):
         cv.imwrite(path, img)
         img = Image.open(path)
         w, h = img.size
-        img = img.resize((w * 2, h * 2), 1)
+        img = img.resize((w * 3, h * 3), 1)
         img.save(path)
 
         # read the image and filter the returned text
@@ -160,7 +161,7 @@ class CaptchaSolver(TarkovBot):
 
         # check lines left in the text, find line containing "all:"
         for i, split in enumerate(filtered_text):
-            if "all:" in split:
+            if "all:" in split or "alk:" in split:
                 # "all:" occurred > the next index is the word
                 return filtered_text[i + 1]
 
@@ -217,5 +218,4 @@ class CaptchaSolver(TarkovBot):
         self.discord.send_message(
             "WARNING! Could not locate the confirmation button!!!"
         )
-
 

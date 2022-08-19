@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import json
 import glob
-
+from PIL import Image
 from tarkov import TarkovBot
 
 
@@ -13,7 +13,12 @@ class Item:
     currency: str
     trader: str
     refreshes: int
-    image: str | None
+    size: int
+
+@dataclass
+class Inventory:
+    total_slots: int
+    slots_taken: int
 
 
 class Database(TarkovBot):
@@ -38,6 +43,12 @@ class Database(TarkovBot):
 
     def add_image(self, item: Item):
         self.get_screenshot(f"images/items/{item.name}.png", region=(879, 147, 64, 64))
+        img = Image.open(f"images/items/{item.name}.png")
+        bottom_corner = img.crop((60, 48, 61, 49))
+        for x in range(53, 63):
+            for y in range(51, 63):
+                img.paste(bottom_corner, (x, y, x + 1, y + 1))
+        img.save(f"images/items/{item.name}.png")
 
     def get_image(self):
         return
@@ -61,10 +72,5 @@ class Database(TarkovBot):
             currency=self.item_data[entry]["currency"],
             trader=self.item_data[entry]["trader"],
             refreshes=self.item_data[entry]["refresh"],
-            image=entry if self.has_image(entry) else None
+            size=self.item_data[entry]["size"]
         )
-
-
-a = Database()
-
-print(a.has_image("Round pliers"))

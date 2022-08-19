@@ -1,4 +1,4 @@
-from item import Item
+from data.items import Item
 from tarkov import TarkovBot, BotTerminated
 import pyautogui as pg
 

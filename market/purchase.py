@@ -1,12 +1,14 @@
 from dataclasses import dataclass
-from item import Item
-from screen import mask
-from tarkov import Discord, TarkovBot
+from data.items import Inventory, Item
+from nightmart_bot import Discord
+from screen import mask, process_tess_image
+from tarkov import TarkovBot
 import pyautogui as pg
-from captcha import CaptchaSolver
+from data.captcha import CaptchaSolver
 from pytesseract import pytesseract as tes
-from PIL import Image
 import cv2 as cv
+from threading import Thread
+from PIL import Image
 
 @dataclass
 class Purchase:
@@ -16,12 +18,15 @@ class Purchase:
     profit: int
     image: str
 
+
 class PurchaseHandler(TarkovBot):
     """Handles purchasing the item"""
 
     def purchase_window_open(self) -> bool:
         """Checks if the purchase prompt has opened yet"""
-        return pg.pixelMatchesColor(1171, 460, (64, 13, 11), tolerance=20)
+        return pg.locateOnScreen(
+            "images/purchase_prompt.png", region=(815, 416, 556, 130), confidence=0.7
+        )
 
     def out_of_money(self) -> bool:
         """Checks if we ran out of money"""
@@ -137,7 +142,9 @@ class PurchaseHandler(TarkovBot):
                 return False, None
 
             # no special error occurred
-            if (success := self.purchase_succeeded() is not None) or self.purchase_failed():
+            if (
+                success := self.purchase_succeeded() is not None
+            ) or self.purchase_failed():
                 return success, None
 
             # check for errors
@@ -147,7 +154,6 @@ class PurchaseHandler(TarkovBot):
                 self.sleep(0.3)
                 self.press("esc")
                 return True, new
-            self.sleep(0.1)
 
     def get_item_amount(self):
         """Gets the amount of items that can be bought"""
@@ -157,25 +163,90 @@ class PurchaseHandler(TarkovBot):
         if self.item_is_regular_amount():
             self.notify(f"Quantity: 1")
             return "1"
-
+        
         # get image showing the amount, process and pass to tesseract
         path = "Images/temp/item_amount.png"
-        self.get_screenshot(path, region=(1090, 472, 48, 32))
-        processed = mask(path)
+        for region in [(1090, 472, 48, 32), (969, 514, 30, 24)]:
 
-        cv.imwrite(path, processed)
+            self.get_screenshot(path, region=region)
+            processed = mask(path)
+            cv.imwrite(path, processed)
 
-        result = (
-            tes.image_to_string(
-                processed,
-                config="-c tessedit_char_whitelist=123/4567890 --psm 8 -l eng",
+            result = (
+                tes.image_to_string(
+                    processed,
+                    config="-c tessedit_char_whitelist=123/4567890() --psm 8 -l eng",
+                )
+                .strip()  # remove blankspaces
+                .replace("/", "")  # remove the "/"
+                .replace("(", "")
+                .replace(")", "")
             )
-            .strip()  # remove blankspaces
-            .replace("/", "")  # remove the "/"
-        )
-        # output ocr result
-        self.notify(f"Quantity: {result}")
-        return result
+            # output ocr result
+            if result:
+                self.notify(f"Quantity: {result}")
+                return result
+
+    def validate_price(self, item: Item, price: int):
+        """Takes an item and the price we think we bought it for and checks
+        if that could be a valid price.
+        """
+        allowed_profit = 0.9
+        profit_limit = int(item.price) * allowed_profit
+
+        if (
+            int(price) > int(item.buy_at)
+            or (int(item.price) - int(price)) > profit_limit
+        ):
+            return item.buy_at
+
+        return price
+
+    def get_item_price(self, item: Item, img):
+        """Processes the image of the item price and ocr's it"""
+        print("Getting item price...")
+
+        img = process_tess_image(img)
+        cv.imwrite("images/temp/sample.png", img)
+        # process passed image and ocr it, remove blankspaces
+        price = tes.image_to_string(
+            img, config="-c tessedit_char_whitelist=1234567890 --psm 8 -l eng"
+        ).strip()
+
+        return self.validate_price(item, price)
+
+    def post_profit(self, item: Item, inventory: Inventory, purchase):
+        """Sends all previously bought items to discord, the thread is started
+        after all items have been purchased to avoid slowdowns and errors.
+
+        Parameters:
+        -----------
+        item: :class:`Item`
+            The item that was being purchased
+
+        purchases: :class:`List`
+            The list of purchases containing image path and purchase quantity
+        """
+        discord = Discord()
+        try:
+            # get price from image, amount from data
+            bought_for = self.get_item_price(item, purchase["price"])
+            profit = (int(item.price) - int(bought_for)) * purchase["quantity"]
+
+            purchase = Purchase(
+                item=item,
+                bought_at=bought_for,
+                amount=purchase["quantity"],
+                profit=profit,
+                image=item.name,
+            )
+            
+            Thread(target=lambda: discord.send_purchase_embed(purchase, inventory)).start()
+            return purchase
+
+        except Exception as e:
+            print(f"Unhandled exception posting to discord!\n{e}")
+
 
     def get_new_amount(self):
         """Checks whether a purchase resulted in an error. this could be:

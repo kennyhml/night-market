@@ -1,4 +1,4 @@
-from threading import Thread
+
 from pyclick import humanclicker
 import pyautogui as pg
 import time
@@ -7,9 +7,7 @@ import datetime
 import psutil
 import inspect
 import os
-import requests
 from mss import mss, tools
-import discord
 
 
 class TarkovBot:
@@ -42,6 +40,8 @@ class TarkovBot:
     def sleep(self, t):
         """Sleep wrapper to check for termination / paused"""
         self.check_status()
+        caller = inspect.currentframe().f_back.f_code.co_name
+        print(f"{caller} sleeps: {t}")
         time.sleep(t)
 
     def move_to(self, x=None, y=None) -> None:
@@ -133,58 +133,6 @@ class TarkovBot:
 
         return filtered
 
-
-class Discord:
-    def __init__(self) -> None:
-        self.url = "https://discord.com/api/webhooks/991429513340780626/Hm4wv4-7G9XJaBiIiAN28mU5d79mG9vSmdsj5luutodvRetwJdOD7Z_fFJzB1tg6W3_m"
-        self.avatar = "https://lostarkcodex.com/icons/use_9_242.webp"
-
-    def send_message(self, message):
-        data = {
-            "content": message,
-            "avatar_url": self.url,
-        }
-        requests.post(self.url, data=data)
-
-    def send_image(self, image, message):
-
-        data = {
-            "content": message,
-            "avatar_url": self.url,
-        }
-
-        file = {"file": (image, open(image, "rb"))}
-        Thread(
-            target=lambda: requests.post(self.url, data=data, files=file),
-            name="Posting to discord!",
-        ).start()
-
-
-    def send_purchase_embed(self, purchase):
-        embed = discord.Embed(
-            type="rich",
-            title=f'Purchased {purchase.item.name}!',
-            description=f'You just hit a lick on {purchase.item.name}',
-            color=0x9807f2,
-        )
-        print(f"images/items/{purchase.image}.png")
-        file = discord.File(f"images/items/{purchase.image}.png", filename="image.png")
-
-        embed.set_thumbnail(url="attachment://image.png")
-        embed.add_field(name="Bought for:ㅤㅤㅤ" ,value=purchase.bought_at)
-        embed.add_field(name="Item value:ㅤㅤㅤ" ,value=purchase.item.price)
-        embed.add_field(name='\u200b', value='\u200b')
-        embed.add_field(name="Quantity:ㅤㅤㅤ" ,value=purchase.amount)
-        embed.add_field(name="Profit made:ㅤㅤㅤ" ,value=purchase.profit)
-        embed.add_field(name='\u200b', value='\u200b')
-
-        embed.set_footer(
-            text="Powered by night market"
-        )
-        webhook = discord.Webhook.from_url(
-            self.url, adapter=discord.RequestsWebhookAdapter()
-        )
-        webhook.send(file=file, avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg", embed=embed) 
 
 now = datetime.datetime.now()
 now_str = now.strftime("%d-%m-%H-%M")
