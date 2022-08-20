@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from time import time
 from data.items import Inventory, Item
 from nightmart_bot import Discord
 from screen import mask, process_tess_image
@@ -21,6 +22,8 @@ class Purchase:
 
 class PurchaseHandler(TarkovBot):
     """Handles purchasing the item"""
+
+    captchas_solved = 0
 
     def purchase_window_open(self) -> bool:
         """Checks if the purchase prompt has opened yet"""
@@ -86,6 +89,7 @@ class PurchaseHandler(TarkovBot):
             self.notify("A captcha has appeared!")
             captcha = CaptchaSolver()
             captcha.solve()
+            self.captchas_solved += 1
             return False, None
 
     def await_prompt(self):
@@ -93,7 +97,7 @@ class PurchaseHandler(TarkovBot):
         self.check_status()
 
         # Wait for the red exit button of the prompt
-        while not self.purchase_window_open() or self.error_prompt_visible():
+        while not self.purchase_window_open() and not self.error_prompt_visible():
             if self.check_for_captcha():
                 return False
         return True
@@ -105,6 +109,7 @@ class PurchaseHandler(TarkovBot):
         self.notify("Buying available item...")
         self.move_to(point)
         self.click(0.2)
+        self.get_screenshot(("images/temp/pre_purchase.png"), region=(1509, 69, 89, 23))
         if not self.await_prompt():
             return False, None
 
@@ -132,20 +137,30 @@ class PurchaseHandler(TarkovBot):
         Returns success state and a new amount of bought items
         """
         self.check_status()
+        start = time()
         self.notify("Awaiting purchase result...")
 
         # wait for either result to show up
         while True:
 
-            # check captcha
+            if not pg.locateOnScreen("images/temp/pre_purchase.png", region=(1508, 66, 90, 29), confidence=0.98, grayscale=True):
+                print("PRICE CHANGED, ITEM BOUGHT!")
+                print("determined after ", time() - start, " s")
+                return True, None
+            
+            elif self.has_timedout(start, 0.6):
+                return False, None
+
             if self.check_for_captcha():
                 return False, None
 
+            """
             # no special error occurred
             if (
                 success := self.purchase_succeeded() is not None
             ) or self.purchase_failed():
                 return success, None
+            """
 
             # check for errors
             error, new = self.purchase_errored()

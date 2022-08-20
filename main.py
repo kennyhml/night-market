@@ -1,11 +1,11 @@
-from tracemalloc import Statistic
+
 from data.statistics import Statistics
 from market.market import MarketUI
 from data.items import Database, Inventory
 from tarkov import BotTerminated, TarkovBot
 import time
 
-from traders import SellUi, Therapist
+from traders import TraderUi, Therapist, TraderUi
 from market.purchase import NoMoneyLeft
 
 market = MarketUI()
@@ -22,10 +22,9 @@ def main():
 
     # initialize database from data file
     data = Database()
-    vendor = SellUi()
+    vendor = TraderUi()
     inventory = Inventory(60, 0)
 
-    start = time.time()
     # vendor.post_current_money()
     items_to_buy = [data.data_to_item(item) for item in data.get_items()]
     statistics = Statistics(items_to_buy)
@@ -41,38 +40,18 @@ def main():
                 # new inventory value and list of purchchases
                 inventory, purchases = market.get_available_purchases(item, inventory)
 
+                # add the purchase to stats
+                statistics.add_purchase(purchases)
+
                 if inventory.total_slots - inventory.slots_taken < 5:
                     market.discord.send_message(f"The inventory needs to be emptied!")
-                    empty_inventory(vendor, Therapist.location)
-                    inventory = Inventory(70, 0)
-                    continue
+                    profit, current_money = vendor.sell(Therapist.location)
+                    statistics.send_stats(profit, current_money)
+                    inventory = Inventory(60, 0)
 
-                if purchases:
-                    statistics.add_purchase(purchases)
-
-                if market.has_timedout(start, 1800):
-                    print("30 mins passed!")
-                    statistics.send_stats()
-
-
-
-            except NoMoneyLeft:
-                pass
-
-            except BotTerminated:
-                pass
-
-            except TimeoutError:
+            except Exception:
                 market.started_searching = time.time()
                 market.press("esc")
-
-
-def empty_inventory(vendor: SellUi, trader_loc):
-    vendor.open()
-    vendor.open_trader(trader_loc)
-    vendor.open_sell_tab()
-    vendor.sell_items()
-    vendor.post_current_money()
-
+                
 
 main()

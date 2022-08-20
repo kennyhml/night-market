@@ -38,7 +38,9 @@ class Discord:
 
         file = discord.File(f"images/items/{purchase.image}.png", filename="image.png")
         taken, total = inventory.slots_taken, inventory.total_slots
-        profit_percent = round(((purchase.profit / purchase.amount) / int(purchase.item.price)) * 100)
+        profit_percent = round(
+            ((purchase.profit / purchase.amount) / int(purchase.item.price)) * 100
+        )
 
         embed.set_thumbnail(url="attachment://image.png")
         embed.add_field(name="Bought for:ㅤㅤㅤ", value=f"{purchase.bought_at} ₽")
@@ -59,54 +61,83 @@ class Discord:
             file=file,
             avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg",
             embed=embed,
-            username="Night market"
+            username="Night market",
         )
 
-
     def shorten_name(self, name):
-        if len(name.split(" ")) > 3:
-            return " ".join(part for part in name.split(" ")[:3])
+        if len(name.split(" ")) > 4:
+            return " ".join(part for part in name.split(" ")[:4])
         return name
 
-    def send_statistics(self, data, total):
+    def send_statistics(self, data):
 
-        profits: set = set([data[val]["total_profit"] for val in data])
-        profits = sorted(list(profits), reverse=True)
-
-        top_3 = profits[0], profits[1], profits[2]
-
-        for item in data:
-            if data[item]["total_profit"] == profits[0]:
-                item_one = self.shorten_name(item)
-                item_one_amount = data[item]["total_quantity"]
-
-            elif data[item]["total_profit"] == profits[1]:
-                item_two = self.shorten_name(item)
-                item_two_amount = data[item]["total_quantity"]
-
-            elif data[item]["total_profit"] == profits[2]:
-                item_three = self.shorten_name(item)
-                item_three_amount = data[item]["total_quantity"]
+        print("Data:", data)
 
         embed = discord.Embed(
             type="rich",
-            title=f"Your 30min statistic!",
-            color=0xf20707,
-            description="Heres your top 3 items:"
+            title=f"The inventory has been emptied!",
+            color=0xF20707,
+            description=f"The inventory has been emptied, here's your stats!\nㅤ",
         )
 
-        embed.set_thumbnail(url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg")
+        embed.set_thumbnail(
+            url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg"
+        )
 
-        embed.add_field(name=f"#1 {item_one} with {profits[0]} total profit at {item_one_amount} purchases!", value="\u200b", inline=False)
-        embed.add_field(name=f"#2 {item_two} with {profits[1]} total profit at {item_two_amount} purchases!", value="\u200b", inline=False)
-        embed.add_field(name=f"#3 {item_three} with {profits[2]} total profit at {item_three_amount} purchases!", value="\u200b", inline=False)
- 
+        embed.add_field(
+            name=f"Emptying profit:ㅤㅤ",
+            value=f"{data['total_profit']:_}".replace("_", " ") + " ₽"
+            if not data["emptying_profit"]
+            else f"{data['emptying_profit']:_}".replace("_", " ") + " ₽",
+        )
+
+        embed.add_field(
+            name=f"Total profit:",
+            value=f"{data['total_profit']:_}".replace("_", " ") + " ₽",
+        )
+        embed.add_field(
+            name=f"Current money:",
+            value=f"{data['current_money']:_}".replace("_", " ") + " ₽",
+        )
+
+        embed.add_field(name=f"Time taken:ㅤㅤ", value=data["empty_time"])
+        embed.add_field(name=f"Session time:ㅤㅤ", value=data["session_time"])
+        embed.add_field(name=f"Real money value:ㅤㅤ", value=f'{data["profit_in_euro"]}\nㅤ')
+
+        embed.add_field(name=f"Item #1ㅤㅤ", value=data["top_items"][0]["name"])
+        embed.add_field(
+            name=f"Total profit:ㅤㅤ",
+            value=f'{data["top_items"][0]["profit"]:_}'.replace("_", " ") + " ₽",
+        )
+        embed.add_field(
+            name=f"Total purchases:", value=data["top_items"][0]["quantity"]
+        )
+
+        embed.add_field(name=f"Item #2ㅤㅤ", value=data["top_items"][1]["name"])
+        embed.add_field(
+            name=f"Total profit:ㅤㅤ",
+            value=f'{data["top_items"][1]["profit"]:_}'.replace("_", " ") + " ₽",
+        )
+        embed.add_field(
+            name=f"Total purchases:", value=data["top_items"][0]["quantity"]
+        )
+
+        embed.add_field(name=f"Item #3ㅤㅤ", value=data["top_items"][2]["name"])
+        embed.add_field(
+            name=f"Total profit:ㅤㅤ",
+            value=f'{data["top_items"][2]["profit"]:_}'.replace("_", " ") + " ₽",
+        )
+        embed.add_field(
+            name=f"Total purchases:", value=data["top_items"][0]["quantity"]
+        )
+
         embed.set_footer(text="Night market on top!")
+
         webhook = discord.Webhook.from_url(
             self.url, adapter=discord.RequestsWebhookAdapter()
         )
         webhook.send(
             avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg",
             embed=embed,
-            username="Night market"
+            username="Night market",
         )

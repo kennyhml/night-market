@@ -80,14 +80,14 @@ class Filter(TarkovBot):
 
         # set price, again by using copy paste to speed things up
         self.move_to(797, 153)
-        self.click(0.1)
+        self.click(0.2)
         self.set_clipboard(str(self.item.buy_at))
         pg.hotkey("ctrl", "v")
 
     def confirm_search(self):
         """Confirm the filter"""
         self.move_to(611, 439)
-        self.click(0.1)
+        self.click(0.2)
 
     def configurate(self):
         """Sets all filter settings."""

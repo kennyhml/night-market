@@ -1,30 +1,69 @@
-
 import json
+import time
 
 from nightmart_bot import Discord
 
+
 class Statistics:
     def __init__(self, items) -> None:
-        self.items = self.get_data(items)
-        self.total_profit = 0
+        self.items = self.data_to_dict(items)
+        self.last_sent = time.time()
+        self.inventories_emptied = 0
+        self.session_start = time.time()
 
     def add_purchase(self, purchases):
-        added_item = purchases[0].item.name
-        items_profits = [(purchase.profit, purchase.amount) for purchase in purchases]
+        if not purchases:
+            return
 
-        for profit in items_profits:
+        added_item = purchases[0].item.name
+        profits = [(purchase.profit, purchase.amount) for purchase in purchases]
+
+        for profit in profits:
             self.items[added_item]["total_quantity"] += int(profit[1])
             self.items[added_item]["total_profit"] += int(profit[0])
-            self.total_profit += int(profit[0])
 
         self.items[added_item]["average_profit"] = round(
             self.items[added_item]["total_profit"]
             / self.items[added_item]["total_quantity"]
         )
 
-        print(json.dumps(self.items, indent=4))
+    def shorten_name(self, name):
+        if len(name.split(" ")) > 4:
+            return " ".join(part for part in name.split(" ")[:4])
+        return name
 
-    def get_data(self, items):
+    def get_special_items(self, best=True):
+        """Returns three dictionaries of items containing name, quanitity and profit.
+        Can return either the top three or the bottom three items.
+        """
+        profits = set([self.items[val]["total_profit"] for val in self.items])
+        profits = sorted(list(profits), reverse=True)
+
+        for item in self.items:
+            if self.items[item]["total_profit"] == profits[0 if best else -1]:
+                item_1 = {
+                    "name": self.shorten_name(item),
+                    "quantity": self.items[item]["total_quantity"],
+                    "profit": self.items[item]["total_profit"],
+                }
+
+            elif self.items[item]["total_profit"] == profits[1 if best else -2]:
+                item_2 = {
+                    "name": self.shorten_name(item),
+                    "quantity": self.items[item]["total_quantity"],
+                    "profit": self.items[item]["total_profit"],
+                }
+
+            elif self.items[item]["total_profit"] == profits[2 if best else -3]:
+                item_3 = {
+                    "name": self.shorten_name(item),
+                    "quantity": self.items[item]["total_quantity"],
+                    "profit": self.items[item]["total_profit"],
+                }
+
+        return [item_1, item_2, item_3]
+
+    def data_to_dict(self, items):
         data = {}
         for item in items:
             data[item.name] = {
@@ -34,6 +73,34 @@ class Statistics:
             }
         return data
 
-    def send_stats(self):
+    def get_session_time(self):
+        return time.strftime(
+            "%H:%M:%S", time.gmtime((time.time() - self.session_start))
+        )
+
+    def get_cycle_time(self):
+        time_taken = time.strftime("%H:%M:%S", time.gmtime((time.time() - self.last_sent)))
+        self.last_sent = time.time()
+        return time_taken
+
+    def get_total_profit(self):
+        return sum([self.items[item]["total_profit"] for item in self.items])
+
+    def profit_to_money(self):
+        return "~" + str(round(self.get_total_profit() / 480_000, 2)) + " €"
+
+    def send_stats(self, profit, current_money):
+
+        data = {
+            "top_items": self.get_special_items(),
+            "bot_items": self.get_special_items(False),
+            "total_profit": self.get_total_profit(),
+            "emptying_profit": profit,
+            "current_money": current_money,
+            "session_time": self.get_session_time(),
+            "empty_time": self.get_cycle_time(),
+            "profit_in_euro": self.profit_to_money()
+        }
+
         discord = Discord()
-        discord.send_statistics(self.items, self.total_profit)
+        discord.send_statistics(data)

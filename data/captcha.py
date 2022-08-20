@@ -191,7 +191,7 @@ class CaptchaSolver(TarkovBot):
 
         for position in positions:
             self.move_to(position)
-            self.click(0.2)
+            self.click(0.4)
 
     def confirm(self):
         """Confirm the captcha"""

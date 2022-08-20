@@ -1,12 +1,24 @@
 
 
+from tracemalloc import Statistic
+from data.statistics import Statistics
+from market.market import MarketUI
+from market.purchase import PurchaseHandler
+import screen
+import pytesseract as tess
+import cv2 as cv
+from PIL import Image
+import pyautogui  as pg
 
+a = PurchaseHandler()
+a.await_prompt()
+
+quit()
 
 from nightmart_bot import Discord
 
-
 a = Discord()
-a.send_statistics({'Toilet paper': {'total_quantity': 3, 'average_profit': 861, 'total_profit': 2582}, 'OFZ 30x160mm shell': {'total_quantity': 2, 'average_profit': 1280, 'total_profit': 2560}, 'Round pliers': {'total_quantity': 0, 'average_profit': 0, 'total_profit': 0}, 'Axel parrot figurine': {'total_quantity': 0, 'average_profit': 0, 'total_profit': 0}, 'Old firesteel': {'total_quantity': 5, 'average_profit': 1208, 'total_profit': 6038}, 'Golden egg': {'total_quantity': 0, 'average_profit': 0, 'total_profit': 0}, "Can of Dr. Lupo's coffee beans": {'total_quantity': 1, 'average_profit': 2760, 'total_profit': 2760}, 'Ratchet wrench': {'total_quantity': 0, 'average_profit': 0, 'total_profit': 0}, 'Military gyrotachometer': {'total_quantity': 0, 'average_profit': 0, 'total_profit': 0}}, 100000)
+a.send_statistics(aa, sum([aa[item]["total_profit"] for item in aa]))
 
 quit()
 

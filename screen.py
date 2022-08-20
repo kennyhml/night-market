@@ -1,4 +1,4 @@
-from codecs import replace_errors
+
 from time import sleep, time
 import numpy as np
 import cv2 as cv
@@ -45,9 +45,8 @@ def filter_close_points(points: set) -> set:
 
     return filtered
 
-def mask(img):
+def mask(img, rgb=(168,166,151)):
 
-    rgb = (168,166,151)
     variance = 50
 
     img = cv.imread(img, cv.COLOR_RGB2BGR)
@@ -68,11 +67,27 @@ def mask(img):
     # apply mask, save image
     
 
+def inv_replace_zeros(image):
+    """Finds all slashed 0s in the price and replaces them with normal 0"""
+    zero = cv.imread("images/0_2.png", 1)
+    img = cv.imread(image, 1)
+
+    results = set(pg.locateAll(zero, img, confidence=0.7))
+
+    zeros = filter_close_points(results)
+    canvas = Image.open(image)
+    zero = Image.open("images/better_0_2.png")
+
+    for spot in zeros:
+        canvas.paste(zero, (spot[0], spot[1]))
+
+    canvas.save(image)
+
+
 def replace_zeros(image):
     """Finds all slashed 0s in the price and replaces them with normal 0"""
     zero = cv.imread("images/0.png", 1)
     zeros = filter_close_points(set(pg.locateAll(zero, image, confidence=0.8)))
-
     canvas = Image.open(image)
     zero = Image.open("images/better_0.png")
 
