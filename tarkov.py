@@ -90,7 +90,7 @@ class TarkovBot:
         return (time.time() - counter) > max_time
 
     @staticmethod
-    def get_screenshot(path, region):
+    def get_screenshot(path, region=(0, 0, 1920, 1080)):
         x1, y1, x2, y2 = region
         
         with mss() as sct:
@@ -100,7 +100,8 @@ class TarkovBot:
 
             # Save to the picture file
             tools.to_png(img.rgb, img.size, output=path.replace('"', ""))
-
+        return path
+        
     @staticmethod
     def game_running() -> bool:
         """Checks if tarkov is running"""

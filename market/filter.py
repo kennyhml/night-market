@@ -42,17 +42,18 @@ class Filter(TarkovBot):
     def open(self):
         """Opens the filter ui"""
         self.check_status()
-        start = time.time()
 
         self.notify("Opening the filter ui...")
         self.move_to(481, 86)
         self.click(0.2)
 
+        c = 0
         while not self.filter_is_open():
             self.sleep(0.1)
-
-            if self.has_timedout(start, 10):
-                raise FilterDidntOpen
+            c += 1
+            
+            if c > 100:
+                raise TimeoutError("Filter didnt open within 10s!")
 
         self.notify("Filter ui opened!")
 

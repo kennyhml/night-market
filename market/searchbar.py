@@ -1,3 +1,4 @@
+from screen import Screen
 from data.items import Item
 from tarkov import TarkovBot, BotTerminated
 import pyautogui as pg
@@ -49,7 +50,7 @@ class SearchBar(TarkovBot):
 
         # move into searchbar
         self.move_to(197, 124)
-        self.click(0.3)
+        self.click(0.4)
 
         # put name into clipboard and paste it into searchbar
         self.set_clipboard(self.item.name)
@@ -59,17 +60,21 @@ class SearchBar(TarkovBot):
         self.sleep(0.2)
 
         # await items found
+        c = 0
         while self.is_searching():
-            pass
+            self.sleep(0.1)
+            c += 1
 
-        while (
-            not pg.pixelMatchesColor(85, 163, (206, 205, 195), tolerance=15)
-            and not pg.pixelMatchesColor(85, 166, (199, 198, 188), tolerance=15)
-            and not pg.pixelMatchesColor(85, 161, (221, 221, 215), tolerance=15)
-            and not pg.pixelMatchesColor(90, 164, (200, 199, 190), tolerance=15)
-            and not pg.pixelMatchesColor(89, 166, (193,193,184), tolerance=15)
-        ):
-            pass
+            if c > 100:
+                raise TimeoutError("More than 10s passed while searching!")
+
+        c = 0
+        while not Screen.icon_loaded():
+            self.sleep(0.1)
+            c += 1
+
+            if c > 100:
+                raise TimeoutError("More than 10s passed awaiting the icon!")
 
         # click the found item bar to make them display
         self.notify("Item found!")

@@ -4,7 +4,7 @@
         "trader": "Therapist",
         "price": "5543",
         "buy_at": "5100",
-        "refresh": 3,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 1
     },
@@ -13,25 +13,25 @@
         "trader": "Therapist",
         "price": "35280",
         "buy_at": "34500",
-        "refresh": 4,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 2
     },
     "Round pliers": {
-        "enabled": true,
+        "enabled": false,
         "trader": "Therapist",
         "price": "17010",
         "buy_at": "16200",
-        "refresh": 3,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 1
     },
     "Axel parrot figurine": {
         "enabled": false,
-        "trader": "therapist",
+        "trader": "Therapist",
         "price": "32130",
         "buy_at": "31500",
-        "refresh": 2,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 2
     },
@@ -40,16 +40,16 @@
         "trader": "Therapist",
         "price": "39943",
         "buy_at": "39900",
-        "refresh": 3,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 1
     },
     "Golden egg": {
-        "enabled": false,
+        "enabled": true,
         "trader": "Therapist",
         "price": "42840",
         "buy_at": "42000",
-        "refresh": 2,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 1
     },
@@ -58,25 +58,25 @@
         "trader": "Therapist",
         "price": "32760",
         "buy_at": "32200",
-        "refresh": 3,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 1
     },
     "Ratchet wrench": {
-        "enabled": true,
+        "enabled": false,
         "trader": "Therapist",
         "price": "78120",
         "buy_at": "76000",
-        "refresh": 2,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 2
     },
     "Military gyrotachometer": {
-        "enabled": true,
+        "enabled": false,
         "trader": "Therapist",
         "price": "39060",
         "buy_at": "38300",
-        "refresh": 3,
+        "refresh": 5,
         "currency": "\u20bd",
         "size": 2
     },
@@ -86,7 +86,7 @@
         "buy_at": "21 000",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 2
     },
     "Bottle of OLOLO Multivitamins": {
@@ -95,7 +95,7 @@
         "buy_at": "15 500",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 1
     },
     "Golden rooster": {
@@ -104,7 +104,7 @@
         "buy_at": "56 500",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 9,
         "size": 4
     },
     "Set of files \"Master\"": {
@@ -113,7 +113,7 @@
         "buy_at": "21 000",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 4
     },
     "Golden 1GPhone smartphone": {
@@ -122,7 +122,7 @@
         "buy_at": "27 350",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 1
     },
     "Raven figurine": {
@@ -131,16 +131,16 @@
         "buy_at": "29 200",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 1
     },
     "Battered antique book": {
-        "enabled": true,
+        "enabled": false,
         "price": "39 708",
         "buy_at": "38 572",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 2
     },
     "Cat figurine": {
@@ -149,7 +149,7 @@
         "buy_at": "38 477",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 3
     },
     "Silver Badge": {
@@ -158,16 +158,25 @@
         "buy_at": "36 835",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 1
     },
     "LVNDMARK's rat poison": {
-        "enabled": true,
+        "enabled": false,
         "price": "32 062",
         "buy_at": "31 394",
         "currency": "\u20bd",
         "trader": "Therapist",
-        "refresh": 3,
+        "refresh": 5,
         "size": 2
+    },
+    "Missam forklift key": {
+        "enabled": false,
+        "price": "18 900",
+        "buy_at": "18 233",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 5,
+        "size": 1
     }
 }

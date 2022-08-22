@@ -8,6 +8,7 @@ import pyautogui as pg
 from data.captcha import CaptchaSolver
 from threading import Thread
 
+
 @dataclass
 class Purchase:
     item: Item
@@ -53,15 +54,10 @@ class PurchaseHandler(TarkovBot):
         )
 
     def is_available(self, region):
-        return (
-            pg.locateOnScreen(
-                "images/purchase.png", region=region, confidence=0.6, grayscale=True
-            )
-            is not None
-            or pg.locateOnScreen(
-                "images/purchase_2.png", region=region, confidence=0.4, grayscale=True
-            )
-            is not None
+        return pg.locateOnScreen(
+            "images/purchase.png", region=region, confidence=0.6, grayscale=True
+        ) or pg.locateOnScreen(
+            "images/purchase_2.png", region=region, confidence=0.4, grayscale=True
         )
 
     def is_out_of_stock(self, region):
@@ -81,7 +77,7 @@ class PurchaseHandler(TarkovBot):
 
     def inv_full(self) -> bool:
         return pg.locateOnScreen(
-            "images/out_of_space.png", region=(716, 458, 120, 45), confidence=0.9
+            "images/out_of_space.png", region=(716, 458, 120, 45), confidence=0.93
         )
 
     def offer_sold_out(self) -> bool:
@@ -99,15 +95,17 @@ class PurchaseHandler(TarkovBot):
     def await_prompt(self):
         """Hits the purchase button and waits for the window"""
         self.check_status()
-        start = time()
         self.notify("Awaiting purchase prompt...")
 
         # Wait for the red exit button of the prompt
+        c = 0
         while not self.purchase_window_open() and not self.error_prompt_visible():
             if self.check_for_captcha():
                 return False
 
-        self.notify(f"Prompt appeared after {self.get_time(start)}s")
+            c += 1
+            if c > 50:
+                raise TimeoutError("Timed out awaiting the purchase prompt!")
         return True
 
     def do_purchase(self, point):
@@ -123,10 +121,7 @@ class PurchaseHandler(TarkovBot):
             return False, None
 
         # Grab the amount of items to check if we need to hit the "all" button
-        start = time()
-
         self.amount = 1 if self.item_is_regular_amount() else None
-        self.notify("regular amount")
 
         if not self.amount:
             get_amount = Thread(target=lambda: self.get_item_amount())
@@ -143,9 +138,6 @@ class PurchaseHandler(TarkovBot):
             self.sleep(0)
 
         success, fixed_amount = self.await_purchase_result()
-        self.notify(
-            f"Getting amount, accepting and awaiting result took {self.get_time(start)}s"
-        )
         return success, fixed_amount if fixed_amount else self.amount
 
     def await_purchase_result(self):
@@ -162,8 +154,7 @@ class PurchaseHandler(TarkovBot):
             if not pg.locateOnScreen(
                 "images/temp/pre_purchase.png",
                 region=(1508, 66, 90, 29),
-                confidence=0.98,
-                grayscale=True,
+                confidence=0.98
             ):
                 self.notify(f"Purchase succeeded after {self.get_time(start)}s")
                 if self.amount_changed():
@@ -174,11 +165,12 @@ class PurchaseHandler(TarkovBot):
 
                 return True, None
 
-            elif self.inv_full():
-                raise InventoryFullError
-
             elif self.offer_sold_out():
                 self.press("esc")
+                return False, None
+
+            elif self.inv_full():
+                raise InventoryFullError
 
             elif self.out_of_money():
                 raise OutOfMoneyError
@@ -195,14 +187,13 @@ class PurchaseHandler(TarkovBot):
         self.notify("Checking item amount...")
         start = time()
 
+        if pg.locateOnScreen("images/11.png", region=(1108, 472, 25, 32), confidence=0.8):
+            return 11
+
         # get image showing the amount, process and pass to tesseract
-        path = "Images/temp/item_amount.png"
-        for region in [(1090, 472, 48, 32), (969, 514, 30, 24)]:
+        for region in [(1108, 472, 25, 32), (969, 514, 30, 24)]:
 
             result = Screen.read_quantity(region)
-            discord = Discord()
-            discord.send_image(path, f"Determined as {result}")
-
             # output ocr result
             if result:
                 self.notify(f"Getting amount took {self.get_time(start)}s")

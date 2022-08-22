@@ -5,6 +5,7 @@ from tarkov import TarkovBot
 import pyautogui as pg
 from pytesseract import pytesseract as tes
 from PIL import Image
+from screen import Screen
 
 @dataclass
 class Vendor:
@@ -55,14 +56,15 @@ class VendorUi(TarkovBot):
         self.open_sell_tab()
         self.sell_items(inventory)
         self.confirm_sell()
-
-        return self.get_current_money()
+        self.sleep(1)
+        
+        return Screen.read_current_money()
 
     def sell_items(self, inventory: Inventory):
         """Takes a list of items and puts all of them into the sell window"""
 
         for i, box in enumerate(self.grid):
-            if i >= inventory.max_slots:
+            if i >= inventory.total_slots:
                 return
             self.move_to(
                 (
@@ -75,27 +77,6 @@ class VendorUi(TarkovBot):
 
             with pg.hold("ctrl"):
                 self.click(0.05)
-
-        self.confirm_sell()
-        self.sleep(1)
-
-    def get_current_money(self):
-        path = "images/temp/money.png"
-
-        self.get_screenshot(path, region=(1575, 166, 154, 38))
-        screen.inv_replace_zeros(path)
-
-        res = Image.open(path)
-        w, h = res.size
-        res = res.resize((w * 3, h * 3), 1)
-        res.save(path)
-
-        img = screen.mask(path, (203, 200, 181))
-        res = tes.image_to_string(
-            img, config="-c tessedit_char_whitelist=1234567890 --psm 8 -l eng"
-        )
-
-        return int(res)
 
     def confirm_sell(self):
         self.move_to(964, 182)

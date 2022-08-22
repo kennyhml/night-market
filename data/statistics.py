@@ -11,6 +11,7 @@ class Statistics:
         self.inventories_emptied = 0
         self.session_start = time.time()
         self.last_profit = None
+        self.start_money = None
 
     def add_purchase(self, purchases):
         if not purchases:
@@ -64,6 +65,10 @@ class Statistics:
 
         return [item_1, item_2, item_3]
 
+    def get_data(self):
+        return self.items
+
+
     def data_to_dict(self, items):
         data = {}
         for item in items:
@@ -100,16 +105,20 @@ class Statistics:
             profit = self.get_total_profit() - self.last_profit
             self.last_profit = self.get_total_profit()
 
+        if not self.start_money:
+            self.start_money = current_money - profit
+
         data = {
             "top_items": self.get_special_items(),
             "bot_items": self.get_special_items(False),
-            "total_profit": self.get_total_profit(),
+            "total_profit": current_money - self.start_money,
             "emptying_profit": profit,
             "current_money": current_money,
             "session_time": self.get_session_time(),
             "empty_time": self.get_cycle_time(),
             "profit_in_euro": self.profit_to_money()
         }
+        self.last_money = current_money
 
         discord = Discord()
         discord.send_statistics(data)

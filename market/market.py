@@ -3,10 +3,11 @@ from data.items import Database, Inventory, Item
 from market.filter import Filter
 from market.searchbar import SearchBar
 from market.purchase import PurchaseHandler
-from tarkov import TarkovBot, BotTerminated
+from tarkov import TarkovBot
 import pyautogui as pg
 from nightmart_bot import Discord
 import time
+
 
 class MarketUI(TarkovBot):
     """Main flea market ui handle
@@ -21,58 +22,35 @@ class MarketUI(TarkovBot):
 
     purchase_grid = [(1678, y_axis, 192, 73) for y_axis in range(143, 937, 72)]
     price_grid = [(1333, y_axis, 172, 26) for y_axis in range(160, 951, 72)]
-    ended = None
+
     def __init__(self) -> None:
         super().__init__()
         self.discord = Discord()
         self.started_searching = time.time()
 
-    def check_status(self) -> None:
-        """Checks if the bot is terminated or paused"""
-        if not self.running:
-            raise BotTerminated
-
-        while self.paused:
-            time.sleep(0.1)
-
-        if self.has_timedout(self.started_searching, 20):
-            raise TimeoutError
-
     def is_open(self) -> bool:
         """Checks if the market is open"""
-        return (
-            pg.locateOnScreen(
-                "images/filter_settings.png", region=(462, 66, 38, 36), confidence=0.7
-            )
-            is not None
+        return pg.locateOnScreen(
+            "images/filter_settings.png", region=(462, 66, 38, 36), confidence=0.7
         )
 
     def items_listed(self) -> bool:
         """Checks if items are already listed"""
-        return (
-            pg.locateOnScreen(
-                "images/price_sort_arrow.png",
-                region=(1419, 112, 28, 22),
-                confidence=0.7,
-            )
-            is not None
+        return pg.locateOnScreen(
+            "images/price_sort_arrow.png",
+            region=(1419, 112, 28, 22),
+            confidence=0.7,
         )
 
     def captcha_appeared(self) -> bool:
-        return (
-            pg.locateOnScreen(
-                "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
-            )
-            is not None
+        return pg.locateOnScreen(
+            "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
         )
 
     def topslot_is_loaded(self) -> bool:
         """Checks if the topmost slot has an item in it"""
-        return (
-            pg.locateOnScreen(
-                "images/available.png", region=(1845, 139, 28, 25), confidence=0.8
-            )
-            is not None
+        return pg.locateOnScreen(
+            "images/available.png", region=(1845, 139, 28, 25), confidence=0.8
         )
 
     def await_market_open(self):
@@ -85,7 +63,6 @@ class MarketUI(TarkovBot):
 
             if counter > 50:
                 raise TimeoutError
-
 
     def open(self):
         """Opens the flea market tab"""
@@ -121,25 +98,40 @@ class MarketUI(TarkovBot):
         # set filter
         filter = Filter(item)
         filter.configurate()
-
         self.sleep(0.2)
         # await items listed
+        c = 0
         while not self.items_listed():
-            pass
+            self.sleep(0.1)
+            c += 1
+            if c > 100:
+                raise TimeoutError(
+                    "Could not detect items listed, this could "
+                    "be caused by an internet error or the price "
+                    "filter being set incorrectly."
+                )
 
         self.notify(f"Searching for {item.name} took {round(time.time() - start, 2)}s")
 
     def refresh(self):
-
+        c = 0
         while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
-            self.sleep(0)
+            self.sleep(0.1)
+            c += 1
+            if c > 100:
+                raise TimeoutError("Could not refresh after 5s!")
 
         self.move_to(1839, 118)
         self.click(0.2)
 
+        c = 0
         while not self.items_listed():
-            self.sleep(0)
-            
+            self.sleep(0.1)
+            c += 1
+
+            if c > 100:
+                raise TimeoutError("Timed out awaiting items listed!")
+
     def get_available_purchases(self, item: Item, inventory: Inventory):
         """Main purchase finding function, checks the status of each item slot
         to determine if theres any available purchases.
@@ -156,14 +148,13 @@ class MarketUI(TarkovBot):
         purchase_ui = PurchaseHandler()
         purchases = []
 
+        data = Database()
+        grab_img = not data.has_image(item)
+
         for attempt in range(item.refreshes + 1):
             box_nr = 0
-            self.started_searching = time.time()
-
-            # attempt is > 0
             if attempt:
                 self.refresh()
-            start = time.time()
 
             # loop over slots, avoided for loop because may need the same slot twice
             while box_nr < 9:
@@ -175,17 +166,18 @@ class MarketUI(TarkovBot):
 
                 # get item status
                 if purchase_ui.is_available(status_region):
-                    if self.ended:
-                        self.notify(f"-------------Accepting the next purchase took {self.get_time(self.ended)}s---------------")
-                    
-                    # screenshot the price and move to the purchase button
-                    self.get_screenshot(path, region=price_region)
-                    price_thread = Thread(target= lambda: purchase_ui.get_item_price(item, path))
-                    price_thread.start()
-
-                    data = Database()
-                    if not data.has_image(item):
+                    if grab_img:
                         data.add_image(item)
+                        grab_img = False
+
+                    # thread the price OCR beforehand so we have the data ready
+                    self.get_screenshot(path, region=price_region)
+                    get_price = Thread(
+                        target=purchase_ui.get_item_price,
+                        args=(item, path),
+                        name="Processing price",
+                    )
+                    get_price.start()
 
                     # attempt to purchase the item, get success state and quantity
                     success, amount = purchase_ui.do_purchase(
@@ -194,38 +186,25 @@ class MarketUI(TarkovBot):
                     self.notify(f"Purchase succeeded: {success}\nQuanitity: {amount}")
 
                     # add the purchase to our purchases to post to discord later
-                    if success:
-                        start_processing = time.time()
+                    if not success:
+                        # someone was faster, continue to next slot
+                        self.notify("Purchase failed!")
+                        continue
+                    
+                    inventory.add_items(int(amount), item.size)
+                    purchase = purchase_ui.post_profit(item, inventory, int(amount))
 
-                        inventory.slots_taken += int(amount) * item.size
-                        box_nr = 0
+                    if purchase:
+                        purchases.append(purchase)
 
-                        while not purchase_ui.price:
-                            self.notify("!!!!!!!!!!!!!")
-                            time.sleep(10)
-                            
-                        purchase = purchase_ui.post_profit(
-                            item, inventory, int(amount)
-                        )
+                    # wait for the status to refresh...
+                    box_nr = 0
+                    while purchase_ui.is_pending(status_region):
+                        pass
 
-                        if purchase:
-                            purchases.append(purchase)
-
-                        self.notify(f"Processing the data took {self.get_time(start_processing)}s")
-
-                        # wait for the status to refresh...
-                        while purchase_ui.is_pending(status_region):
-                            pass
-
-                        if self.topslot_is_loaded():
-                            self.notify("Another item took the top slot!")
-                            self.notify(f"Took {self.get_time(start)}s to proceed to next item!")
-                            self.ended = time.time()
-                            continue
-                        break
-
-                    # someone was faster, continue to next slot
-                    self.notify("Purchase failed!")
+                    if self.topslot_is_loaded():
+                        continue
+                    break
 
                 # item is already out of stock, just skip and get the next instead
                 elif purchase_ui.is_out_of_stock(status_region):
@@ -236,7 +215,3 @@ class MarketUI(TarkovBot):
                     break
 
         return inventory, purchases
-
-
-class MarketDidntOpenError(Exception):
-    """Raised when the market could not be opened"""

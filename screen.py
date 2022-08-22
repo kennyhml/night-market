@@ -1,3 +1,4 @@
+from statistics import variance
 import numpy as np
 import cv2 as cv
 from mss import mss
@@ -103,6 +104,23 @@ class Screen(TarkovBot):
 
         canvas.save(image)
 
+
+    def crop_inventory_money():
+        path = "images/temp/money.png"
+
+        rouble = pg.locate("images/rubel_2.png", path, confidence=0.8)
+        euro = pg.locate("images/euro.png", path, confidence=0.8)
+
+        left_bound = rouble[0] + rouble[2] + 3
+        right_bound = euro[0] - 15
+
+        img = Image.open(path)
+        _, h = img.size
+        img = img.crop((left_bound, 0, right_bound, h))
+
+        img.save(path)
+
+
     @staticmethod
     def remove_rubel_right(image_path):
         """Replaces zeros, removes the rubel, and masks the image"""
@@ -178,22 +196,45 @@ class Screen(TarkovBot):
         ).strip()
 
     @staticmethod
+    def replace_ones(image):
+        """Finds all slashed 0s in the price and replaces them with normal 0"""
+        one = cv.imread("images/1.png", 1)
+        ones = TarkovBot.filter_close_points(
+            set(pg.locateAll(one, image, confidence=0.9)), diff=2
+        )
+        canvas = Image.open(image)
+        one = Image.open("images/better_1.png")
+
+        for spot in ones:
+            canvas.paste(one, (spot[0], spot[1]))
+
+        canvas.save(image)
+
+    @staticmethod
     def read_quantity(region):
         path = "Images/temp/item_amount.png"
 
         Screen.get_screenshot(path, region=region)
+        Screen.replace_ones(path)
+
         processed = Screen.mask(path)
         cv.imwrite(path, processed)
+        img = Image.open(path)
+        w, h = img.size
+        img = img.resize((w * 13, h * 13), 1)
+        img.save(path)
 
         return (
             tes.image_to_string(
                 processed,
-                config="-c tessedit_char_whitelist=123/4567890() --psm 8 -l eng",
+                config="-c tessedit_char_whitelist=0123456789ilTa --psm 6 --oem 3 -l eng",
             )
             .strip()  # remove blankspaces
-            .replace("/", "")  # remove the "/"
             .replace("(", "")
             .replace(")", "")
+            .replace("t", "1")
+            .replace("Ta", "17")
+            .replace("i", "6")
         )
 
     @staticmethod
@@ -219,3 +260,57 @@ class Screen(TarkovBot):
         img.save(path)
 
         return tes.image_to_string(path, config=config)
+
+    @staticmethod
+    def read_current_money():
+
+        path = "images/temp/money.png"
+        Screen.get_screenshot(path, region=(1471, 173, 366, 24))
+        Screen.crop_inventory_money()
+
+        Screen.inv_replace_zeros(path)
+
+        res = Image.open(path)
+        w, h = res.size
+        res = res.resize((w * 3, h * 3), 1)
+        res.save(path)
+
+        img = Screen.mask(path, (203, 200, 181))
+        cv.imwrite(path, img)
+        
+        res = tes.image_to_string(
+            img, config="-c tessedit_char_whitelist=1234567890 --psm 8 -l eng"
+        )
+
+        return int(res)
+
+    @staticmethod
+    def icon_loaded():
+
+        path = "images/temp/item_icon.png"
+        Screen.get_screenshot(path, (61, 144, 41, 37))
+        img = cv.imread(path, 1)
+
+        image = cv.cvtColor(img, cv.COLOR_RGB2BGR)
+        rgb=(205,204,194)
+        variance=20
+
+        lower_bound = (
+            max(0, rgb[0] - variance),
+            max(0, rgb[1] - variance),
+            max(0, rgb[2] - variance),
+        )
+        upper_bound = (
+            min(255, rgb[0] + variance),
+            min(255, rgb[1] + variance),
+            min(255, rgb[2] + variance),
+        )
+
+        # image, lower_bound, upper_bound. CARE THEY ARE IN BGR
+        mask = cv.inRange(image, lower_bound, upper_bound)
+        matches = cv.findNonZero(mask)
+
+        if matches is None:
+            return
+
+        return len(matches) > 3

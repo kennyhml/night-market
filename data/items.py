@@ -36,6 +36,9 @@ class Inventory(TarkovBot):
         """Resets the taken slots"""
         self.slots_taken = 0
 
+    def add_items(self, amount, size):
+        self.slots_taken += amount * size
+
 class Database(TarkovBot):
     def __init__(self) -> None:
         self.load_items()

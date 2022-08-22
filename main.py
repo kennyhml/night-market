@@ -1,9 +1,12 @@
+from screen import Screen
 from data.statistics import Statistics
 from gui.main_ui_handle import MainUi
 from market.market import MarketUI
 from data.items import Database, Inventory
+from nightmart_bot import Discord
 from tarkov import BotTerminated, TarkovBot
 
+import json
 from traders import VendorUi
 from threading import Thread
 from pynput import keyboard
@@ -65,8 +68,23 @@ def main():
                     statistics.send_stats(current_money)
                     inventory.reset()
 
+
             except BotTerminated:
                 pass
+
+            except TimeoutError:
+                discord = Discord()
+                discord.send_image(Screen.get_screenshot("images/temp/error.png"), f"Timed out!")
+                market.press("esc")
+
+            except Exception as e:
+                discord = Discord()
+                discord.send_image(Screen.get_screenshot("images/temp/error.png"), f"Unhandled error!\n{e}")
+                market.press("esc")
+
+        print(json.dumps(statistics.get_data()))
+
+
 
 
 if __name__ == "__main__":
