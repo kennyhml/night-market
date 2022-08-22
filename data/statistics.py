@@ -10,6 +10,7 @@ class Statistics:
         self.last_sent = time.time()
         self.inventories_emptied = 0
         self.session_start = time.time()
+        self.last_profit = None
 
     def add_purchase(self, purchases):
         if not purchases:
@@ -89,7 +90,15 @@ class Statistics:
     def profit_to_money(self):
         return "~" + str(round(self.get_total_profit() / 480_000, 2)) + " €"
 
-    def send_stats(self, profit, current_money):
+    def send_stats(self, current_money):
+
+        if not self.last_profit:
+            profit = self.get_total_profit()
+            self.last_profit = profit
+
+        else:
+            profit = self.get_total_profit() - self.last_profit
+            self.last_profit = self.get_total_profit()
 
         data = {
             "top_items": self.get_special_items(),

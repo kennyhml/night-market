@@ -11,15 +11,30 @@ class Item:
     price: float
     buy_at: int
     currency: str
-    trader: str
+    vendor: str
     refreshes: int
     size: int
 
-@dataclass
-class Inventory:
-    total_slots: int
-    slots_taken: int
 
+@dataclass
+class Inventory(TarkovBot):
+    """Inventory class containing slots to empty, amount of slots at
+    which to empty and amount of slots currently taken, alongside methods
+    to request the state
+    """
+    def __init__(self):
+        super().__init__()
+        self.total_slots = self.config["allowed_inv_slots"]
+        self.max_slots = self.config["empty_inv_at"]
+        self.slots_taken = 0
+
+    def is_full(self) -> bool:
+        """Checks if the inventory is full"""
+        return self.slots_taken > self.max_slots
+
+    def reset(self) -> None:
+        """Resets the taken slots"""
+        self.slots_taken = 0
 
 class Database(TarkovBot):
     def __init__(self) -> None:
@@ -39,24 +54,27 @@ class Database(TarkovBot):
             image.removeprefix("images/items\\").removesuffix(".png")
             for image in self.images
         ]
-        return target in images
+        return target.name in images
 
     def add_image(self, item: Item):
-        self.get_screenshot(f"images/items/{item.name}.png", region=(879, 147, 64, 64))
-        img = Image.open(f"images/items/{item.name}.png")
+        path = item.name.replace('"', "")
+        self.get_screenshot(f"images/items/{path}.png", region=(879, 147, 64, 64))
+        img = Image.open(f"images/items/{path}.png")
         bottom_corner = img.crop((60, 48, 61, 49))
         for x in range(53, 63):
             for y in range(51, 63):
                 img.paste(bottom_corner, (x, y, x + 1, y + 1))
-        img.save(f"images/items/{item.name}.png")
+        img.save(f"images/items/{path}.png")
 
-    def get_image(self):
-        return
+    def get_items_to_purchase(self):
+        return [
+            self.data_to_item(item)
+            for item in self.get_items()
+            if self.item_data[item]["enabled"]
+        ]
 
     def load_items(self):
         self.load_config()
-        for item in self.item_data:
-            print(f"Loaded {item}")
 
     def get_items(self):
         return self.item_data
@@ -67,10 +85,10 @@ class Database(TarkovBot):
     def data_to_item(self, entry) -> Item:
         return Item(
             name=entry,
-            price=self.item_data[entry]["price"],
-            buy_at=self.item_data[entry]["buy_at"],
+            price=self.item_data[entry]["price"].replace(" ", ""),
+            buy_at=self.item_data[entry]["buy_at"].replace(" ", ""),
             currency=self.item_data[entry]["currency"],
-            trader=self.item_data[entry]["trader"],
+            vendor=self.item_data[entry]["trader"],
             refreshes=self.item_data[entry]["refresh"],
-            size=self.item_data[entry]["size"]
+            size=self.item_data[entry]["size"],
         )

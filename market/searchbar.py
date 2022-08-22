@@ -67,6 +67,7 @@ class SearchBar(TarkovBot):
             and not pg.pixelMatchesColor(85, 166, (199, 198, 188), tolerance=15)
             and not pg.pixelMatchesColor(85, 161, (221, 221, 215), tolerance=15)
             and not pg.pixelMatchesColor(90, 164, (200, 199, 190), tolerance=15)
+            and not pg.pixelMatchesColor(89, 166, (193,193,184), tolerance=15)
         ):
             pass
 

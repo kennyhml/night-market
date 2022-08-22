@@ -7,10 +7,6 @@ from tarkov import TarkovBot, BotTerminated
 import pyautogui as pg
 from nightmart_bot import Discord
 import time
-import pytesseract as tes
-
-tes.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
 
 class MarketUI(TarkovBot):
     """Main flea market ui handle
@@ -25,7 +21,7 @@ class MarketUI(TarkovBot):
 
     purchase_grid = [(1678, y_axis, 192, 73) for y_axis in range(143, 937, 72)]
     price_grid = [(1333, y_axis, 172, 26) for y_axis in range(160, 951, 72)]
-
+    ended = None
     def __init__(self) -> None:
         super().__init__()
         self.discord = Discord()
@@ -81,34 +77,28 @@ class MarketUI(TarkovBot):
 
     def await_market_open(self):
         """Awaits the market to open to idle less"""
-        start = time.time()
+        counter = 0
 
         while not self.is_open():
             self.sleep(0.1)
+            counter += 1
 
-            if self.has_timedout(start, 3):
-                return
+            if counter > 50:
+                raise TimeoutError
+
 
     def open(self):
         """Opens the flea market tab"""
+        self.started_searching = time.time()
         self.check_status()
-        self.notify("Opening flea market...")
-        start = time.time()
 
         # check if flea market is currently open (mostly will be the case)
         if self.is_open():
-            self.notify("Flea market is open.")
             return
 
-        # open the market tab
-        while not self.is_open():
-            self.move_to(1251, 1063)
-            self.click()
-            self.await_market_open()
-
-            if self.has_timedout(start, 30):
-                self.notify("Unable to open the flea market after 30s!")
-                raise MarketDidntOpenError
+        self.move_to(1251, 1063)
+        self.click()
+        self.await_market_open()
 
         self.notify("Opened the flea market!")
 
@@ -142,16 +132,14 @@ class MarketUI(TarkovBot):
     def refresh(self):
 
         while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
-            self.sleep(0.1)
-            self.notify("Waiting to be able to refresh...")
+            self.sleep(0)
 
         self.move_to(1839, 118)
         self.click(0.2)
 
         while not self.items_listed():
-            self.sleep(0.01)
-            self.notify("Waiting for listed items...")
-
+            self.sleep(0)
+            
     def get_available_purchases(self, item: Item, inventory: Inventory):
         """Main purchase finding function, checks the status of each item slot
         to determine if theres any available purchases.
@@ -175,6 +163,7 @@ class MarketUI(TarkovBot):
             # attempt is > 0
             if attempt:
                 self.refresh()
+            start = time.time()
 
             # loop over slots, avoided for loop because may need the same slot twice
             while box_nr < 9:
@@ -186,9 +175,14 @@ class MarketUI(TarkovBot):
 
                 # get item status
                 if purchase_ui.is_available(status_region):
-
+                    if self.ended:
+                        self.notify(f"-------------Accepting the next purchase took {self.get_time(self.ended)}s---------------")
+                    
                     # screenshot the price and move to the purchase button
                     self.get_screenshot(path, region=price_region)
+                    price_thread = Thread(target= lambda: purchase_ui.get_item_price(item, path))
+                    price_thread.start()
+
                     data = Database()
                     if not data.has_image(item):
                         data.add_image(item)
@@ -201,21 +195,32 @@ class MarketUI(TarkovBot):
 
                     # add the purchase to our purchases to post to discord later
                     if success:
+                        start_processing = time.time()
+
                         inventory.slots_taken += int(amount) * item.size
                         box_nr = 0
+
+                        while not purchase_ui.price:
+                            self.notify("!!!!!!!!!!!!!")
+                            time.sleep(10)
+                            
+                        purchase = purchase_ui.post_profit(
+                            item, inventory, int(amount)
+                        )
+
+                        if purchase:
+                            purchases.append(purchase)
+
+                        self.notify(f"Processing the data took {self.get_time(start_processing)}s")
 
                         # wait for the status to refresh...
                         while purchase_ui.is_pending(status_region):
                             pass
 
-                        purchase = purchase_ui.post_profit(
-                            item, inventory, {"price": path, "quantity": int(amount)}
-                        )
-                        if purchase:
-                            purchases.append(purchase)
-
                         if self.topslot_is_loaded():
                             self.notify("Another item took the top slot!")
+                            self.notify(f"Took {self.get_time(start)}s to proceed to next item!")
+                            self.ended = time.time()
                             continue
                         break
 
@@ -228,7 +233,6 @@ class MarketUI(TarkovBot):
                     box_nr += 1
 
                 else:
-                    self.notify(f"No items available for purchase!")
                     break
 
         return inventory, purchases

@@ -1,6 +1,9 @@
 
 
+from threading import Thread
+from time import sleep, time
 from tracemalloc import Statistic
+from data.captcha import CaptchaSolver
 from data.statistics import Statistics
 from market.market import MarketUI
 from market.purchase import PurchaseHandler
@@ -10,20 +13,18 @@ import cv2 as cv
 from PIL import Image
 import pyautogui  as pg
 
+from tarkov import TarkovBot
+
+from screen import Screen
+
+Screen.process_tess_image("images/temp/test.png")
+
+
+quit()
+
 a = PurchaseHandler()
-a.await_prompt()
-
-quit()
-
-from nightmart_bot import Discord
-
-a = Discord()
-a.send_statistics(aa, sum([aa[item]["total_profit"] for item in aa]))
-
-quit()
-
-
-
+while 1:
+    print(a.is_available((1678, 143, 192, 73)))
 
 pg.screenshot("nigga.png", region=(620, 63, 680, 980))
 

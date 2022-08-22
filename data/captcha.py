@@ -1,14 +1,10 @@
 import difflib
 from time import time
 import pyautogui as pg
-from screen import mask
+from screen import Screen
 from tarkov import TarkovBot
 from nightmart_bot import Discord
-from PIL import Image
-import pytesseract as tes
-import cv2 as cv
 
-tes.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 path = "images/captcha/"
 
 CAPTCHA_ITEMS = {
@@ -34,7 +30,7 @@ CAPTCHA_ITEMS = {
     "Strike cigarettes": path + "strike_cigarettes.png",
     "42 Signature Blend English Tea": path + "42_signature_blend_english_tea.png",
     "Bottle of water (0.6L)": path + "bottle_of_water (0.6L).png",
-    "Immobilzing splint": path + "immobilzing_splint.png",
+    "Immobilzing splint": path + "immobilizing_splint.png",
     "Printer paper": path + "printer_paper.png",
     "Red Rebel ice pick": path + "red_rebel_ice_pick.png",
     "Antique Teapot": path + "antique_teapot.png",
@@ -96,26 +92,9 @@ class CaptchaSolver(TarkovBot):
     def get_captcha_target(self):
         """Processes the image of the captcha and returns the filtered item"""
         # set configs
-        allowed_characters = (
-            " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890()-"
-        )
-        config = "--oem 3 --psm 6 -c tessedit_char_whitelist=" + allowed_characters
-        path = "images/temp/captcha.png"
-
-        # upscale the image for better matches
-        self.get_screenshot(path, region=(620, 63, 680, 980))
-        self.discord.send_image(path, "A captcha has appeared:")
-
-        # mask the image, upscale it a little
-        img = mask(path)
-        cv.imwrite(path, img)
-        img = Image.open(path)
-        w, h = img.size
-        img = img.resize((w * 3, h * 3), 1)
-        img.save(path)
-
+        
         # read the image and filter the returned text
-        raw_text: str = tes.image_to_string(path, config=config)
+        raw_text: str = Screen.read_captcha()
         return self.filter_captcha_target(raw_text)
 
     def compare_target_to_database(self, target):
@@ -218,4 +197,5 @@ class CaptchaSolver(TarkovBot):
         self.discord.send_message(
             "WARNING! Could not locate the confirmation button!!!"
         )
+
 

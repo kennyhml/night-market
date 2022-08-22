@@ -8,6 +8,7 @@ import psutil
 import inspect
 import os
 from mss import mss, tools
+import json
 
 
 class TarkovBot:
@@ -26,8 +27,15 @@ class TarkovBot:
     """
 
     version = "0.1.0"
-    running = True
+    running = False
     paused = False
+
+    def __init__(self):
+        with open("data/data.json") as f:
+            self.data = json.load(f)
+
+        with open("data/settings.json") as f:
+            self.config = json.load(f)
 
     def check_status(self) -> None:
         """Checks if the bot is terminated or paused"""
@@ -40,8 +48,6 @@ class TarkovBot:
     def sleep(self, t):
         """Sleep wrapper to check for termination / paused"""
         self.check_status()
-        caller = inspect.currentframe().f_back.f_code.co_name
-        print(f"{caller} sleeps: {t}")
         time.sleep(t)
 
     def move_to(self, x=None, y=None) -> None:
@@ -55,34 +61,36 @@ class TarkovBot:
         self.check_status()
         x, y = pg._normalizeXYArgs(x, y)
 
-        pg.moveTo(x, y)
-        return
-        lg.info(f"Moving to {x, y}")
+        if self.config["mouse_movement"] == "warping":
+            pg.moveTo(x, y)
+            return
+
         humanclicker.move_to_point((x, y), duration=(0.05))
+
+    def click(self, delay=0.3, button="left") -> None:
+        """Clicks at the current mouse position"""
+        self.check_status()
+        lg.info(f"Clicking button: {button}; Delay: {delay}")
+
+        # split the delay before and after the click
+        self.sleep((delay / 2) * self.config["mouse_speed"])
+        pg.click(button=button)
+        self.sleep((delay / 2) * self.config["mouse_speed"])
+
+    def press(self, key) -> None:
+        """Presses a passed key"""
+        self.check_status()
+
+        lg.info(f"Pressing {key}")
+        pg.press(key)
 
     @staticmethod
     def has_timedout(counter: float, max_time: int) -> bool:
         """Checks if a `time.time()` timer has elapsed"""
         return (time.time() - counter) > max_time
 
-    def click(self, delay=0.3, button="left") -> None:
-        """Clicks at the current mouse position"""
-        self.check_status()
-        lg.info(f"Clicking! Button: {button}; Delay: {delay}")
-
-        # split the delay before and after the click
-        self.sleep(delay / 2)
-        pg.click(button=button)
-        self.sleep(delay / 2)
-
-    def press(self, key) -> None:
-        """Presses a passed key"""
-        self.check_status()
-        lg.info(f"Pressing {key}")
-
-        pg.press(key)
-
-    def get_screenshot(self, path, region):
+    @staticmethod
+    def get_screenshot(path, region):
         x1, y1, x2, y2 = region
         
         with mss() as sct:
@@ -91,13 +99,46 @@ class TarkovBot:
             img = sct.grab(region)
 
             # Save to the picture file
-            tools.to_png(img.rgb, img.size, output=path)
+            tools.to_png(img.rgb, img.size, output=path.replace('"', ""))
 
-    def game_running(self) -> bool:
+    @staticmethod
+    def game_running() -> bool:
         """Checks if tarkov is running"""
         for process in psutil.process_iter():
             if process.name() == "EscapeFromTarkov.exe":
                 return True
+
+    @staticmethod
+    def set_clipboard(text):
+        """Puts the passed text into the clipboard to allow for pasting"""
+        command = "echo | set /p nul=" + text.strip() + "| clip"
+        os.system(command)
+
+    @staticmethod
+    def get_time(timer):
+        return round(time.time() - timer, 2)
+
+    @staticmethod
+    def rect_to_center(rect):
+        return (((rect[0] + (0.5 * rect[2])), round(rect[1] + (0.5 * rect[3]))))
+
+    @staticmethod
+    def overlaps(C1, C2, eps):
+        return all(abs(c2 - c1) < eps for c2, c1 in zip(C2, C1))
+
+    @staticmethod
+    def filter_close_points(points: set, diff=20) -> set:
+        filtered = set()
+
+        while points:
+            circle = points.pop()
+            for other in points:
+                if TarkovBot.overlaps(circle, other, diff):
+                    break
+            else:
+                filtered.add(circle)
+
+        return filtered
 
     def notify(self, message: str, console=True, discord=False):
         """Prints, logs and posts a message"""
@@ -106,33 +147,6 @@ class TarkovBot:
 
         if console:
             print(message)
-
-    def set_clipboard(str, text):
-        """Puts the passed text into the clipboard to allow for pasting"""
-        command = "echo | set /p nul=" + text.strip() + "| clip"
-        os.system(command)
-
-    @staticmethod
-    def rect_to_center(rect):
-        return (((rect[0] + (0.5 * rect[2])), round(rect[1] + (0.5 * rect[3]))))
-
-    def overlaps(self, C1, C2, eps):
-        return all(abs(c2 - c1) < eps for c2, c1 in zip(C2, C1))
-
-    def filter_close_points(self, points: set) -> set:
-        diff = 20
-        filtered = set()
-
-        while points:
-            circle = points.pop()
-            for other in points:
-                if self.overlaps(circle, other, diff):
-                    break
-            else:
-                filtered.add(circle)
-
-        return filtered
-
 
 now = datetime.datetime.now()
 now_str = now.strftime("%d-%m-%H-%M")

@@ -1,91 +1,173 @@
 {
     "Toilet paper": {
-        "trader": "therapist",
-        "price": "5544",
+        "enabled": true,
+        "trader": "Therapist",
+        "price": "5543",
         "buy_at": "5100",
-        "refresh": 0,
-        "currency": "RUB",
+        "refresh": 3,
+        "currency": "\u20bd",
         "size": 1
-
     },
-
     "OFZ 30x160mm shell": {
-        "trader": "therapist",
+        "enabled": true,
+        "trader": "Therapist",
         "price": "35280",
         "buy_at": "34500",
         "refresh": 4,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 2
-
     },
-
     "Round pliers": {
-        "trader": "therapist",
+        "enabled": true,
+        "trader": "Therapist",
         "price": "17010",
         "buy_at": "16200",
         "refresh": 3,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 1
-
     },
-    
     "Axel parrot figurine": {
+        "enabled": false,
         "trader": "therapist",
         "price": "32130",
         "buy_at": "31500",
         "refresh": 2,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 2
-
     },
-
     "Old firesteel": {
-        "trader": "therapist",
+        "enabled": true,
+        "trader": "Therapist",
         "price": "39943",
         "buy_at": "39900",
         "refresh": 3,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 1
-
     },
-
     "Golden egg": {
-        "trader": "therapist",
+        "enabled": false,
+        "trader": "Therapist",
         "price": "42840",
         "buy_at": "42000",
         "refresh": 2,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 1
-
     },
-
     "Can of Dr. Lupo's coffee beans": {
-        "trader": "therapist",
+        "enabled": true,
+        "trader": "Therapist",
         "price": "32760",
         "buy_at": "32200",
         "refresh": 3,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 1
-
     },
-
     "Ratchet wrench": {
-        "trader": "therapist",
+        "enabled": true,
+        "trader": "Therapist",
         "price": "78120",
         "buy_at": "76000",
         "refresh": 2,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 2
-
     },
-
     "Military gyrotachometer": {
-        "trader": "therapist",
+        "enabled": true,
+        "trader": "Therapist",
         "price": "39060",
         "buy_at": "38300",
         "refresh": 3,
-        "currency": "RUB",
+        "currency": "\u20bd",
         "size": 2
-
+    },
+    "Gunpowder \"Hawk\"": {
+        "enabled": false,
+        "price": "22 050",
+        "buy_at": "21 000",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 2
+    },
+    "Bottle of OLOLO Multivitamins": {
+        "enabled": false,
+        "price": "15 807",
+        "buy_at": "15 500",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 1
+    },
+    "Golden rooster": {
+        "enabled": true,
+        "price": "57 057",
+        "buy_at": "56 500",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 4
+    },
+    "Set of files \"Master\"": {
+        "enabled": false,
+        "price": "22 050",
+        "buy_at": "21 000",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 4
+    },
+    "Golden 1GPhone smartphone": {
+        "enabled": false,
+        "price": "28 123",
+        "buy_at": "27 350",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 1
+    },
+    "Raven figurine": {
+        "enabled": false,
+        "price": "30 240",
+        "buy_at": "29 200",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 1
+    },
+    "Battered antique book": {
+        "enabled": true,
+        "price": "39 708",
+        "buy_at": "38 572",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 2
+    },
+    "Cat figurine": {
+        "enabled": false,
+        "price": "39 254",
+        "buy_at": "38 477",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 3
+    },
+    "Silver Badge": {
+        "enabled": false,
+        "price": "37 983",
+        "buy_at": "36 835",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 1
+    },
+    "LVNDMARK's rat poison": {
+        "enabled": true,
+        "price": "32 062",
+        "buy_at": "31 394",
+        "currency": "\u20bd",
+        "trader": "Therapist",
+        "refresh": 3,
+        "size": 2
     }
 }

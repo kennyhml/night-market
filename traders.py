@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from data.items import Inventory
 import screen
 from tarkov import TarkovBot
 import pyautogui as pg
@@ -6,26 +7,22 @@ from pytesseract import pytesseract as tes
 from PIL import Image
 
 @dataclass
-class Therapist:
-    name = "Therapist"
-    location = (874, 420)
+class Vendor:
+    name: str
+    location: tuple
 
 
-@dataclass
-class Fence:
-    name = "Fence"
-    location = (1049, 423)
+VENDORS = {
+    "fence": Vendor(name="Fence", location=(1049, 423)),
+    "Therapist": Vendor(name="Therapist", location=(874, 420)),
+}
 
 
-str_to_instance = {"Therapist": Therapist, "Fence": Fence}
-
-
-class TraderUi(TarkovBot):
-    last_known = None
+class VendorUi(TarkovBot):
 
     grid = [
-        (x_axis, y_axis, 38, 38)
-        for y_axis in range(261, 701, 63)
+        (x_axis, y_axis, 64, 64)
+        for y_axis in range(261, 827, 63)
         for x_axis in range(1270, 1900, 63)
     ]
 
@@ -48,32 +45,24 @@ class TraderUi(TarkovBot):
         self.move_to(236, 45)
         self.click(1)
 
-    def open_trader(self, pos):
-        self.move_to(pos)
+    def open_trader(self, vendor: Vendor):
+        self.move_to(vendor.location)
         self.click(0.8)
 
-    def sell(self, trader):
+    def sell(self, vendor, inventory: Inventory):
         self.open()
-        self.open_trader(trader)
+        self.open_trader(VENDORS[vendor])
         self.open_sell_tab()
-        self.sell_items()
+        self.sell_items(inventory)
         self.confirm_sell()
 
-        if self.last_known:
-            current_money = self.get_current_money()
+        return self.get_current_money()
 
-            profit = (current_money - self.last_known), current_money
-            self.last_known = current_money
-            return profit
-
-        self.last_known = self.get_current_money()
-        return None, self.last_known
-
-    def sell_items(self):
+    def sell_items(self, inventory: Inventory):
         """Takes a list of items and puts all of them into the sell window"""
 
         for i, box in enumerate(self.grid):
-            if i >= 80:
+            if i >= inventory.max_slots:
                 return
             self.move_to(
                 (
@@ -86,28 +75,28 @@ class TraderUi(TarkovBot):
 
             with pg.hold("ctrl"):
                 self.click(0.05)
+
         self.confirm_sell()
         self.sleep(1)
 
     def get_current_money(self):
+        path = "images/temp/money.png"
 
-        self.get_screenshot("test.png", region=(1575, 166, 154, 38))
+        self.get_screenshot(path, region=(1575, 166, 154, 38))
+        screen.inv_replace_zeros(path)
 
-        screen.inv_replace_zeros("test.png")
-
-        res = Image.open("test.png")
+        res = Image.open(path)
         w, h = res.size
         res = res.resize((w * 3, h * 3), 1)
-        res.save("test.png")
+        res.save(path)
 
-        img = screen.mask("test.png", (203,200,181))
-        res = tes.image_to_string(img, config="-c tessedit_char_whitelist=1234567890 --psm 8 -l eng")
+        img = screen.mask(path, (203, 200, 181))
+        res = tes.image_to_string(
+            img, config="-c tessedit_char_whitelist=1234567890 --psm 8 -l eng"
+        )
 
         return int(res)
 
-
     def confirm_sell(self):
-        self.move_to(964,182)
+        self.move_to(964, 182)
         self.click(0.4)
-
-

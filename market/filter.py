@@ -22,7 +22,7 @@ class Filter(TarkovBot):
 
     CURRENCIES = {
         "Any": (663, 149),
-        "RUB": (662, 180),
+        "₽": (662, 180),
         "USD": (662, 208),
         "EUR": (662, 239),
     }

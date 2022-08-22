@@ -35,8 +35,9 @@ class Discord:
             title=f"Purchased {purchase.item.name}!",
             color=0x9807F2,
         )
-
-        file = discord.File(f"images/items/{purchase.image}.png", filename="image.png")
+        img = purchase.image.replace('"', "")
+        
+        file = discord.File(f"images/items/{img}.png", filename="image.png")
         taken, total = inventory.slots_taken, inventory.total_slots
         profit_percent = round(
             ((purchase.profit / purchase.amount) / int(purchase.item.price)) * 100
@@ -119,7 +120,7 @@ class Discord:
             value=f'{data["top_items"][1]["profit"]:_}'.replace("_", " ") + " ₽",
         )
         embed.add_field(
-            name=f"Total purchases:", value=data["top_items"][0]["quantity"]
+            name=f"Total purchases:", value=data["top_items"][1]["quantity"]
         )
 
         embed.add_field(name=f"Item #3ㅤㅤ", value=data["top_items"][2]["name"])
@@ -128,7 +129,7 @@ class Discord:
             value=f'{data["top_items"][2]["profit"]:_}'.replace("_", " ") + " ₽",
         )
         embed.add_field(
-            name=f"Total purchases:", value=data["top_items"][0]["quantity"]
+            name=f"Total purchases:", value=data["top_items"][2]["quantity"]
         )
 
         embed.set_footer(text="Night market on top!")
