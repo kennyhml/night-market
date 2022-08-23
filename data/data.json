@@ -6,7 +6,7 @@
         "buy_at": "5100",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 1
+        "size": "1"
     },
     "OFZ 30x160mm shell": {
         "enabled": true,
@@ -15,7 +15,7 @@
         "buy_at": "34500",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 2
+        "size": "2"
     },
     "Round pliers": {
         "enabled": false,
@@ -24,7 +24,7 @@
         "buy_at": "16200",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 1
+        "size": "1"
     },
     "Axel parrot figurine": {
         "enabled": false,
@@ -33,7 +33,7 @@
         "buy_at": "31500",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 2
+        "size": "2"
     },
     "Old firesteel": {
         "enabled": true,
@@ -42,7 +42,7 @@
         "buy_at": "39900",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 1
+        "size": "1"
     },
     "Golden egg": {
         "enabled": true,
@@ -51,7 +51,7 @@
         "buy_at": "42000",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 1
+        "size": "1"
     },
     "Can of Dr. Lupo's coffee beans": {
         "enabled": true,
@@ -60,7 +60,7 @@
         "buy_at": "32200",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 1
+        "size": "1"
     },
     "Ratchet wrench": {
         "enabled": false,
@@ -69,7 +69,7 @@
         "buy_at": "76000",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 2
+        "size": "2"
     },
     "Military gyrotachometer": {
         "enabled": false,
@@ -78,7 +78,7 @@
         "buy_at": "38300",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": 2
+        "size": "2"
     },
     "Gunpowder \"Hawk\"": {
         "enabled": false,
@@ -87,7 +87,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 2
+        "size": "2"
     },
     "Bottle of OLOLO Multivitamins": {
         "enabled": false,
@@ -96,7 +96,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 1
+        "size": "1"
     },
     "Golden rooster": {
         "enabled": true,
@@ -105,7 +105,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 9,
-        "size": 4
+        "size": "4"
     },
     "Set of files \"Master\"": {
         "enabled": false,
@@ -114,7 +114,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 4
+        "size": "4"
     },
     "Golden 1GPhone smartphone": {
         "enabled": false,
@@ -123,7 +123,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 1
+        "size": "1"
     },
     "Raven figurine": {
         "enabled": false,
@@ -132,7 +132,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 1
+        "size": "1"
     },
     "Battered antique book": {
         "enabled": false,
@@ -141,7 +141,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 2
+        "size": "2"
     },
     "Cat figurine": {
         "enabled": false,
@@ -150,7 +150,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 3
+        "size": "3"
     },
     "Silver Badge": {
         "enabled": false,
@@ -159,7 +159,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 1
+        "size": "1"
     },
     "LVNDMARK's rat poison": {
         "enabled": false,
@@ -168,7 +168,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 2
+        "size": "2"
     },
     "Missam forklift key": {
         "enabled": false,
@@ -177,6 +177,6 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": 1
+        "size": "1"
     }
 }

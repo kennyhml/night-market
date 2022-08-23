@@ -13,21 +13,40 @@ class Statistics:
         self.last_profit = None
         self.start_money = None
 
-    def add_purchase(self, purchases):
+        with open("data\statistics.json", "r") as json_file:
+            self.stats_data = json.load(json_file)
+
+    def add_purchase(self, purchases, founds, item):
+        with open("data\statistics.json", "r") as json_file:
+            self.stats_data = json.load(json_file)
+        added_item = item.name
+
         if not purchases:
+            self.stats_data[added_item]["times_searched"] += item.refreshes + 1
+            with open("data\statistics.json", "w") as json_file:
+                json.dump(self.stats_data, json_file, indent=4)
             return
 
-        added_item = purchases[0].item.name
         profits = [(purchase.profit, purchase.amount) for purchase in purchases]
 
         for profit in profits:
             self.items[added_item]["total_quantity"] += int(profit[1])
             self.items[added_item]["total_profit"] += int(profit[0])
 
+            self.stats_data[added_item]["total_quantity"] += int(profit[1])
+            self.stats_data[added_item]["total_profit"] += int(profit[0])
+
+        self.stats_data[added_item]["times_searched"] += purchases[0].item.refreshes + 1
+        self.stats_data[added_item]["times_found"] += founds
+
         self.items[added_item]["average_profit"] = round(
             self.items[added_item]["total_profit"]
             / self.items[added_item]["total_quantity"]
         )
+
+        with open("data\statistics.json", "w") as json_file:
+            json.dump(self.stats_data, json_file, indent=4)
+
 
     def shorten_name(self, name):
         if len(name.split(" ")) > 4:

@@ -43,7 +43,7 @@ Line#line{
      <rect>
       <x>-10</x>
       <y>0</y>
-      <width>311</width>
+      <width>321</width>
       <height>621</height>
      </rect>
     </property>
@@ -223,10 +223,10 @@ QPushButton:hover {
    <widget class="QTabWidget" name="main_tab">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>310</x>
       <y>-20</y>
       <width>781</width>
-      <height>581</height>
+      <height>571</height>
      </rect>
     </property>
     <property name="font">
@@ -236,7 +236,7 @@ QPushButton:hover {
     </property>
     <property name="styleSheet">
      <string notr="true">border: none;
-background-color: rgb(15,15,15);
+background-color: rgb(35,35,40);
 color: rgb(255,255,255);
 
 </string>
@@ -275,6 +275,9 @@ color: rgb(255,255,255);
 Allows shadowhunter to use transform on stage 1, recommended to enable for high mobility classes.
 Other classes with low cooldowns like sorc and bard will not benefit from this.</string>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
        <string>Use wishlist tab</string>
       </property>
@@ -301,7 +304,7 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>Mouse movement:</string>
@@ -330,23 +333,16 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox{
-color: rgb(255, 0, 0);
+	color: rgb(255,255,255);
+	background-color: rgb(35,35,40)
 }
 
-QComboBox::drop-down {
-
-	background-color: rgb(255,255,255);
-}
 
 QComboBox QAbstractItemView {
-	color: rgb(255,0,0);
+	color: rgb(255,255,255);
 }
 
-QComboBox::down-arrow {
-    image: url(Images/gui/dropdown.png);
-	width: 10px;
-	height: 10px;
-}</string>
+</string>
       </property>
       <property name="insertPolicy">
        <enum>QComboBox::InsertAtBottom</enum>
@@ -434,25 +430,10 @@ affected by changing your character.</string>
       </property>
       <property name="styleSheet">
        <string notr="true">QSpinBox {
-	color: rgb(255,0,0);
-	background-color: rgb(25,25,25);
+	color: rgb(255,255,255);
+background-color: rgb(35,35,40)
 }
-
-QSpinBox::up-button {
-  	image: url(Images/gui/dropdownup.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}
-
-QSpinBox::down-button {   
-  	image: url(Images/gui/dropdown.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}</string>
+</string>
       </property>
       <property name="minimum">
        <number>20</number>
@@ -488,6 +469,9 @@ QSpinBox::down-button {
         <kerning>false</kerning>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
        <string>Allowed inventory slots:</string>
       </property>
@@ -516,6 +500,9 @@ QSpinBox::down-button {
         <kerning>false</kerning>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
        <string>Empty at inventory slots:</string>
       </property>
@@ -543,25 +530,10 @@ QSpinBox::down-button {
       </property>
       <property name="styleSheet">
        <string notr="true">QSpinBox {
-	color: rgb(255,0,0);
-	background-color: rgb(25,25,25);
+	color: rgb(255,255,255);
+background-color: rgb(35,35,40)
 }
-
-QSpinBox::up-button {
-  	image: url(Images/gui/dropdownup.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}
-
-QSpinBox::down-button {   
-  	image: url(Images/gui/dropdown.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}</string>
+</string>
       </property>
       <property name="minimum">
        <number>20</number>
@@ -598,7 +570,7 @@ QSpinBox::down-button {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>Item searching:</string>
@@ -627,23 +599,16 @@ QSpinBox::down-button {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox{
-color: rgb(255, 0, 0);
+	color: rgb(255,255,255);
+	background-color: rgb(35,35,40)
 }
 
-QComboBox::drop-down {
-
-	background-color: rgb(255,255,255);
-}
 
 QComboBox QAbstractItemView {
-	color: rgb(255,0,0);
+	color: rgb(255,255,255);
 }
 
-QComboBox::down-arrow {
-    image: url(Images/gui/dropdown.png);
-	width: 10px;
-	height: 10px;
-}</string>
+</string>
       </property>
       <property name="insertPolicy">
        <enum>QComboBox::InsertAtBottom</enum>
@@ -663,7 +628,7 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>470</y>
+        <y>460</y>
         <width>271</width>
         <height>21</height>
        </rect>
@@ -680,6 +645,9 @@ QComboBox::down-arrow {
         <kerning>false</kerning>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
        <string>Mouse speed multiplier:</string>
       </property>
@@ -691,7 +659,7 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>141</x>
-        <y>510</y>
+        <y>500</y>
         <width>16</width>
         <height>31</height>
        </rect>
@@ -719,7 +687,7 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>81</x>
-        <y>510</y>
+        <y>500</y>
         <width>16</width>
         <height>31</height>
        </rect>
@@ -736,6 +704,9 @@ QComboBox::down-arrow {
         <kerning>false</kerning>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
        <string>2</string>
       </property>
@@ -747,13 +718,16 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>18</x>
-        <y>490</y>
+        <y>480</y>
         <width>251</width>
         <height>22</height>
        </rect>
       </property>
       <property name="toolTip">
        <string>Multiply Stage 1 delays by:</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
       </property>
       <property name="minimum">
        <number>1</number>
@@ -796,7 +770,7 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>200</x>
-        <y>510</y>
+        <y>500</y>
         <width>16</width>
         <height>31</height>
        </rect>
@@ -824,7 +798,7 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>262</x>
-        <y>510</y>
+        <y>500</y>
         <width>21</width>
         <height>31</height>
        </rect>
@@ -852,7 +826,7 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>19</x>
-        <y>510</y>
+        <y>500</y>
         <width>20</width>
         <height>31</height>
        </rect>
@@ -868,6 +842,9 @@ QComboBox::down-arrow {
         <strikeout>false</strikeout>
         <kerning>false</kerning>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>1</string>
@@ -900,9 +877,9 @@ QComboBox::down-arrow {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -927,18 +904,18 @@ QComboBox::down-arrow {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -965,9 +942,9 @@ QComboBox::down-arrow {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -992,18 +969,18 @@ QComboBox::down-arrow {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1030,9 +1007,9 @@ QComboBox::down-arrow {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1057,18 +1034,18 @@ QComboBox::down-arrow {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1251,7 +1228,7 @@ QComboBox::down-arrow {
       </property>
       <property name="styleSheet">
        <string notr="true">QTextEdit {
-    background-color: rgb(30,30,30);
+	background-color: rgb(30,30,40);
 	color: white;
 }
 </string>
@@ -1305,7 +1282,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>650</x>
         <y>110</y>
-        <width>61</width>
+        <width>51</width>
         <height>31</height>
        </rect>
       </property>
@@ -1321,8 +1298,8 @@ p, li { white-space: pre-wrap; }
 }
 
 QPushButton {
-    background-color: rgb(30,30,30);
-	color: rgb(255,0,0);
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
 }</string>
       </property>
       <property name="text">
@@ -1332,7 +1309,7 @@ QPushButton {
      <widget class="QLabel" name="lb_AdcanvedOptions_6">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>340</x>
         <y>300</y>
         <width>101</width>
         <height>21</height>
@@ -1350,8 +1327,11 @@ QPushButton {
         <kerning>false</kerning>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Webhook link:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>Webhook link:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1360,7 +1340,7 @@ QPushButton {
      <widget class="QTextEdit" name="discord_webhook">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>340</x>
         <y>330</y>
         <width>331</width>
         <height>31</height>
@@ -1380,8 +1360,8 @@ QPushButton {
       </property>
       <property name="styleSheet">
        <string notr="true">QTextEdit {
-    background-color: rgb(30,30,30);
-	color: white;
+	background-color: rgb(30,30,40);
+
 }
 </string>
       </property>
@@ -1432,7 +1412,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QPushButton" name="discord_webhook_valid">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>340</x>
         <y>370</y>
         <width>91</width>
         <height>30</height>
@@ -1451,7 +1431,6 @@ p, li { white-space: pre-wrap; }
 
 QPushButton {
     background-color: rgb(30,30,30);
-	color: rgb(255,0,0);
 }</string>
       </property>
       <property name="text">
@@ -1461,7 +1440,7 @@ QPushButton {
      <widget class="QLabel" name="discord_webhook_status">
       <property name="geometry">
        <rect>
-        <x>430</x>
+        <x>440</x>
         <y>370</y>
         <width>181</width>
         <height>31</height>
@@ -1510,9 +1489,9 @@ QPushButton {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1537,18 +1516,18 @@ QPushButton {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1575,9 +1554,9 @@ QPushButton {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1602,18 +1581,18 @@ QPushButton {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1640,9 +1619,9 @@ QPushButton {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1667,18 +1646,18 @@ QPushButton {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1703,7 +1682,7 @@ QPushButton {
       <widget class="QLabel" name="label_126">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>0</y>
          <width>741</width>
          <height>51</height>
@@ -1727,7 +1706,7 @@ QPushButton {
       <widget class="QLabel" name="label_176">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>80</y>
          <width>721</width>
          <height>51</height>
@@ -1751,7 +1730,7 @@ QPushButton {
       <widget class="QLabel" name="label_127">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>40</y>
          <width>741</width>
          <height>51</height>
@@ -1800,37 +1779,90 @@ QPushButton {
 Allows shadowhunter to use transform on stage 1, recommended to enable for high mobility classes.
 Other classes with low cooldowns like sorc and bard will not benefit from this.</string>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
        <string>Post to discord</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_177">
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>-10</y>
+        <width>721</width>
+        <height>561</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+
+background-color: rgb(35,35,40)
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>711</width>
+        <width>701</width>
         <height>51</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>26</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <underline>false</underline>
-        <strikeout>false</strikeout>
-        <kerning>false</kerning>
+        <family>Segoe UI</family>
+        <pointsize>27</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">
+
+background-color: rgb(35,35,40)</string>
+      </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#5a5a5a;&quot;&gt;Night market&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>Bot configuration</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
+     <zorder>label_7</zorder>
+     <zorder>use_wishlist_tab</zorder>
+     <zorder>mouse_movements</zorder>
+     <zorder>mouse_movement_mode</zorder>
+     <zorder>label_61</zorder>
+     <zorder>label_78</zorder>
+     <zorder>allowed_inv_slots</zorder>
+     <zorder>inventory_allowed_slots</zorder>
+     <zorder>inventory_empty_at_slots</zorder>
+     <zorder>empty_inv_at</zorder>
+     <zorder>item_searching</zorder>
+     <zorder>item_search_mode</zorder>
+     <zorder>lb_AdcanvedOptions_50</zorder>
+     <zorder>lb_AdcanvedOptions_44</zorder>
+     <zorder>lb_AdcanvedOptions_25</zorder>
+     <zorder>mouse_speed</zorder>
+     <zorder>lb_AdcanvedOptions_53</zorder>
+     <zorder>lb_AdcanvedOptions_54</zorder>
+     <zorder>lb_AdcanvedOptions_26</zorder>
+     <zorder>frame_4</zorder>
+     <zorder>at_on_events</zorder>
+     <zorder>lb_AdcanvedOptions_16</zorder>
+     <zorder>discord_id</zorder>
+     <zorder>test_discord_id_2</zorder>
+     <zorder>lb_AdcanvedOptions_6</zorder>
+     <zorder>discord_webhook</zorder>
+     <zorder>discord_webhook_valid</zorder>
+     <zorder>discord_webhook_status</zorder>
+     <zorder>frame_5</zorder>
+     <zorder>post_to_discord</zorder>
+     <zorder>label_8</zorder>
     </widget>
     <widget class="QWidget" name="maintab_license">
      <attribute name="title">
@@ -1860,9 +1892,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1887,18 +1919,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1925,9 +1957,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1952,18 +1984,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -1990,9 +2022,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2017,18 +2049,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2083,9 +2115,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2110,18 +2142,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2148,9 +2180,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2175,18 +2207,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2213,9 +2245,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2240,18 +2272,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2306,9 +2338,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2333,18 +2365,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2371,9 +2403,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2398,18 +2430,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2436,9 +2468,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2463,18 +2495,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2529,9 +2561,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2556,18 +2588,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2594,9 +2626,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2621,18 +2653,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2659,9 +2691,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2686,18 +2718,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2752,9 +2784,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2779,18 +2811,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2817,9 +2849,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2844,18 +2876,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2882,9 +2914,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2909,18 +2941,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -2975,9 +3007,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3002,18 +3034,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3040,9 +3072,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3067,18 +3099,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3105,9 +3137,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3132,18 +3164,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3201,9 +3233,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3228,18 +3260,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3266,9 +3298,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3293,18 +3325,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3331,9 +3363,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3358,18 +3390,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3424,9 +3456,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3451,18 +3483,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3489,9 +3521,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3516,18 +3548,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3554,9 +3586,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3581,18 +3613,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3711,9 +3743,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3738,18 +3770,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3776,9 +3808,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3803,18 +3835,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3841,9 +3873,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3868,18 +3900,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3934,9 +3966,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3961,18 +3993,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -3999,9 +4031,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4026,18 +4058,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4064,9 +4096,9 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4091,18 +4123,18 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4271,7 +4303,7 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>34</y>
+        <y>59</y>
         <width>71</width>
         <height>41</height>
        </rect>
@@ -4289,10 +4321,10 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00ffff;&quot;&gt;Item:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Item:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4301,15 +4333,15 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
      <widget class="QComboBox" name="current_item">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>30</y>
-        <width>221</width>
+        <x>110</x>
+        <y>55</y>
+        <width>211</width>
         <height>50</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Segoe UI Variable Display Light</family>
+        <family>Segoe UI</family>
         <pointsize>11</pointsize>
        </font>
       </property>
@@ -4327,24 +4359,16 @@ Other classes with low cooldowns like sorc and bard will not benefit from this.<
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox{
-color: rgb(0, 255, 127);
-
+color: rgb(255, 255, 255);
+background-color: rgb(35,35,40)
 }
 
-QComboBox::drop-down {
-
-	background-color: rgb(255,255,255);
-}
 
 QComboBox QAbstractItemView {
 	color: rgb(0, 255, 127);
 }
 
-QComboBox::down-arrow {
-    image: url(images/gui/dropdown.png);
-	width: 10px;
-	height: 10px;
-}</string>
+</string>
       </property>
       <property name="inputMethodHints">
        <set>Qt::ImhNone</set>
@@ -4361,12 +4385,17 @@ QComboBox::down-arrow {
       <property name="duplicatesEnabled">
        <bool>false</bool>
       </property>
+      <item>
+       <property name="text">
+        <string>test</string>
+       </property>
+      </item>
      </widget>
      <widget class="QPushButton" name="delete_item">
       <property name="geometry">
        <rect>
-        <x>470</x>
-        <y>30</y>
+        <x>590</x>
+        <y>60</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -4387,11 +4416,16 @@ QComboBox::down-arrow {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton:pressed {
-    background-color: rgb(100,100,100);
+    background-color: rgb(141,124,102);
 }
 
+QPushButton:hover {
+    background-color: rgb(118,111,102);
+}
+
+
 QPushButton {
-    background-color: rgb(40,40,40);
+    background-color: rgb(25,25,25);
 	color: rgb(255,0,0);
 }</string>
       </property>
@@ -4402,8 +4436,8 @@ QPushButton {
      <widget class="QPushButton" name="add_item">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>30</y>
+        <x>470</x>
+        <y>60</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -4424,61 +4458,28 @@ QPushButton {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton:pressed {
-    background-color: rgb(100,100,100);
+    background-color: rgb(141,124,102);
+}
+
+QPushButton:hover {
+    background-color: rgb(118,111,102);
 }
 
 QPushButton {
-    background-color: rgb(40,40,40);
-	color: rgb(255,0,0);
+    background-color: rgb(25,25,25);
+	color: rgb(0,255,0);
 }</string>
       </property>
       <property name="text">
        <string>Add item</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="rename_preset">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>30</y>
-        <width>101</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>ArrowCursor</cursorShape>
-      </property>
-      <property name="mouseTracking">
-       <bool>false</bool>
-      </property>
-      <property name="toolTip">
-       <string>Rename the current preset</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton:pressed {
-    background-color: rgb(100,100,100);
-}
-
-QPushButton {
-    background-color: rgb(40,40,40);
-	color: rgb(255,0,0);
-}</string>
-      </property>
-      <property name="text">
-       <string>Rename item</string>
-      </property>
-     </widget>
      <widget class="QComboBox" name="item_currency">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>180</y>
-        <width>81</width>
+        <x>150</x>
+        <y>205</y>
+        <width>71</width>
         <height>41</height>
        </rect>
       </property>
@@ -4489,17 +4490,17 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4507,8 +4508,8 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
@@ -4516,26 +4517,26 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4554,17 +4555,17 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4572,8 +4573,8 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
@@ -4581,26 +4582,26 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4619,17 +4620,17 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4637,8 +4638,8 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
@@ -4646,26 +4647,26 @@ QPushButton {
           <brush brushstyle="SolidPattern">
            <color alpha="255">
             <red>255</red>
-            <green>0</green>
-            <blue>0</blue>
+            <green>255</green>
+            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -4692,25 +4693,17 @@ QPushButton {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox{
-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);
+background-color: rgb(35,35,40)
 }
 
 
-
-QComboBox::drop-down {
-
-	background-color: rgb(255,255,255);
-}
 
 QComboBox QAbstractItemView {
 	color: rgb(255,0,0);
 }
 
-QComboBox::down-arrow {
-    image: url(images/gui/dropdown.png);
-	width: 10px;
-	height: 10px;
-}</string>
+</string>
       </property>
       <property name="sizeAdjustPolicy">
        <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
@@ -4740,9 +4733,9 @@ QComboBox::down-arrow {
      <widget class="QLabel" name="select_vendor">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>110</y>
-        <width>141</width>
+        <x>253</x>
+        <y>205</y>
+        <width>91</width>
         <height>41</height>
        </rect>
       </property>
@@ -4759,7 +4752,8 @@ QComboBox::down-arrow {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>Vendor:</string>
@@ -4772,8 +4766,8 @@ QComboBox::down-arrow {
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>180</y>
-        <width>141</width>
+        <y>205</y>
+        <width>91</width>
         <height>41</height>
        </rect>
       </property>
@@ -4790,7 +4784,8 @@ QComboBox::down-arrow {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>Currency:</string>
@@ -4802,9 +4797,9 @@ QComboBox::down-arrow {
      <widget class="QComboBox" name="item_vendor">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>110</y>
-        <width>111</width>
+        <x>360</x>
+        <y>205</y>
+        <width>101</width>
         <height>41</height>
        </rect>
       </property>
@@ -4819,24 +4814,17 @@ QComboBox::down-arrow {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox{
-color: rgb(255, 0, 0);
-
+color: rgb(255, 255, 255);
+background-color: rgb(35,35,40)
 }
 
-QComboBox::drop-down {
 
-	background-color: rgb(255,255,255);
-}
 
 QComboBox QAbstractItemView {
 	color: rgb(255,0,0);
 }
 
-QComboBox::down-arrow {
-    image: url(images/gui/dropdown.png);
-	width: 10px;
-	height: 10px;
-}</string>
+</string>
       </property>
       <item>
        <property name="text">
@@ -4849,41 +4837,12 @@ QComboBox::down-arrow {
        </property>
       </item>
      </widget>
-     <widget class="QCheckBox" name="item_enabled">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>120</y>
-        <width>91</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Variable Display Light</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <underline>false</underline>
-        <strikeout>false</strikeout>
-        <kerning>false</kerning>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>Enable to use a potion if you fall below your set % of hp.
-This does not take into account the max hp reduce of mayhem zerkers.</string>
-      </property>
-      <property name="text">
-       <string>Enabled</string>
-      </property>
-     </widget>
      <widget class="QSpinBox" name="item_refreshes">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>250</y>
-        <width>81</width>
+        <x>150</x>
+        <y>280</y>
+        <width>71</width>
         <height>21</height>
        </rect>
       </property>
@@ -4898,24 +4857,11 @@ This does not take into account the max hp reduce of mayhem zerkers.</string>
       </property>
       <property name="styleSheet">
        <string notr="true">QSpinBox {
-	color: rgb(255,0,0);
+	color: rgb(255,255,255);
+background-color: rgb(35,35,40)
 }
 
-QSpinBox::up-button {
-  	image: url(Images/gui/dropdownup.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}
-
-QSpinBox::down-button {   
-  	image: url(Images/gui/dropdown.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}</string>
+</string>
       </property>
       <property name="maximum">
        <number>120</number>
@@ -4925,8 +4871,8 @@ QSpinBox::down-button {
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>250</y>
-        <width>131</width>
+        <y>280</y>
+        <width>91</width>
         <height>21</height>
        </rect>
       </property>
@@ -4941,6 +4887,10 @@ QSpinBox::down-button {
         <strikeout>false</strikeout>
         <kerning>false</kerning>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>Refreshes:</string>
@@ -4949,89 +4899,12 @@ QSpinBox::down-button {
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QSpinBox" name="item_size">
-      <property name="geometry">
-       <rect>
-        <x>190</x>
-        <y>300</y>
-        <width>81</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Variable Display Light</family>
-        <pointsize>13</pointsize>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>The amount of slots the item takes up</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QSpinBox {
-	color: rgb(255,0,0);
-}
-
-QSpinBox::up-button {
-  	image: url(Images/gui/dropdownup.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}
-
-QSpinBox::down-button {   
-  	image: url(Images/gui/dropdown.png);
-	background-color: white;
-	height: 9px;
-	width: 9px;
-	padding: 1px;
-}</string>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>6</number>
-      </property>
-      <property name="singleStep">
-       <number>1</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="set_item_size">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>131</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Variable Display Light</family>
-        <pointsize>13</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <underline>false</underline>
-        <strikeout>false</strikeout>
-        <kerning>false</kerning>
-       </font>
-      </property>
-      <property name="text">
-       <string>Slot size:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-     </widget>
      <widget class="QTextEdit" name="item_value">
       <property name="geometry">
        <rect>
-        <x>410</x>
-        <y>183</y>
-        <width>131</width>
+        <x>110</x>
+        <y>141</y>
+        <width>111</width>
         <height>31</height>
        </rect>
       </property>
@@ -5054,8 +4927,8 @@ The default values are the regular priorities, if left empty, regular priorities
       </property>
       <property name="styleSheet">
        <string notr="true">QTextEdit {
-    background-color: rgb(30,30,30);
-	color: red;
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
 }
 </string>
       </property>
@@ -5087,8 +4960,8 @@ The default values are the regular priorities, if left empty, regular priorities
      <widget class="QLabel" name="set_item_value">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>180</y>
+        <x>20</x>
+        <y>135</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -5108,9 +4981,9 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5135,18 +5008,18 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5173,9 +5046,9 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5200,18 +5073,18 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5238,9 +5111,9 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5265,18 +5138,18 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5298,7 +5171,8 @@ The default values are the regular priorities, if left empty, regular priorities
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(255,255,255)</string>
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
        <string>Value:</string>
@@ -5307,9 +5181,9 @@ The default values are the regular priorities, if left empty, regular priorities
      <widget class="QTextEdit" name="item_max_price">
       <property name="geometry">
        <rect>
-        <x>410</x>
-        <y>245</y>
-        <width>131</width>
+        <x>350</x>
+        <y>141</y>
+        <width>111</width>
         <height>31</height>
        </rect>
       </property>
@@ -5332,8 +5206,8 @@ The default values are the regular priorities, if left empty, regular priorities
       </property>
       <property name="styleSheet">
        <string notr="true">QTextEdit {
-    background-color: rgb(30,30,30);
-	color: red;
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
 }
 </string>
       </property>
@@ -5365,8 +5239,8 @@ The default values are the regular priorities, if left empty, regular priorities
      <widget class="QLabel" name="set_item_price">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>240</y>
+        <x>250</x>
+        <y>135</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -5386,9 +5260,9 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5413,18 +5287,18 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5451,9 +5325,9 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5478,18 +5352,18 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5516,9 +5390,9 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5543,18 +5417,18 @@ The default values are the regular priorities, if left empty, regular priorities
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>15</red>
-            <green>15</green>
-            <blue>15</blue>
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
            </color>
           </brush>
          </colorrole>
@@ -5576,29 +5450,2282 @@ The default values are the regular priorities, if left empty, regular priorities
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(255,255,255)</string>
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
-       <string>Max price:</string>
+       <string>Max. price:</string>
       </property>
      </widget>
+     <widget class="QLabel" name="set_item_value_2">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>135</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Min. profit:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_profit">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>141</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(0,255,0);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="placeholderText">
+       <string>1930</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="select_vendor_2">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>205</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>13</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Slot size:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="item_size">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>205</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>The vendor to sell the item at</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox{
+color: rgb(255, 255, 255);
+background-color: rgb(35,35,40)
+}
+
+
+QComboBox QAbstractItemView {
+	color: rgb(255,0,0);
+}
+
+</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>6</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>721</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+
+background-color: rgb(35,35,40)
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>27</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Item configuration</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>350</y>
+        <width>721</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+background-color: rgb(35,35,40)
+
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="set_item_value_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>385</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Searched:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_stats_searched">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>390</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="placeholderText">
+       <string>3000x</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_stats_found">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>390</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="placeholderText">
+       <string>1000x</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="set_item_value_4">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>385</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Found:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_stats_bought">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>390</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="placeholderText">
+       <string>1000x</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="set_item_value_5">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>385</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Bought:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_stats_avg_profit">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>460</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="placeholderText">
+       <string>1 323</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="set_item_value_6">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>455</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Avg. profit:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_stats_total_profit">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>460</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="placeholderText">
+       <string>1 323</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="set_item_value_7">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>455</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Total profit:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="item_stats_rank">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>460</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>16</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Define your skill priority order, they will be checked from left to right. For example:
+'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.
+The default values are the regular priorities, if left empty, regular priorities will be used.</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+	background-color: rgb(30,30,40);
+	color: rgb(255,255,255);
+}
+</string>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhDigitsOnly</set>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoNone</set>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="placeholderText">
+       <string>1 323</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="set_item_value_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>455</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>35</red>
+            <green>35</green>
+            <blue>40</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="PlaceholderText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Rank:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="item_enabled">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>60</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(35,35,40)
+</string>
+      </property>
+      <property name="text">
+       <string>Enabled</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>310</y>
+        <width>721</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>27</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Item statistics</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>label_2</zorder>
+     <zorder>select_item</zorder>
+     <zorder>current_item</zorder>
+     <zorder>delete_item</zorder>
+     <zorder>add_item</zorder>
+     <zorder>item_currency</zorder>
+     <zorder>select_vendor</zorder>
+     <zorder>select_currency</zorder>
+     <zorder>item_vendor</zorder>
+     <zorder>item_refreshes</zorder>
+     <zorder>set_item_refreshes</zorder>
+     <zorder>item_value</zorder>
+     <zorder>set_item_value</zorder>
+     <zorder>item_max_price</zorder>
+     <zorder>set_item_price</zorder>
+     <zorder>set_item_value_2</zorder>
+     <zorder>item_profit</zorder>
+     <zorder>select_vendor_2</zorder>
+     <zorder>item_size</zorder>
+     <zorder>label_4</zorder>
+     <zorder>set_item_value_3</zorder>
+     <zorder>item_stats_searched</zorder>
+     <zorder>item_stats_found</zorder>
+     <zorder>set_item_value_4</zorder>
+     <zorder>item_stats_bought</zorder>
+     <zorder>set_item_value_5</zorder>
+     <zorder>item_stats_avg_profit</zorder>
+     <zorder>set_item_value_6</zorder>
+     <zorder>item_stats_total_profit</zorder>
+     <zorder>set_item_value_7</zorder>
+     <zorder>item_stats_rank</zorder>
+     <zorder>set_item_value_8</zorder>
+     <zorder>item_enabled</zorder>
+     <zorder>label_5</zorder>
+     <zorder>label_3</zorder>
     </widget>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>310</x>
       <y>0</y>
       <width>721</width>
       <height>621</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{
-
-background-color: rgb(0,0,0);
-
-}</string>
+     <string notr="true">background-color: rgb(35,35,40)</string>
     </property>
     <property name="text">
      <string/>
@@ -5607,7 +7734,7 @@ background-color: rgb(0,0,0);
    <widget class="QLabel" name="bot_status">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>320</x>
       <y>570</y>
       <width>361</width>
       <height>41</height>
@@ -5743,8 +7870,8 @@ background-color: rgb(0,0,0);
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#55ffff;&quot;&gt;Bot Status:&lt;/span&gt; Idle - Press F1 to start.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <zorder>background_left</zorder>
    <zorder>label</zorder>
+   <zorder>background_left</zorder>
    <zorder>buttons_general</zorder>
    <zorder>buttons_database</zorder>
    <zorder>buttons_license</zorder>

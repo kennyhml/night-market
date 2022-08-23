@@ -9,7 +9,7 @@ import inspect
 import os
 from mss import mss, tools
 import json
-
+from pytesseract import pytesseract as tes
 
 class TarkovBot:
     """Main Tarkov bot handle
@@ -36,6 +36,7 @@ class TarkovBot:
 
         with open("data/settings.json") as f:
             self.config = json.load(f)
+            tes.tesseract_cmd = self.config["tesseract_path"]
 
     def check_status(self) -> None:
         """Checks if the bot is terminated or paused"""

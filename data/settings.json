@@ -7,7 +7,7 @@
     "empty_inv_at": 60,
     "post_discord": false,
     "discord_mention": false,
-    "discord_webhook": "31231",
-    "discord_id": "12331",
+    "discord_webhook": "",
+    "discord_id": "",
     "tesseract_path": "C:/Program Files/Tesseract-OCR/tesseract.exe"
 }

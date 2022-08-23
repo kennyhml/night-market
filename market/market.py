@@ -147,6 +147,7 @@ class MarketUI(TarkovBot):
         # prepare variables
         purchase_ui = PurchaseHandler()
         purchases = []
+        founds = set()
 
         data = Database()
         grab_img = not data.has_image(item)
@@ -166,6 +167,8 @@ class MarketUI(TarkovBot):
 
                 # get item status
                 if purchase_ui.is_available(status_region):
+                    founds.add(attempt)
+
                     if grab_img:
                         data.add_image(item)
                         grab_img = False
@@ -214,4 +217,4 @@ class MarketUI(TarkovBot):
                 else:
                     break
 
-        return inventory, purchases
+        return inventory, purchases, len(founds)

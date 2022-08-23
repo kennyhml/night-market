@@ -1,3 +1,4 @@
+import re
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6 import QtGui
@@ -58,12 +59,18 @@ class MainUi(QMainWindow, Ui_Form):
         with open("data\data.json", "r") as json_file:
             self.data = json.load(json_file)
 
+        with open("data\statistics.json", "r") as json_file:
+            self.stats = json.load(json_file)
+
     def save_files(self):
         with open("data\settings.json", "w") as json_file:
             json.dump(self.settings, json_file, indent=4)
 
         with open("data\data.json", "w") as json_file:
             json.dump(self.data, json_file, indent=4)
+
+        with open("data\statistics.json", "w") as json_file:
+            json.dump(self.stats, json_file, indent=4)
 
     def add_item_data(self):
         """Adds a preset to the config, the preset will hold static default value."""
@@ -93,21 +100,24 @@ class MainUi(QMainWindow, Ui_Form):
             return
 
         item_value, confirmed = QtWidgets.QInputDialog.getText(
-            self, "Add item properties", "Please enter the value of the item!\n\n"
-            "The value is how much the Therapist buys it for."
+            self,
+            "Add item properties",
+            "Please enter the value of the item!\n\n"
+            "The value is how much the Therapist buys it for.",
         )
 
         if not confirmed:
             return
 
         max_price, confirmed = QtWidgets.QInputDialog.getText(
-            self, "Add item properties", "Please enter the max price of the item!\n\n"
+            self,
+            "Add item properties",
+            "Please enter the max price of the item!\n\n"
             "The max price is what the bot will\n"
-            "set in the filter to find the item."
+            "set in the filter to find the item.",
         )
         if not confirmed:
             return
-
 
         if int(item_value.replace(" ", "")) < int(max_price.replace(" ", "")):
             QtWidgets.QMessageBox.about(
@@ -136,7 +146,9 @@ class MainUi(QMainWindow, Ui_Form):
         self.save_files()
         print(f"{item_name} was added to your items!")
         self.populate_ui()  # update ui
-        self.current_item.setCurrentIndex([i for i in range(self.current_item.count())][-1])
+        self.current_item.setCurrentIndex(
+            [i for i in range(self.current_item.count())][-1]
+        )
 
     def delete_item_data(self):
         """Deletes the currently active preset"""
@@ -159,6 +171,19 @@ class MainUi(QMainWindow, Ui_Form):
             self.data.pop(self.current_item.currentText())
             self.save_files()
             self.populate_ui()
+
+    def sync_stats_data(self):
+
+        raw_data = {
+            "total_quantity": 0,
+            "total_profit": 0,
+            "times_searched": 0,
+            "times_found": 0,
+        }
+
+        for entry in self.data:
+            if entry not in self.stats:
+                self.stats[entry] = raw_data
 
     def populate_ui(self):
         self.save_changes = False
@@ -193,7 +218,7 @@ class MainUi(QMainWindow, Ui_Form):
                 self.current_item.removeItem(
                     self.current_item.findText(item, QtCore.Qt.MatchFixedString)
                 )
-        
+
         current_item = self.current_item.currentText()
 
         self.item_value.setText(self.data[current_item]["price"])
@@ -202,11 +227,36 @@ class MainUi(QMainWindow, Ui_Form):
         self.item_currency.setCurrentText(self.data[current_item]["currency"])
         self.item_vendor.setCurrentText(self.data[current_item]["trader"])
         self.item_refreshes.setValue(self.data[current_item]["refresh"])
-        self.item_size.setValue(self.data[current_item]["size"])
+        self.item_size.setCurrentText(str(self.data[current_item]["size"]))
         self.item_enabled.setChecked(self.data[current_item]["enabled"])
 
+        self.item_profit.setText(
+            str(
+                int(self.data[current_item]["price"].replace(" ", ""))
+                - int(self.data[current_item]["buy_at"].replace(" ", ""))
+            )
+        )
+
+        self.item_stats_searched.setText(str(self.stats[current_item]["times_searched"]))
+        self.item_stats_bought.setText(str(self.stats[current_item]["total_quantity"]))
+        self.item_stats_total_profit.setText(str(self.stats[current_item]["total_profit"]))
+        self.item_stats_found.setText(str(self.stats[current_item]["times_found"]))
+        if int(self.stats[current_item]["total_quantity"]):
+            self.item_stats_avg_profit.setText(
+                str(
+                    int(
+                        self.stats[current_item]["total_profit"]
+                        / int(self.stats[current_item]["total_quantity"])
+                    )
+                )
+            )
+        else:self.item_stats_avg_profit.setText("0")
+
         self.save_changes = True
+        self.sync_stats_data()
         print("Ui populated.")
+
+        self.save_settings()
 
     def save_item_settings(self):
         if not self.save_changes:
@@ -219,7 +269,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.data[current_item]["currency"] = self.item_currency.currentText()
         self.data[current_item]["trader"] = self.item_vendor.currentText()
         self.data[current_item]["refresh"] = self.item_refreshes.value()
-        self.data[current_item]["size"] = self.item_size.value()
+        self.data[current_item]["size"] = self.item_size.currentText()
         self.data[current_item]["enabled"] = self.item_enabled.isChecked()
         self.save_files()
 
@@ -275,7 +325,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.item_currency.currentIndexChanged.connect(self.save_item_settings)
         self.item_vendor.currentIndexChanged.connect(self.save_item_settings)
         self.item_refreshes.valueChanged.connect(self.save_item_settings)
-        self.item_size.valueChanged.connect(self.save_item_settings)
-        self.item_enabled.stateChanged.connect(self.save_item_settings)
-        
+        self.item_size.currentIndexChanged.connect(self.save_item_settings)
+        self.item_enabled.clicked.connect(self.save_item_settings)
+
         self.current_item.currentIndexChanged.connect(self.populate_ui)

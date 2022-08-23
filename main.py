@@ -57,10 +57,12 @@ def main():
                 market.search_item(item)
 
                 # new inventory value and list of purchchases
-                inventory, purchases = market.get_available_purchases(item, inventory)
+                inventory, purchases, founds = market.get_available_purchases(
+                    item, inventory
+                )
 
                 # add the purchase to stats
-                statistics.add_purchase(purchases)
+                statistics.add_purchase(purchases, founds, item)
 
                 if inventory.is_full():
                     vendor = VendorUi()
@@ -68,23 +70,25 @@ def main():
                     statistics.send_stats(current_money)
                     inventory.reset()
 
-
             except BotTerminated:
                 pass
 
             except TimeoutError:
                 discord = Discord()
-                discord.send_image(Screen.get_screenshot("images/temp/error.png"), f"Timed out!")
+                discord.send_image(
+                    Screen.get_screenshot("images/temp/error.png"), f"Timed out!"
+                )
                 market.press("esc")
 
             except Exception as e:
                 discord = Discord()
-                discord.send_image(Screen.get_screenshot("images/temp/error.png"), f"Unhandled error!\n{e}")
+                discord.send_image(
+                    Screen.get_screenshot("images/temp/error.png"),
+                    f"Unhandled error!\n{e}",
+                )
                 market.press("esc")
 
         print(json.dumps(statistics.get_data()))
-
-
 
 
 if __name__ == "__main__":

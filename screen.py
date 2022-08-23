@@ -15,9 +15,6 @@ sct = mss()
 
 class Screen(TarkovBot):
     """Screen class for any sort of more complex detection"""
-    def __init__(self):
-        super().__init__()
-        tes.pytesseract.tesseract_cmd = self.config["tesseract_path"]
 
     @staticmethod
     def get_screen():
