@@ -66,6 +66,7 @@ class VendorUi(TarkovBot):
         for i, box in enumerate(self.grid):
             if i >= inventory.total_slots:
                 return
+
             self.move_to(
                 (
                     round(box[0] + (0.5 * box[2])),
@@ -77,6 +78,10 @@ class VendorUi(TarkovBot):
 
             with pg.hold("ctrl"):
                 self.click(0.05)
+
+            if i == 60:
+                self.confirm_sell()
+                self.sleep(0.5)
 
     def confirm_sell(self):
         self.move_to(964, 182)

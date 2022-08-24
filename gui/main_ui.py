@@ -20,6 +20,8 @@ from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QCheckBox, QCo
     QSizePolicy, QSlider, QSpinBox, QTabWidget,
     QTextEdit, QWidget)
 
+from gui.mplwidget import MplWidget
+
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -102,7 +104,7 @@ class Ui_Form(object):
         self.buttons_database.setIconSize(QSize(40, 40))
         self.buttons_license = QPushButton(self.MainUi)
         self.buttons_license.setObjectName(u"buttons_license")
-        self.buttons_license.setGeometry(QRect(-20, 170, 271, 41))
+        self.buttons_license.setGeometry(QRect(-20, 240, 271, 41))
         self.buttons_license.setFont(font)
         self.buttons_license.setStyleSheet(u"\n"
 "QPushButton {\n"
@@ -1369,7 +1371,7 @@ class Ui_Form(object):
 "}")
         self.set_item_value_3 = QLabel(self.maintab_database)
         self.set_item_value_3.setObjectName(u"set_item_value_3")
-        self.set_item_value_3.setGeometry(QRect(20, 385, 81, 41))
+        self.set_item_value_3.setGeometry(QRect(20, 380, 81, 41))
         palette16 = QPalette()
         palette16.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette16.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1404,7 +1406,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.item_stats_searched = QTextEdit(self.maintab_database)
         self.item_stats_searched.setObjectName(u"item_stats_searched")
-        self.item_stats_searched.setGeometry(QRect(110, 390, 111, 31))
+        self.item_stats_searched.setGeometry(QRect(110, 385, 121, 31))
         self.item_stats_searched.setFont(font14)
         self.item_stats_searched.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1421,7 +1423,7 @@ class Ui_Form(object):
         self.item_stats_searched.setReadOnly(True)
         self.item_stats_found = QTextEdit(self.maintab_database)
         self.item_stats_found.setObjectName(u"item_stats_found")
-        self.item_stats_found.setGeometry(QRect(340, 390, 121, 31))
+        self.item_stats_found.setGeometry(QRect(340, 385, 131, 31))
         self.item_stats_found.setFont(font14)
         self.item_stats_found.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1438,7 +1440,7 @@ class Ui_Form(object):
         self.item_stats_found.setReadOnly(True)
         self.set_item_value_4 = QLabel(self.maintab_database)
         self.set_item_value_4.setObjectName(u"set_item_value_4")
-        self.set_item_value_4.setGeometry(QRect(250, 385, 81, 41))
+        self.set_item_value_4.setGeometry(QRect(250, 380, 81, 41))
         palette17 = QPalette()
         palette17.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette17.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1473,7 +1475,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.item_stats_bought = QTextEdit(self.maintab_database)
         self.item_stats_bought.setObjectName(u"item_stats_bought")
-        self.item_stats_bought.setGeometry(QRect(590, 390, 111, 31))
+        self.item_stats_bought.setGeometry(QRect(340, 440, 131, 31))
         self.item_stats_bought.setFont(font14)
         self.item_stats_bought.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1490,7 +1492,7 @@ class Ui_Form(object):
         self.item_stats_bought.setReadOnly(True)
         self.set_item_value_5 = QLabel(self.maintab_database)
         self.set_item_value_5.setObjectName(u"set_item_value_5")
-        self.set_item_value_5.setGeometry(QRect(490, 385, 81, 41))
+        self.set_item_value_5.setGeometry(QRect(250, 435, 81, 41))
         palette18 = QPalette()
         palette18.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette18.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1525,7 +1527,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.item_stats_avg_profit = QTextEdit(self.maintab_database)
         self.item_stats_avg_profit.setObjectName(u"item_stats_avg_profit")
-        self.item_stats_avg_profit.setGeometry(QRect(340, 460, 121, 31))
+        self.item_stats_avg_profit.setGeometry(QRect(580, 440, 101, 31))
         self.item_stats_avg_profit.setFont(font14)
         self.item_stats_avg_profit.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1542,7 +1544,7 @@ class Ui_Form(object):
         self.item_stats_avg_profit.setReadOnly(True)
         self.set_item_value_6 = QLabel(self.maintab_database)
         self.set_item_value_6.setObjectName(u"set_item_value_6")
-        self.set_item_value_6.setGeometry(QRect(250, 455, 81, 41))
+        self.set_item_value_6.setGeometry(QRect(490, 435, 81, 41))
         palette19 = QPalette()
         palette19.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette19.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1577,7 +1579,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.item_stats_total_profit = QTextEdit(self.maintab_database)
         self.item_stats_total_profit.setObjectName(u"item_stats_total_profit")
-        self.item_stats_total_profit.setGeometry(QRect(590, 460, 111, 31))
+        self.item_stats_total_profit.setGeometry(QRect(110, 440, 121, 31))
         self.item_stats_total_profit.setFont(font14)
         self.item_stats_total_profit.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1594,7 +1596,7 @@ class Ui_Form(object):
         self.item_stats_total_profit.setReadOnly(True)
         self.set_item_value_7 = QLabel(self.maintab_database)
         self.set_item_value_7.setObjectName(u"set_item_value_7")
-        self.set_item_value_7.setGeometry(QRect(490, 455, 91, 41))
+        self.set_item_value_7.setGeometry(QRect(20, 435, 91, 41))
         palette20 = QPalette()
         palette20.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette20.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1629,7 +1631,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.item_stats_rank = QTextEdit(self.maintab_database)
         self.item_stats_rank.setObjectName(u"item_stats_rank")
-        self.item_stats_rank.setGeometry(QRect(110, 460, 111, 31))
+        self.item_stats_rank.setGeometry(QRect(110, 495, 121, 31))
         self.item_stats_rank.setFont(font14)
         self.item_stats_rank.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1644,9 +1646,10 @@ class Ui_Form(object):
         self.item_stats_rank.setAutoFormatting(QTextEdit.AutoNone)
         self.item_stats_rank.setLineWrapMode(QTextEdit.NoWrap)
         self.item_stats_rank.setReadOnly(True)
+        self.item_stats_rank.setPlaceholderText(u"#1")
         self.set_item_value_8 = QLabel(self.maintab_database)
         self.set_item_value_8.setObjectName(u"set_item_value_8")
-        self.set_item_value_8.setGeometry(QRect(20, 455, 81, 41))
+        self.set_item_value_8.setGeometry(QRect(20, 490, 81, 41))
         palette21 = QPalette()
         palette21.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette21.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1693,6 +1696,110 @@ class Ui_Form(object):
 "\n"
 "background-color: rgb(35,35,40)")
         self.label_5.setAlignment(Qt.AlignCenter)
+        self.item_stats_rarity = QTextEdit(self.maintab_database)
+        self.item_stats_rarity.setObjectName(u"item_stats_rarity")
+        self.item_stats_rarity.setGeometry(QRect(580, 385, 101, 31))
+        self.item_stats_rarity.setFont(font14)
+        self.item_stats_rarity.setStyleSheet(u"QTextEdit {\n"
+"	background-color: rgb(30,30,40);\n"
+"	color: rgb(255,255,255);\n"
+"}\n"
+"")
+        self.item_stats_rarity.setInputMethodHints(Qt.ImhDigitsOnly)
+        self.item_stats_rarity.setLineWidth(1)
+        self.item_stats_rarity.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.item_stats_rarity.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.item_stats_rarity.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.item_stats_rarity.setAutoFormatting(QTextEdit.AutoNone)
+        self.item_stats_rarity.setLineWrapMode(QTextEdit.NoWrap)
+        self.item_stats_rarity.setReadOnly(True)
+        self.set_item_value_9 = QLabel(self.maintab_database)
+        self.set_item_value_9.setObjectName(u"set_item_value_9")
+        self.set_item_value_9.setGeometry(QRect(490, 380, 81, 41))
+        palette22 = QPalette()
+        palette22.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette22.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette22.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette22.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette22.setBrush(QPalette.Active, QPalette.Base, brush1)
+        palette22.setBrush(QPalette.Active, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette22.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+#endif
+        palette22.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette22.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        palette22.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette22.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette22.setBrush(QPalette.Inactive, QPalette.Base, brush1)
+        palette22.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette22.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+#endif
+        palette22.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette22.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette22.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette22.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        palette22.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette22.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette22.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+#endif
+        self.set_item_value_9.setPalette(palette22)
+        self.set_item_value_9.setFont(font15)
+        self.set_item_value_9.setStyleSheet(u"color:rgb(255,255,255);\n"
+"background-color: rgb(35,35,40)")
+        self.item_stats_efficiency = QTextEdit(self.maintab_database)
+        self.item_stats_efficiency.setObjectName(u"item_stats_efficiency")
+        self.item_stats_efficiency.setGeometry(QRect(340, 495, 131, 31))
+        self.item_stats_efficiency.setFont(font14)
+        self.item_stats_efficiency.setStyleSheet(u"QTextEdit {\n"
+"	background-color: rgb(30,30,40);\n"
+"	color: rgb(255,255,255);\n"
+"}\n"
+"")
+        self.item_stats_efficiency.setInputMethodHints(Qt.ImhDigitsOnly)
+        self.item_stats_efficiency.setLineWidth(1)
+        self.item_stats_efficiency.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.item_stats_efficiency.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.item_stats_efficiency.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.item_stats_efficiency.setAutoFormatting(QTextEdit.AutoNone)
+        self.item_stats_efficiency.setLineWrapMode(QTextEdit.NoWrap)
+        self.item_stats_efficiency.setReadOnly(True)
+        self.set_item_value_10 = QLabel(self.maintab_database)
+        self.set_item_value_10.setObjectName(u"set_item_value_10")
+        self.set_item_value_10.setGeometry(QRect(250, 490, 81, 41))
+        palette23 = QPalette()
+        palette23.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette23.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette23.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette23.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette23.setBrush(QPalette.Active, QPalette.Base, brush1)
+        palette23.setBrush(QPalette.Active, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette23.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+#endif
+        palette23.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette23.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        palette23.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette23.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette23.setBrush(QPalette.Inactive, QPalette.Base, brush1)
+        palette23.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette23.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+#endif
+        palette23.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette23.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette23.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette23.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        palette23.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette23.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette23.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+#endif
+        self.set_item_value_10.setPalette(palette23)
+        self.set_item_value_10.setFont(font15)
+        self.set_item_value_10.setStyleSheet(u"color:rgb(255,255,255);\n"
+"background-color: rgb(35,35,40)")
         self.main_tab.addTab(self.maintab_database, "")
         self.label_2.raise_()
         self.select_item.raise_()
@@ -1729,6 +1836,42 @@ class Ui_Form(object):
         self.item_enabled.raise_()
         self.label_5.raise_()
         self.label_3.raise_()
+        self.item_stats_rarity.raise_()
+        self.set_item_value_9.raise_()
+        self.item_stats_efficiency.raise_()
+        self.set_item_value_10.raise_()
+        self.maintab_statistics = QWidget()
+        self.maintab_statistics.setObjectName(u"maintab_statistics")
+        self.statistics_plot = MplWidget(self.maintab_statistics)
+        self.statistics_plot.setObjectName(u"statistics_plot")
+        self.statistics_plot.setGeometry(QRect(20, 70, 671, 461))
+        self.select_statistic = QComboBox(self.maintab_statistics)
+        self.select_statistic.addItem("")
+        self.select_statistic.addItem("")
+        self.select_statistic.addItem("")
+        self.select_statistic.addItem("")
+        self.select_statistic.setObjectName(u"select_statistic")
+        self.select_statistic.setGeometry(QRect(170, 20, 271, 31))
+        self.select_statistic.setFont(font3)
+        self.select_statistic.setStyleSheet(u"QComboBox{\n"
+"	color: rgb(255,255,255);\n"
+"	background-color: rgb(35,35,40)\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"	color: rgb(255,255,255);\n"
+"}\n"
+"\n"
+"")
+        self.select_statistic.setInsertPolicy(QComboBox.InsertAtBottom)
+        self.mouse_movements_2 = QLabel(self.maintab_statistics)
+        self.mouse_movements_2.setObjectName(u"mouse_movements_2")
+        self.mouse_movements_2.setGeometry(QRect(20, 20, 141, 31))
+        self.mouse_movements_2.setFont(font2)
+        self.mouse_movements_2.setStyleSheet(u"background-color: rgb(35,35,40)")
+        self.mouse_movements_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.main_tab.addTab(self.maintab_statistics, "")
         self.label = QLabel(self.MainUi)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(310, 0, 721, 621))
@@ -1736,28 +1879,50 @@ class Ui_Form(object):
         self.bot_status = QLabel(self.MainUi)
         self.bot_status.setObjectName(u"bot_status")
         self.bot_status.setGeometry(QRect(320, 570, 361, 41))
-        palette22 = QPalette()
-        palette22.setBrush(QPalette.Active, QPalette.WindowText, brush)
-        palette22.setBrush(QPalette.Active, QPalette.Text, brush)
-        palette22.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette24 = QPalette()
+        palette24.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette24.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette24.setBrush(QPalette.Active, QPalette.ButtonText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette22.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+        palette24.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
 #endif
-        palette22.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
-        palette22.setBrush(QPalette.Inactive, QPalette.Text, brush)
-        palette22.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette22.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
 #endif
-        palette22.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
-        palette22.setBrush(QPalette.Disabled, QPalette.Text, brush)
-        palette22.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette22.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
 #endif
-        self.bot_status.setPalette(palette22)
+        self.bot_status.setPalette(palette24)
         self.bot_status.setFont(font10)
         self.bot_status.setStyleSheet(u"color:rgb(255,255,255)")
+        self.buttons_statistics = QPushButton(self.MainUi)
+        self.buttons_statistics.setObjectName(u"buttons_statistics")
+        self.buttons_statistics.setGeometry(QRect(-20, 170, 271, 41))
+        self.buttons_statistics.setFont(font)
+        self.buttons_statistics.setStyleSheet(u"\n"
+"QPushButton {\n"
+"	border-bottom-right-radius: 20px;\n"
+"	border-top-left-radius: 20px;\n"
+"	color:rgba(255, 255, 255, 210);\n"
+"	background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(30, 60, 60, 120), stop:1 rgba(80, 98, 112, 255));\n"
+"}\n"
+"\n"
+"QPushButton:pressed {          \n"
+"		  background-color: rgb(255, 255,255); \n"
+"          border:1px solid rgb(255, 255, 255);}\n"
+"\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(30, 60, 60, 160), stop:1 rgba(80, 98, 112, 230));\n"
+"}")
+        self.buttons_statistics.setIcon(icon2)
+        self.buttons_statistics.setIconSize(QSize(40, 40))
         Form.setCentralWidget(self.MainUi)
         self.label.raise_()
         self.background_left.raise_()
@@ -1766,10 +1931,11 @@ class Ui_Form(object):
         self.buttons_license.raise_()
         self.main_tab.raise_()
         self.bot_status.raise_()
+        self.buttons_statistics.raise_()
 
         self.retranslateUi(Form)
 
-        self.main_tab.setCurrentIndex(2)
+        self.main_tab.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -2009,7 +2175,7 @@ class Ui_Form(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_total_profit.setPlaceholderText(QCoreApplication.translate("Form", u"1 323", None))
+        self.item_stats_total_profit.setPlaceholderText(QCoreApplication.translate("Form", u"1 233 924", None))
         self.set_item_value_7.setText(QCoreApplication.translate("Form", u"Total profit:", None))
 #if QT_CONFIG(tooltip)
         self.item_stats_rank.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
@@ -2021,12 +2187,46 @@ class Ui_Form(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_rank.setPlaceholderText(QCoreApplication.translate("Form", u"1 323", None))
         self.set_item_value_8.setText(QCoreApplication.translate("Form", u"Rank:", None))
         self.item_enabled.setText(QCoreApplication.translate("Form", u"Enabled", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"Item statistics", None))
+#if QT_CONFIG(tooltip)
+        self.item_stats_rarity.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
+"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
+"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+#endif // QT_CONFIG(tooltip)
+        self.item_stats_rarity.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+        self.item_stats_rarity.setPlaceholderText(QCoreApplication.translate("Form", u"10%", None))
+        self.set_item_value_9.setText(QCoreApplication.translate("Form", u"Rarity:", None))
+#if QT_CONFIG(tooltip)
+        self.item_stats_efficiency.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
+"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
+"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+#endif // QT_CONFIG(tooltip)
+        self.item_stats_efficiency.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+        self.item_stats_efficiency.setPlaceholderText(QCoreApplication.translate("Form", u"50%", None))
+        self.set_item_value_10.setText(QCoreApplication.translate("Form", u"Efficiency:", None))
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_database), QCoreApplication.translate("Form", u"Seite", None))
+        self.select_statistic.setItemText(0, QCoreApplication.translate("Form", u"Average profit timeline - plot chart", None))
+        self.select_statistic.setItemText(1, QCoreApplication.translate("Form", u"Total item profits - bar chart", None))
+        self.select_statistic.setItemText(2, QCoreApplication.translate("Form", u"Item efficiency - bar chart", None))
+        self.select_statistic.setItemText(3, QCoreApplication.translate("Form", u"Total profit - pie chart", None))
+
+#if QT_CONFIG(tooltip)
+        self.select_statistic.setToolTip(QCoreApplication.translate("Form", u"Select what button you move with", None))
+#endif // QT_CONFIG(tooltip)
+        self.mouse_movements_2.setText(QCoreApplication.translate("Form", u"Statistic:", None))
+        self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_statistics), QCoreApplication.translate("Form", u"Seite", None))
         self.label.setText("")
         self.bot_status.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#55ffff;\">Bot Status:</span> Idle - Press F1 to start.</p></body></html>", None))
+        self.buttons_statistics.setText(QCoreApplication.translate("Form", u"Statistics", None))
     # retranslateUi
 

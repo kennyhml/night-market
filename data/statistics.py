@@ -2,6 +2,7 @@ import json
 import time
 
 from nightmart_bot import Discord
+from datetime import datetime, timedelta
 
 
 class Statistics:
@@ -47,7 +48,6 @@ class Statistics:
         with open("data\statistics.json", "w") as json_file:
             json.dump(self.stats_data, json_file, indent=4)
 
-
     def shorten_name(self, name):
         if len(name.split(" ")) > 4:
             return " ".join(part for part in name.split(" ")[:4])
@@ -59,34 +59,35 @@ class Statistics:
         """
         profits = set([self.items[val]["total_profit"] for val in self.items])
         profits = sorted(list(profits), reverse=True)
+        try:
+            for item in self.items:
+                if self.items[item]["total_profit"] == profits[0 if best else -1]:
+                    item_1 = {
+                        "name": self.shorten_name(item),
+                        "quantity": self.items[item]["total_quantity"],
+                        "profit": self.items[item]["total_profit"],
+                    }
 
-        for item in self.items:
-            if self.items[item]["total_profit"] == profits[0 if best else -1]:
-                item_1 = {
-                    "name": self.shorten_name(item),
-                    "quantity": self.items[item]["total_quantity"],
-                    "profit": self.items[item]["total_profit"],
-                }
+                elif self.items[item]["total_profit"] == profits[1 if best else -2]:
+                    item_2 = {
+                        "name": self.shorten_name(item),
+                        "quantity": self.items[item]["total_quantity"],
+                        "profit": self.items[item]["total_profit"],
+                    }
 
-            elif self.items[item]["total_profit"] == profits[1 if best else -2]:
-                item_2 = {
-                    "name": self.shorten_name(item),
-                    "quantity": self.items[item]["total_quantity"],
-                    "profit": self.items[item]["total_profit"],
-                }
+                elif self.items[item]["total_profit"] == profits[2 if best else -3]:
+                    item_3 = {
+                        "name": self.shorten_name(item),
+                        "quantity": self.items[item]["total_quantity"],
+                        "profit": self.items[item]["total_profit"],
+                    }
 
-            elif self.items[item]["total_profit"] == profits[2 if best else -3]:
-                item_3 = {
-                    "name": self.shorten_name(item),
-                    "quantity": self.items[item]["total_quantity"],
-                    "profit": self.items[item]["total_profit"],
-                }
-
-        return [item_1, item_2, item_3]
+            return [item_1, item_2, item_3]
+        except:
+            return [None, None, None]
 
     def get_data(self):
         return self.items
-
 
     def data_to_dict(self, items):
         data = {}
@@ -104,7 +105,9 @@ class Statistics:
         )
 
     def get_cycle_time(self):
-        time_taken = time.strftime("%H:%M:%S", time.gmtime((time.time() - self.last_sent)))
+        time_taken = time.strftime(
+            "%H:%M:%S", time.gmtime((time.time() - self.last_sent))
+        )
         self.last_sent = time.time()
         return time_taken
 
@@ -135,9 +138,42 @@ class Statistics:
             "current_money": current_money,
             "session_time": self.get_session_time(),
             "empty_time": self.get_cycle_time(),
-            "profit_in_euro": self.profit_to_money()
+            "profit_in_euro": self.profit_to_money(),
         }
         self.last_money = current_money
+
+        with open("data\statistics.json", "r") as json_file:
+            self.stats_data = json.load(json_file)
+
+        timeline = self.stats_data["timeline"]
+        today = datetime.today()
+        today_str = datetime.strftime(today, "%Y-%m-%d")
+
+        if today_str not in timeline:
+            self.stats_data["timeline"][today_str] = {}
+
+        to_rm = []
+        for date in timeline:
+            data_day = datetime.strptime(str(date), "%Y-%m-%d")
+
+            diff = today - data_day
+            if diff.days > 2:
+                to_rm.append(date)
+
+        for date in to_rm:
+            self.stats_data["timeline"].pop(date)
+            print(date, " has been removed from the timeline.")
+
+        current_time = datetime.now().strftime("%H:%M:%S")
+        hours = int(data["session_time"][:2])
+        minutes = int(data["session_time"][3:5])
+
+        total_min = hours * 60 + minutes
+        current_rate = round(data["total_profit"] / total_min) * 60
+        self.stats_data["timeline"][today_str][current_time] = current_rate
+
+        with open("data\statistics.json", "w") as json_file:
+            json.dump(self.stats_data, json_file, indent=4)
 
         discord = Discord()
         discord.send_statistics(data)

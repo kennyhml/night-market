@@ -4,7 +4,7 @@ import discord
 
 class Discord:
     def __init__(self) -> None:
-        self.url = "https://discord.com/api/webhooks/991429513340780626/Hm4wv4-7G9XJaBiIiAN28mU5d79mG9vSmdsj5luutodvRetwJdOD7Z_fFJzB1tg6W3_m"
+        self.url = "https://discord.com/api/webhooks/1012067077512761374/Z5iQrJVYJ65zCH-CGTrBhGEnjCBjj5pp2JIOdvwpD9wacxqZzZtfkXlhSFi_fmKls-OU"
         self.avatar = "https://lostarkcodex.com/icons/use_9_242.webp"
         self.webhook = discord.Webhook.from_url(
             self.url, adapter=discord.RequestsWebhookAdapter()
@@ -29,6 +29,22 @@ class Discord:
             name="Posting to discord!",
         ).start()
 
+    def send_evalutation(self, image, value):
+        file = discord.File(image, filename="image.png")
+        webhook = discord.Webhook.from_url(
+            "https://discord.com/api/webhooks/1012067464584118333/LltdShfzrSQQtl_nfgmxT8B6LsQJEU0oo-4C5WIraOKSi7lCOzW00LRwxsbg7mCCLp3P",
+            adapter=discord.RequestsWebhookAdapter(),
+        )
+        Thread(
+            target=lambda: webhook.send(
+                content=value,
+                avatar_url=self.avatar,
+                file=file,
+                username="Night market",
+            ),
+            name="Posting to discord!",
+        ).start()
+
     def send_purchase_embed(self, purchase, inventory):
         embed = discord.Embed(
             type="rich",
@@ -36,7 +52,7 @@ class Discord:
             color=0x9807F2,
         )
         img = purchase.image.replace('"', "")
-        
+
         file = discord.File(f"images/items/{img}.png", filename="image.png")
         taken, total = inventory.slots_taken, inventory.total_slots
         profit_percent = round(
@@ -103,31 +119,35 @@ class Discord:
 
         embed.add_field(name=f"Time taken:ㅤㅤ", value=data["empty_time"])
         embed.add_field(name=f"Session time:ㅤㅤ", value=data["session_time"])
-        embed.add_field(name=f"Real money value:ㅤㅤ", value=f'{data["profit_in_euro"]}\nㅤ')
+        embed.add_field(
+            name=f"Real money value:ㅤㅤ", value=f'{data["profit_in_euro"]}\nㅤ'
+        )
+        try:
+            embed.add_field(name=f"Item #1ㅤㅤ", value=data["top_items"][0]["name"])
+            embed.add_field(
+                name=f"Total profit:ㅤㅤ",
+                value=f'{data["top_items"][0]["profit"]:_}'.replace("_", " ") + " ₽",
+            )
+            embed.add_field(
+                name=f"Total purchases:", value=data["top_items"][0]["quantity"]
+            )
 
-        embed.add_field(name=f"Item #1ㅤㅤ", value=data["top_items"][0]["name"])
-        embed.add_field(
-            name=f"Total profit:ㅤㅤ",
-            value=f'{data["top_items"][0]["profit"]:_}'.replace("_", " ") + " ₽",
-        )
-        embed.add_field(
-            name=f"Total purchases:", value=data["top_items"][0]["quantity"]
-        )
+            embed.add_field(name=f"Item #2ㅤㅤ", value=data["top_items"][1]["name"])
+            embed.add_field(
+                name=f"Total profit:ㅤㅤ",
+                value=f'{data["top_items"][1]["profit"]:_}'.replace("_", " ") + " ₽",
+            )
+            embed.add_field(
+                name=f"Total purchases:", value=data["top_items"][1]["quantity"]
+            )
 
-        embed.add_field(name=f"Item #2ㅤㅤ", value=data["top_items"][1]["name"])
-        embed.add_field(
-            name=f"Total profit:ㅤㅤ",
-            value=f'{data["top_items"][1]["profit"]:_}'.replace("_", " ") + " ₽",
-        )
-        embed.add_field(
-            name=f"Total purchases:", value=data["top_items"][1]["quantity"]
-        )
-
-        embed.add_field(name=f"Item #3ㅤㅤ", value=data["top_items"][2]["name"])
-        embed.add_field(
-            name=f"Total profit:ㅤㅤ",
-            value=f'{data["top_items"][2]["profit"]:_}'.replace("_", " ") + " ₽",
-        )
+            embed.add_field(name=f"Item #3ㅤㅤ", value=data["top_items"][2]["name"])
+            embed.add_field(
+                name=f"Total profit:ㅤㅤ",
+                value=f'{data["top_items"][2]["profit"]:_}'.replace("_", " ") + " ₽",
+            )
+        except:
+            pass
         embed.add_field(
             name=f"Total purchases:", value=data["top_items"][2]["quantity"]
         )

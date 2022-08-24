@@ -1,12 +1,12 @@
-import re
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6 import QtGui
 import json
 import datetime
 import sys
 import ctypes
 from gui.main_ui import Ui_Form
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+from PIL import Image
 
 app = QApplication()
 main_win = QtWidgets.QMainWindow()
@@ -32,7 +32,22 @@ class MainUi(QMainWindow, Ui_Form):
         self.connect_buttons()
         self.connect_changes()
         self.save_changes = True
-        print(self.data)
+        self.update_statistics()
+
+    def update_statistics(self):
+        match self.select_statistic.currentText():
+
+            case "Average profit timeline - plot chart":
+                self.display_timeline_profits()
+
+            case "Total item profits - bar chart":
+                self.display__bar_chart(criteria="profit")
+
+            case "Item efficiency - bar chart":
+                self.display__bar_chart(criteria="efficiency")
+
+            case "Total profit - pie chart":
+                self.display_pie_chart()
 
     def display(self):
         main_win.show()
@@ -185,6 +200,11 @@ class MainUi(QMainWindow, Ui_Form):
             if entry not in self.stats:
                 self.stats[entry] = raw_data
 
+    def format(self, num):
+        if isinstance(num, str):
+            num = num.replace(" ", "")
+        return f"{int(num):_}".replace("_", " ")
+
     def populate_ui(self):
         self.save_changes = False
 
@@ -221,8 +241,8 @@ class MainUi(QMainWindow, Ui_Form):
 
         current_item = self.current_item.currentText()
 
-        self.item_value.setText(self.data[current_item]["price"])
-        self.item_max_price.setText(self.data[current_item]["buy_at"])
+        self.item_value.setText(self.format(self.data[current_item]["price"]))
+        self.item_max_price.setText(self.format(self.data[current_item]["buy_at"]))
 
         self.item_currency.setCurrentText(self.data[current_item]["currency"])
         self.item_vendor.setCurrentText(self.data[current_item]["trader"])
@@ -230,40 +250,77 @@ class MainUi(QMainWindow, Ui_Form):
         self.item_size.setCurrentText(str(self.data[current_item]["size"]))
         self.item_enabled.setChecked(self.data[current_item]["enabled"])
 
-        self.item_profit.setText(
-            str(
-                int(self.data[current_item]["price"].replace(" ", ""))
-                - int(self.data[current_item]["buy_at"].replace(" ", ""))
-            )
+        profit = int(self.data[current_item]["price"].replace(" ", "")) - int(
+            self.data[current_item]["buy_at"].replace(" ", "")
         )
-
-        self.item_stats_searched.setText(str(self.stats[current_item]["times_searched"]))
-        self.item_stats_bought.setText(str(self.stats[current_item]["total_quantity"]))
-        self.item_stats_total_profit.setText(str(self.stats[current_item]["total_profit"]))
-        self.item_stats_found.setText(str(self.stats[current_item]["times_found"]))
-        if int(self.stats[current_item]["total_quantity"]):
-            self.item_stats_avg_profit.setText(
-                str(
-                    int(
-                        self.stats[current_item]["total_profit"]
-                        / int(self.stats[current_item]["total_quantity"])
-                    )
-                )
-            )
-        else:self.item_stats_avg_profit.setText("0")
+        self.item_profit.setText(str(profit))
 
         self.save_changes = True
+        self.populate_item_statistics()
         self.sync_stats_data()
         print("Ui populated.")
 
         self.save_settings()
+
+    def get_efficiency(self, item):
+
+        data = self.stats[item]
+
+        full_efficiency = 400
+        ru_per_search = data["total_profit"] / data["times_searched"]
+
+        return round((ru_per_search / full_efficiency) * 100, 2)
+
+    def get_rank(self, item):
+        try:
+            return (
+                sorted(
+                    [
+                        self.get_efficiency(item)
+                        for item in self.stats
+                        if item != "timeline"
+                    ],
+                    reverse=True,
+                ).index(self.get_efficiency(item))
+                + 1
+            )
+        except:
+            return "?"
+
+    def get_rarity(self, item):
+        try:
+            return round(
+                (self.stats[item]["times_found"] / self.stats[item]["times_searched"])
+                * 100,
+                2,
+            )
+        except:
+            return "?"
+
+    def populate_item_statistics(self):
+        current_item = self.current_item.currentText()
+        data = self.stats[current_item]
+
+        self.item_stats_searched.setText(self.format(data["times_searched"]))
+        self.item_stats_bought.setText(self.format(data["total_quantity"]))
+        self.item_stats_total_profit.setText(self.format(data["total_profit"]))
+        self.item_stats_found.setText(self.format(self.format(data["times_found"])))
+
+        self.item_stats_rank.setText(f"#{str(self.get_rank(current_item))}")
+        self.item_stats_efficiency.setText(f"{str(self.get_efficiency(current_item))}%")
+        self.item_stats_rarity.setText(f"{str(self.get_rarity(current_item))}%")
+
+        if int(data["total_quantity"]):
+            avg_profit = int(data["total_profit"]) // int(data["total_quantity"])
+            self.item_stats_avg_profit.setText(self.format(avg_profit))
+        else:
+            self.item_stats_avg_profit.setText("0")
 
     def save_item_settings(self):
         if not self.save_changes:
             return
 
         current_item = self.current_item.currentText()
-
         self.data[current_item]["price"] = self.item_value.toPlainText()
         self.data[current_item]["buy_at"] = self.item_max_price.toPlainText()
         self.data[current_item]["currency"] = self.item_currency.currentText()
@@ -302,6 +359,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.buttons_general.clicked.connect(lambda: self.open_tab(0))
         self.buttons_license.clicked.connect(lambda: self.open_tab(1))
         self.buttons_database.clicked.connect(lambda: self.open_tab(2))
+        self.buttons_statistics.clicked.connect(lambda: self.open_tab(3))
         self.add_item.clicked.connect(self.add_item_data)
         self.delete_item.clicked.connect(self.delete_item_data)
 
@@ -329,3 +387,101 @@ class MainUi(QMainWindow, Ui_Form):
         self.item_enabled.clicked.connect(self.save_item_settings)
 
         self.current_item.currentIndexChanged.connect(self.populate_ui)
+        self.select_statistic.currentIndexChanged.connect(self.update_statistics)
+        
+    def get_percent_of_profit(self, item):
+        total = sum([self.stats[item]["total_profit"] for item in self.stats if item != "timeline"])
+        percentual = round((self.stats[item]["total_profit"] / total) * 100, 1)
+        if percentual > 5:
+            return percentual
+
+    def shorten_name(self, name):
+        if len(name.split(" ")) > 3:
+            return " ".join(part for part in name.split(" ")[:3])
+        return name
+
+    def display_pie_chart(self):
+        self.read_files()
+        self.statistics_plot.canvas.ax.cla()
+
+        profits = []
+        labels = []
+
+        for item in self.stats:
+            if item == "timeline":
+                continue
+            
+            if part := self.get_percent_of_profit(item):
+                labels.append(self.shorten_name(item))
+                profits.append(part)
+
+        self.statistics_plot.canvas.ax.pie(
+            profits, labels=labels, autopct="%1.1f%%", shadow=True, startangle=90
+        )
+        self.statistics_plot.canvas.ax.axis('equal')
+        self.statistics_plot.canvas.draw()
+
+    def display_timeline_profits(self):
+        self.read_files()
+        data = self.stats["timeline"]
+        self.statistics_plot.canvas.ax.cla()
+
+        profits = []
+        times = []
+        for day in data:
+            for time in data[day]:
+                profits.append(data[day][time])
+                times.append(time[:5])
+
+        self.statistics_plot.canvas.ax.plot(times, profits, marker=".", color="r")
+        self.statistics_plot.canvas.fig.autofmt_xdate(rotation=45)
+        self.statistics_plot.canvas.draw()
+
+    def display__bar_chart(self, criteria="profit"):
+        self.read_files()
+        self.statistics_plot.canvas.ax.cla()
+
+        imgs = []
+        y = []
+
+        for item in self.stats:
+            if item == "timeline":
+                continue
+            try:
+                stripped = item.replace('"', "")
+                img = Image.open(f"images/items/{stripped}.png")
+                imgs.append(img.resize((22, 22), 1))
+
+                if criteria == "profit":
+                    y.append(self.stats[item]["total_profit"])
+
+                elif criteria == "efficiency":
+                    y.append(self.get_efficiency(item))
+
+            except FileNotFoundError:
+                print(f"Missing data for {item}, unable to display.")
+
+        self.statistics_plot.canvas.ax.bar(range(len(imgs)), y, align="center")
+        self.statistics_plot.canvas.ax.set_xticks(range(len(imgs)))
+
+        for i, c in enumerate(imgs):
+            self.offset_image(i, c, self.statistics_plot.canvas.ax)
+
+        self.statistics_plot.canvas.draw()
+
+    def offset_image(self, coord, name, ax):
+
+        im = OffsetImage(name, zoom=0.72)
+        im.image.axes = ax
+
+        ab = AnnotationBbox(
+            im,
+            (coord, 0),
+            xybox=(0.0, -16.0),
+            frameon=False,
+            xycoords="data",
+            boxcoords="offset points",
+            pad=0,
+        )
+
+        ax.add_artist(ab)

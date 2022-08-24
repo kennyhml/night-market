@@ -55,9 +55,11 @@ class PurchaseHandler(TarkovBot):
 
     def is_available(self, region):
         return pg.locateOnScreen(
-            "images/purchase.png", region=region, confidence=0.6, grayscale=True
+            "images/purchase_3.png", region=region, confidence=0.5, grayscale=True
         ) or pg.locateOnScreen(
             "images/purchase_2.png", region=region, confidence=0.4, grayscale=True
+        ) or pg.locateOnScreen(
+            "images/purchase.png", region=region, confidence=0.6, grayscale=True
         )
 
     def is_out_of_stock(self, region):
@@ -130,7 +132,7 @@ class PurchaseHandler(TarkovBot):
             self.move_to(1146, 490)
             self.click()
             self.move_to(1780, 118)
-
+        
         # Y to confirm, check purchase succeeded, return item quantity
         self.press("Y")
 
@@ -154,7 +156,7 @@ class PurchaseHandler(TarkovBot):
             if not pg.locateOnScreen(
                 "images/temp/pre_purchase.png",
                 region=(1508, 66, 90, 29),
-                confidence=0.98
+                confidence=0.98,
             ):
                 self.notify(f"Purchase succeeded after {self.get_time(start)}s")
                 if self.amount_changed():
@@ -187,7 +189,9 @@ class PurchaseHandler(TarkovBot):
         self.notify("Checking item amount...")
         start = time()
 
-        if pg.locateOnScreen("images/11.png", region=(1108, 472, 25, 32), confidence=0.8):
+        if pg.locateOnScreen(
+            "images/11.png", region=(1108, 472, 25, 32), confidence=0.8
+        ):
             return 11
 
         # get image showing the amount, process and pass to tesseract
@@ -198,6 +202,8 @@ class PurchaseHandler(TarkovBot):
             if result:
                 self.notify(f"Getting amount took {self.get_time(start)}s")
                 self.amount = result
+                discord = Discord()
+                discord.send_evalutation("Images/temp/item_amount.png", f"Evaluated: {result}")
                 return
 
         self.amount = 1
@@ -221,6 +227,8 @@ class PurchaseHandler(TarkovBot):
         """Processes the image of the item price and ocr's it"""
         self.price = None
         self.price = self.validate_price(item, Screen.read_price(img))
+        discord = Discord()
+        discord.send_evalutation("images/temp/sample.png", f"Evaluated: {self.price}")
 
     def post_profit(self, item: Item, inventory: Inventory, amount):
         """Sends all previously bought items to discord, the thread is started

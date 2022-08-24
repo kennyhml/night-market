@@ -115,22 +115,25 @@ class MarketUI(TarkovBot):
 
     def refresh(self):
         c = 0
+        self.move_to(1776,182)
+
         while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
             self.sleep(0.1)
             c += 1
             if c > 100:
                 raise TimeoutError("Could not refresh after 5s!")
 
-        self.move_to(1839, 118)
-        self.click(0.2)
-
+        self.press("F5")
+        self.sleep(0.1)
+        start = time.time()
         c = 0
         while not self.items_listed():
-            self.sleep(0.1)
+            self.sleep(0.01)
             c += 1
-
-            if c > 100:
+            if c > 1000:
                 raise TimeoutError("Timed out awaiting items listed!")
+
+        self.notify(f"Items listed after {self.get_time(start)}s")
 
     def get_available_purchases(self, item: Item, inventory: Inventory):
         """Main purchase finding function, checks the status of each item slot
@@ -166,7 +169,9 @@ class MarketUI(TarkovBot):
                 path = "images/temp/price.png"
 
                 # get item status
+                self.get_screenshot("images/temp/status.png", region=status_region)
                 if purchase_ui.is_available(status_region):
+                    self.discord.send_evalutation("images/temp/status.png", "Purchase!")
                     founds.add(attempt)
 
                     if grab_img:
@@ -215,6 +220,7 @@ class MarketUI(TarkovBot):
                     box_nr += 1
 
                 else:
+                    self.discord.send_evalutation("images/temp/status.png", "No purchase")
                     break
 
         return inventory, purchases, len(founds)

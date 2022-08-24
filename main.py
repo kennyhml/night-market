@@ -32,7 +32,7 @@ def on__key_press(key):
             TarkovBot.running = False  # stop the bot
             ui.save_changes = True  # allow config changes again
 
-    elif key == keyboard.Key.f5:  # paused
+    elif key == keyboard.Key.f2:  # paused
         if TarkovBot.running and not TarkovBot.paused:  # not currently paused
             TarkovBot.paused = True  # pause the bot
 
@@ -71,7 +71,7 @@ def main():
                     inventory.reset()
 
             except BotTerminated:
-                pass
+                return
 
             except TimeoutError:
                 discord = Discord()

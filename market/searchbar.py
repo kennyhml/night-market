@@ -32,7 +32,7 @@ class SearchBar(TarkovBot):
     def get_price_filter_position(self) -> None | tuple:
         """Gets position of the price filter"""
         return pg.locateCenterOnScreen(
-            "images/max_price.png", region=(753, 51, 40, 21), confidence=0.7
+            "images/max_price.png", region=(753, 51, 70, 21), confidence=0.7
         )
 
     def disable_price_filter(self):
