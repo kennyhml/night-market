@@ -46,9 +46,6 @@ class MainUi(QMainWindow, Ui_Form):
             case "Item efficiency - bar chart":
                 self.display__bar_chart(criteria="efficiency")
 
-            case "Total profit - pie chart":
-                self.display_pie_chart()
-
     def display(self):
         main_win.show()
         sys.exit(app.exec())
@@ -389,38 +386,6 @@ class MainUi(QMainWindow, Ui_Form):
         self.current_item.currentIndexChanged.connect(self.populate_ui)
         self.select_statistic.currentIndexChanged.connect(self.update_statistics)
         
-    def get_percent_of_profit(self, item):
-        total = sum([self.stats[item]["total_profit"] for item in self.stats if item != "timeline"])
-        percentual = round((self.stats[item]["total_profit"] / total) * 100, 1)
-        if percentual > 5:
-            return percentual
-
-    def shorten_name(self, name):
-        if len(name.split(" ")) > 3:
-            return " ".join(part for part in name.split(" ")[:3])
-        return name
-
-    def display_pie_chart(self):
-        self.read_files()
-        self.statistics_plot.canvas.ax.cla()
-
-        profits = []
-        labels = []
-
-        for item in self.stats:
-            if item == "timeline":
-                continue
-            
-            if part := self.get_percent_of_profit(item):
-                labels.append(self.shorten_name(item))
-                profits.append(part)
-
-        self.statistics_plot.canvas.ax.pie(
-            profits, labels=labels, autopct="%1.1f%%", shadow=True, startangle=90
-        )
-        self.statistics_plot.canvas.ax.axis('equal')
-        self.statistics_plot.canvas.draw()
-
     def display_timeline_profits(self):
         self.read_files()
         data = self.stats["timeline"]
@@ -428,10 +393,22 @@ class MainUi(QMainWindow, Ui_Form):
 
         profits = []
         times = []
+
         for day in data:
-            for time in data[day]:
-                profits.append(data[day][time])
-                times.append(time[:5])
+            print(day)
+            times_included = set([int(pot[:2]) for pot in data[day]])
+
+            for point_of_time in times_included:
+                print(f"Times included in this day: {times_included}")
+                matching_times = [timepoint for timepoint in data[day] if int(timepoint[:2]) == point_of_time]
+                print(f"Matching timepoints: {matching_times}")
+
+                summe = sum([data[day][time] for time in matching_times])
+                profit = summe / (len(matching_times))
+                print(f"Sum of {point_of_time + 1}:00 - {profit}")
+
+                profits.append(profit)
+                times.append(f"{day[8:11]}th {point_of_time + 1}:00")
 
         self.statistics_plot.canvas.ax.plot(times, profits, marker=".", color="r")
         self.statistics_plot.canvas.fig.autofmt_xdate(rotation=45)

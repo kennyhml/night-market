@@ -69,7 +69,8 @@ def main():
                     current_money = vendor.sell(item.vendor, inventory)
                     statistics.send_stats(current_money)
                     inventory.reset()
-
+                    ui.display_timeline_profits()
+                    
             except BotTerminated:
                 return
 

@@ -192,7 +192,7 @@ class PurchaseHandler(TarkovBot):
         if pg.locateOnScreen(
             "images/11.png", region=(1108, 472, 25, 32), confidence=0.8
         ):
-            return 11
+             self.amount = 11
 
         # get image showing the amount, process and pass to tesseract
         for region in [(1108, 472, 25, 32), (969, 514, 30, 24)]:
@@ -214,13 +214,13 @@ class PurchaseHandler(TarkovBot):
         """
         allowed_profit = 0.9
         profit_limit = int(item.price) * allowed_profit
-
-        if (
-            int(price) > int(item.buy_at)
-            or (int(item.price) - int(price)) > profit_limit
-        ):
-            return item.buy_at
-
+        try:
+            if (
+                int(price) > int(item.buy_at)
+                or (int(item.price) - int(price)) > profit_limit
+            ):
+                return item.buy_at
+        except: pass
         return price
 
     def get_item_price(self, item: Item, img):

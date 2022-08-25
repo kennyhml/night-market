@@ -81,7 +81,11 @@ class Filter(TarkovBot):
 
         # set price, again by using copy paste to speed things up
         self.move_to(797, 153)
-        self.click(0.2)
+        self.click(0.3)
+
+        if not pg.pixelMatchesColor(834,157, (176,200,222), tolerance=20):
+            self.click(0.2)
+
         self.set_clipboard(str(self.item.buy_at))
         pg.hotkey("ctrl", "v")
 

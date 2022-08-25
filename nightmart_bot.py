@@ -35,16 +35,19 @@ class Discord:
             "https://discord.com/api/webhooks/1012067464584118333/LltdShfzrSQQtl_nfgmxT8B6LsQJEU0oo-4C5WIraOKSi7lCOzW00LRwxsbg7mCCLp3P",
             adapter=discord.RequestsWebhookAdapter(),
         )
-        Thread(
-            target=lambda: webhook.send(
-                content=value,
-                avatar_url=self.avatar,
-                file=file,
-                username="Night market",
-            ),
-            name="Posting to discord!",
-        ).start()
-
+        try:
+            Thread(
+                target=lambda: webhook.send(
+                    content=value,
+                    avatar_url=self.avatar,
+                    file=file,
+                    username="Night market",
+                ),
+                name="Posting to discord!",
+            ).start()
+        except:
+            pass
+        
     def send_purchase_embed(self, purchase, inventory):
         embed = discord.Embed(
             type="rich",

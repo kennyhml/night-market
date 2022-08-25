@@ -89,10 +89,29 @@ class CaptchaSolver(TarkovBot):
         self.discord.send_message(f"Captcha took {round(time() - start, 2)}s to solve.")
         self.confirm()
 
+        if self.await_captcha_disappear():
+            return
+        self.solve()
+
+    def await_captcha_disappear(self):
+        start = time()
+        while (
+            pg.locateOnScreen(
+                "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
+            )
+            is not None
+        ):
+            self.sleep(0.1)
+            if self.has_timedout(start, 6):
+                return False
+
+        else:
+            return True
+
     def get_captcha_target(self):
         """Processes the image of the captcha and returns the filtered item"""
         # set configs
-        
+
         # read the image and filter the returned text
         raw_text: str = Screen.read_captcha()
         return self.filter_captcha_target(raw_text)
@@ -187,15 +206,16 @@ class CaptchaSolver(TarkovBot):
             self.move_to(confirm)
             self.click(0.3)
             while pg.locateOnScreen(
-                "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7, grayscale=True
+                "Images/captcha.png",
+                region=(577, 45, 775, 1007),
+                confidence=0.7,
+                grayscale=True,
             ):
                 pass
 
-            return
+            return True
 
         # now we are in trouble
         self.discord.send_message(
             "WARNING! Could not locate the confirmation button!!!"
         )
-
-
