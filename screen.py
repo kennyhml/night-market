@@ -1,4 +1,4 @@
-from statistics import variance
+
 import numpy as np
 import cv2 as cv
 from mss import mss

@@ -1,7 +1,6 @@
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 import json
-import datetime
 import sys
 import ctypes
 from gui.main_ui import Ui_Form

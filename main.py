@@ -2,6 +2,8 @@ from screen import Screen
 from data.statistics import Statistics
 from gui.main_ui_handle import MainUi
 from market.market import MarketUI
+from market.purchase import OutOfMoneyError
+from market.searchbar import NoItemsListed
 from data.items import Database, Inventory
 from nightmart_bot import Discord
 from tarkov import BotTerminated, TarkovBot
@@ -73,6 +75,9 @@ def main():
                     
             except BotTerminated:
                 return
+
+            except NoItemsListed:
+                continue
 
             except TimeoutError:
                 discord = Discord()

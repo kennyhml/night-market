@@ -1,7 +1,6 @@
 from data.items import Item
-from tarkov import TarkovBot, BotTerminated
+from tarkov import TarkovBot
 import pyautogui as pg
-import time
 
 class Filter(TarkovBot):
     """Flea market filter ui

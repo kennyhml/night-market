@@ -1,5 +1,6 @@
 from threading import Thread
 import discord
+import sys
 
 
 class Discord:
@@ -15,39 +16,21 @@ class Discord:
             content=message, avatar_url=self.avatar, username="Night market"
         )
 
+    def send_img_to_disc(self, image, message):
+        try:
+            file = discord.File(image, filename="image.png")
+            self.webhook.send(
+                content=message, avatar_url=self.avatar, file=file, username="Night market"
+            )
+        except:
+            pass
+
     def send_image(self, image, message):
-
-        file = discord.File(image, filename="image.png")
-
         Thread(
-            target=lambda: self.webhook.send(
-                content=message,
-                avatar_url=self.avatar,
-                file=file,
-                username="Night market",
-            ),
+            target=lambda: self.send_img_to_disc(image, message),
             name="Posting to discord!",
         ).start()
 
-    def send_evalutation(self, image, value):
-        file = discord.File(image, filename="image.png")
-        webhook = discord.Webhook.from_url(
-            "https://discord.com/api/webhooks/1012067464584118333/LltdShfzrSQQtl_nfgmxT8B6LsQJEU0oo-4C5WIraOKSi7lCOzW00LRwxsbg7mCCLp3P",
-            adapter=discord.RequestsWebhookAdapter(),
-        )
-        try:
-            Thread(
-                target=lambda: webhook.send(
-                    content=value,
-                    avatar_url=self.avatar,
-                    file=file,
-                    username="Night market",
-                ),
-                name="Posting to discord!",
-            ).start()
-        except:
-            pass
-        
     def send_purchase_embed(self, purchase, inventory):
         embed = discord.Embed(
             type="rich",

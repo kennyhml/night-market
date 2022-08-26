@@ -169,9 +169,7 @@ class MarketUI(TarkovBot):
                 path = "images/temp/price.png"
 
                 # get item status
-                self.get_screenshot("images/temp/status.png", region=status_region)
                 if purchase_ui.is_available(status_region):
-                    self.discord.send_evalutation("images/temp/status.png", "Purchase!")
                     founds.add(attempt)
 
                     if grab_img:
@@ -220,7 +218,6 @@ class MarketUI(TarkovBot):
                     box_nr += 1
 
                 else:
-                    self.discord.send_evalutation("images/temp/status.png", "No purchase")
                     break
 
         return inventory, purchases, len(founds)

@@ -167,6 +167,12 @@ class PurchaseHandler(TarkovBot):
 
                 return True, None
 
+            if self.amount_changed():
+                    self.notify("Purchase amount changed!")
+                    amount = self.get_new_amount()
+                    self.press("esc")
+                    return True, amount
+
             elif self.offer_sold_out():
                 self.press("esc")
                 return False, None
@@ -178,6 +184,7 @@ class PurchaseHandler(TarkovBot):
                 raise OutOfMoneyError
 
             elif self.has_timedout(start, 0.6):
+                print("Timedout, no success!")
                 return False, None
 
             if self.check_for_captcha():
@@ -202,8 +209,6 @@ class PurchaseHandler(TarkovBot):
             if result:
                 self.notify(f"Getting amount took {self.get_time(start)}s")
                 self.amount = result
-                discord = Discord()
-                discord.send_evalutation("Images/temp/item_amount.png", f"Evaluated: {result}")
                 return
 
         self.amount = 1
@@ -227,8 +232,6 @@ class PurchaseHandler(TarkovBot):
         """Processes the image of the item price and ocr's it"""
         self.price = None
         self.price = self.validate_price(item, Screen.read_price(img))
-        discord = Discord()
-        discord.send_evalutation("images/temp/sample.png", f"Evaluated: {self.price}")
 
     def post_profit(self, item: Item, inventory: Inventory, amount):
         """Sends all previously bought items to discord, the thread is started

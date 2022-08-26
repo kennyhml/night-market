@@ -1,15 +1,15 @@
 {
     "Toilet paper": {
-        "total_quantity": 626,
-        "total_profit": 520256,
-        "times_searched": 1172,
-        "times_found": 154
+        "total_quantity": 791,
+        "total_profit": 675456,
+        "times_searched": 1348,
+        "times_found": 200
     },
     "OFZ 30x160mm shell": {
-        "total_quantity": 349,
-        "total_profit": 856476,
-        "times_searched": 2190,
-        "times_found": 251
+        "total_quantity": 426,
+        "total_profit": 1038506,
+        "times_searched": 2700,
+        "times_found": 311
     },
     "Round pliers": {
         "total_quantity": 30,
@@ -24,22 +24,22 @@
         "times_found": 18
     },
     "Old firesteel": {
-        "total_quantity": 152,
-        "total_profit": 351027,
-        "times_searched": 1494,
-        "times_found": 118
+        "total_quantity": 176,
+        "total_profit": 435062,
+        "times_searched": 1834,
+        "times_found": 136
     },
     "Golden egg": {
-        "total_quantity": 86,
-        "total_profit": 214804,
-        "times_searched": 1125,
-        "times_found": 63
+        "total_quantity": 101,
+        "total_profit": 239218,
+        "times_searched": 1380,
+        "times_found": 75
     },
     "Can of Dr. Lupo's coffee beans": {
-        "total_quantity": 166,
-        "total_profit": 324928,
-        "times_searched": 1372,
-        "times_found": 119
+        "total_quantity": 192,
+        "total_profit": 364917,
+        "times_searched": 1712,
+        "times_found": 144
     },
     "Ratchet wrench": {
         "total_quantity": 6,
@@ -48,16 +48,16 @@
         "times_found": 5
     },
     "Military gyrotachometer": {
-        "total_quantity": 84,
-        "total_profit": 324977,
-        "times_searched": 824,
-        "times_found": 52
+        "total_quantity": 121,
+        "total_profit": 401828,
+        "times_searched": 994,
+        "times_found": 75
     },
     "Gunpowder \"Hawk\"": {
-        "total_quantity": 93,
-        "total_profit": 173920,
-        "times_searched": 890,
-        "times_found": 49
+        "total_quantity": 124,
+        "total_profit": 223723,
+        "times_searched": 1058,
+        "times_found": 65
     },
     "Bottle of OLOLO Multivitamins": {
         "total_quantity": 15,
@@ -72,10 +72,10 @@
         "times_found": 18
     },
     "Set of files \"Master\"": {
-        "total_quantity": 141,
-        "total_profit": 263463,
-        "times_searched": 1059,
-        "times_found": 93
+        "total_quantity": 181,
+        "total_profit": 360642,
+        "times_searched": 1311,
+        "times_found": 119
     },
     "Golden 1GPhone smartphone": {
         "total_quantity": 2,
@@ -90,16 +90,16 @@
         "times_found": 13
     },
     "Battered antique book": {
-        "total_quantity": 34,
-        "total_profit": 175247,
-        "times_searched": 1048,
-        "times_found": 27
+        "total_quantity": 45,
+        "total_profit": 206064,
+        "times_searched": 1384,
+        "times_found": 38
     },
     "Cat figurine": {
-        "total_quantity": 104,
-        "total_profit": 215871,
-        "times_searched": 1044,
-        "times_found": 70
+        "total_quantity": 149,
+        "total_profit": 307857,
+        "times_searched": 1296,
+        "times_found": 94
     },
     "Silver Badge": {
         "total_quantity": 6,
@@ -166,7 +166,21 @@
             "00:29:10": 342420,
             "00:48:36": 309420,
             "00:56:12": 313800,
-            "01:06:36": 314760
+            "01:06:36": 314760,
+            "19:05:41": 369660,
+            "19:18:39": 359160,
+            "19:25:45": 355140,
+            "19:34:11": 361140,
+            "19:42:38": 359100,
+            "19:44:05": 338880,
+            "20:23:47": 349980,
+            "20:33:51": 332820,
+            "20:40:26": 361680,
+            "20:50:11": 375240,
+            "20:59:52": 420540,
+            "21:07:58": 409380,
+            "21:16:01": 426120,
+            "22:13:42": 499260
         }
     }
 }

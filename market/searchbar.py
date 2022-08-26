@@ -1,6 +1,6 @@
 from screen import Screen
 from data.items import Item
-from tarkov import TarkovBot, BotTerminated
+from tarkov import TarkovBot
 import pyautogui as pg
 
 
@@ -75,8 +75,11 @@ class SearchBar(TarkovBot):
             c += 1
 
             if c > 100:
-                raise TimeoutError("More than 10s passed awaiting the icon!")
+                raise NoItemsListed
 
         # click the found item bar to make them display
         self.notify("Item found!")
         self.click(0.3)
+
+class NoItemsListed(Exception):
+    """Hurensohn"""
