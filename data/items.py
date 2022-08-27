@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 import json
 import glob
+from screen import Screen
 from PIL import Image
 from tarkov import TarkovBot
-
+import pyautogui as pg
 
 @dataclass
 class Item:
@@ -69,13 +70,35 @@ class Database(TarkovBot):
                 img.paste(bottom_corner, (x, y, x + 1, y + 1))
         img.save(f"images/items/{path}.png")
 
+    def slot_is_empty(self, slot) -> bool:
+        return pg.locateOnScreen("images/empty.png", region=slot, confidence=0.7)
+
+    @staticmethod
+    def load_inventory_image(item):
+        directory = "images/inv"
+        all_items = [
+            image.removeprefix("images/inv\\").removesuffix(".png")
+            for image in glob.glob("images/inv/*.png")
+        ]
+        img = item.replace('"', "")
+
+        if img in all_items:
+            return directory + "/" + img
+        return "No image, please take one!"
+
+    def add_inventory_image(self, item):
+        item_size = self.item_data[item]["size"].split("x")
+        path = item.replace('"', "")
+        size = int(item_size[0]) * 64, int(item_size[1]) * 64
+        Screen.get_screenshot(f"images/inv/{path}.png", region=(1270, 260, *size))
+
     def get_items_to_purchase(self):
         return [
             self.data_to_item(item)
             for item in self.get_items()
             if self.item_data[item]["enabled"]
         ]
-
+        
     def load_items(self):
         self.load_config()
 
@@ -85,6 +108,10 @@ class Database(TarkovBot):
     def items_sold_at(self, vendor):
         return [item for item in self.item_data if item["trader"] == vendor]
 
+    def get_size(self, size):
+        size = size.split("x")
+        return int(size[0]) * int(size[1])
+
     def data_to_item(self, entry) -> Item:
         return Item(
             name=entry,
@@ -93,5 +120,6 @@ class Database(TarkovBot):
             currency=self.item_data[entry]["currency"],
             vendor=self.item_data[entry]["trader"],
             refreshes=self.item_data[entry]["refresh"],
-            size=self.item_data[entry]["size"],
+            size=self.get_size(self.item_data[entry]["size"])
         )
+

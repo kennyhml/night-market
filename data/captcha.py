@@ -1,5 +1,6 @@
 import difflib
 from time import time
+from tracemalloc import start
 import pyautogui as pg
 from screen import Screen
 from tarkov import TarkovBot
@@ -27,13 +28,13 @@ CAPTCHA_ITEMS = {
     "Salewa first aid kit": path + "salewa_first_aid_kit.png",
     "Horse figurine": path + "horse_figurine.png",
     "Car battery": path + "car_battery.png",
-    "Strike cigarettes": path + "strike_cigarettes.png",
+    "Strike Cigarettes": path + "strike_cigarettes.png",
     "42 Signature Blend English Tea": path + "42_signature_blend_english_tea.png",
     "Bottle of water (0.6L)": path + "bottle_of_water (0.6L).png",
     "Immobilzing splint": path + "immobilizing_splint.png",
     "Printer paper": path + "printer_paper.png",
     "Red Rebel ice pick": path + "red_rebel_ice_pick.png",
-    "Antique Teapot": path + "antique_teapot.png",
+    "Antique teapot": path + "antique_teapot.png",
     "Freeman crowbar": path + "freeman_crowbar.png",
     "Golen rooster": path + "golden_rooster.png",
     'Gunpoweder "Eagle"': path + "gunpoweder_eagle.png",
@@ -77,6 +78,7 @@ class CaptchaSolver(TarkovBot):
         start = time()
 
         # process the captcha and get the desired item
+        image_region, item_region = self.get_captcha_boundaries()
         target_item = self.get_captcha_target()
         self.discord.send_message(f"Captcha target item: {target_item}")
 
@@ -84,22 +86,67 @@ class CaptchaSolver(TarkovBot):
         image = self.compare_target_to_database(target_item)
 
         # convert all occurrences into points, tick them all
-        filtered_points = self.find_all_occurrences(image)
+        filtered_points = self.find_all_occurrences(image, image_region)
         self.check_all_items(filtered_points)
-        self.discord.send_message(f"Captcha took {round(time() - start, 2)}s to solve.")
-        self.confirm()
 
-        if self.await_captcha_disappear():
+        if self.confirm():
+            while not Screen.captcha_succeeded(item_region):
+                self.sleep(0.1)
+            self.press("esc")
+            self.discord.send_message(
+                f"Captcha took {self.get_time(start)}s to solve!"
+            )
             return
+
         self.solve()
+
+    def get_captcha_boundaries(self):
+        self.check_status()
+        captcha_region = (577, 45, 775, 1007)
+        self.notify("Getting captcha boundaries...")
+
+        # find top left and top right on the screen
+        sec_check = pg.locateOnScreen(
+            "images/captcha.png", region=captcha_region, confidence=0.7
+        )
+        exit_but = pg.locateOnScreen(
+            "images/purchase_prompt.png", region=captcha_region, confidence=0.7
+        )
+
+        try:
+            # calculate the boundaries needed
+            top_left = sec_check[0] - 50, sec_check[1]
+            top_right = exit_but[0] + exit_but[2], exit_but[1]
+
+            # screenshot the calculated boundaries
+            self.get_screenshot(
+                "images/temp/captcha_target.png",
+                region=(*top_left, top_right[0] - top_left[0], 110),
+            )
+
+            # get the upper x axis of confirm button to end the images crop region
+            bottom = pg.locateOnScreen(
+                "images/captcha_confirm.png", region=captcha_region, confidence=0.7
+            )
+            end_y_axis = bottom[1]
+
+            return (
+                (
+                    top_left[0],
+                    top_left[1] + 105,
+                    top_right[0] - top_left[0],
+                    end_y_axis - top_right[1] - 105,
+                ),
+                (*top_left, top_right[0] - top_left[0], 110),
+            )
+
+        except Exception as e:
+            self.notify(f"Critical exception calculating captcha boundaries!\n{e}")
 
     def await_captcha_disappear(self):
         start = time()
-        while (
-            pg.locateOnScreen(
-                "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
-            )
-            is not None
+        while pg.locateOnScreen(
+            "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
         ):
             self.sleep(0.1)
             if self.has_timedout(start, 6):
@@ -110,8 +157,6 @@ class CaptchaSolver(TarkovBot):
 
     def get_captcha_target(self):
         """Processes the image of the captcha and returns the filtered item"""
-        # set configs
-
         # read the image and filter the returned text
         raw_text: str = Screen.read_captcha()
         return self.filter_captcha_target(raw_text)
@@ -134,7 +179,6 @@ class CaptchaSolver(TarkovBot):
         closest_match = difflib.get_close_matches(
             target, list(CAPTCHA_ITEMS), n=1, cutoff=0.5
         )
-
         if closest_match:
             self.discord.send_message(f"Found match as: {closest_match}!")
             return CAPTCHA_ITEMS[closest_match[0]]
@@ -163,16 +207,14 @@ class CaptchaSolver(TarkovBot):
                 # "all:" occurred > the next index is the word
                 return filtered_text[i + 1]
 
-    def find_all_occurrences(self, image):
+    def find_all_occurrences(self, image, region):
         """Find all occurences of the item within the captcha"""
         self.check_status()
         self.notify("Checking for occurrences...")
 
         # get a list of all matches, note that this function will match the same image
         # muliple times on the same location!
-        occurrences = list(
-            pg.locateAllOnScreen(image, region=(590, 48, 739, 992), confidence=0.85)
-        )
+        occurrences = list(pg.locateAllOnScreen(image, region=region, confidence=0.85))
 
         # convert the matched boxes into their center coordinates, this makes it easier to
         # filter out points that are close to each other and click them in the end
@@ -189,7 +231,7 @@ class CaptchaSolver(TarkovBot):
 
         for position in positions:
             self.move_to(position)
-            self.click(0.4)
+            self.click(0.3)
 
     def confirm(self):
         """Confirm the captcha"""
@@ -205,14 +247,6 @@ class CaptchaSolver(TarkovBot):
         if confirm:
             self.move_to(confirm)
             self.click(0.3)
-            while pg.locateOnScreen(
-                "Images/captcha.png",
-                region=(577, 45, 775, 1007),
-                confidence=0.7,
-                grayscale=True,
-            ):
-                pass
-
             return True
 
         # now we are in trouble

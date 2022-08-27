@@ -87,7 +87,8 @@ class Filter(TarkovBot):
 
         self.set_clipboard(str(self.item.buy_at))
         pg.hotkey("ctrl", "v")
-
+        self.sleep(0.2)
+        
     def confirm_search(self):
         """Confirm the filter"""
         self.move_to(611, 439)

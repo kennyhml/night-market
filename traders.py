@@ -1,11 +1,10 @@
 from dataclasses import dataclass
-from data.items import Inventory
-import screen
+from data.items import Inventory, Item
 from tarkov import TarkovBot
 import pyautogui as pg
 from pytesseract import pytesseract as tes
-from PIL import Image
 from screen import Screen
+from PIL import Image
 
 @dataclass
 class Vendor:
@@ -50,39 +49,51 @@ class VendorUi(TarkovBot):
         self.move_to(vendor.location)
         self.click(0.8)
 
-    def sell(self, vendor, inventory: Inventory):
+    def sell(self, vendor, inventory: Inventory, items):
         self.open()
         self.open_trader(VENDORS[vendor])
         self.open_sell_tab()
-        self.sell_items(inventory)
+        self.sell_items(inventory, items)
         self.confirm_sell()
-        self.sleep(1)
-        
+
         return Screen.read_current_money()
 
-    def sell_items(self, inventory: Inventory):
+    def sell_items(self, inventory: Inventory, items: list[Item]):
         """Takes a list of items and puts all of them into the sell window"""
+        sell_slots = 0
 
-        for i, box in enumerate(self.grid):
-            if i >= inventory.total_slots:
-                return
-
-            self.move_to(
-                (
-                    round(box[0] + (0.5 * box[2])),
-                    round(box[1] + (0.5 * box[3])),
-                )
-            )
-            if not i:
+        for i in range(3):
+            if i:
+                for _ in range(9):
+                    pg.scroll(-8)
+                    self.sleep(0.01)
                 self.sleep(1)
+            
+            for item in items:
+                image = item.name.replace('"', '')
+                
+                points = set(pg.locateAllOnScreen(f"images/inv/{image}.png", region=(1270, 259, 643, 748), confidence=0.6))
 
-            with pg.hold("ctrl"):
-                self.click(0.05)
+                if item.size in [2, 3, 5, 7]:
+                    turned = Image.open(f"images/inv/{image}.png")
+                    turned = turned.rotate(270, expand=True)
+                    points.union(set(pg.locateAllOnScreen(turned, region=(1270, 259, 643, 748), confidence=0.85)))
 
-            if i == 60:
-                self.confirm_sell()
-                self.sleep(0.5)
+                occurrences = Screen.filter_close_points(points, diff=10)
+                points = [Screen.rect_to_center(point) for point in occurrences]
+
+                for point in points:
+                    if sell_slots > 64:
+                        self.confirm_sell()
+                        sell_slots = 0
+
+                    pg.moveTo(point)
+                    with pg.hold("ctrl"):
+                        for _ in range(2):
+                            self.click(0.05)
+                        sell_slots += item.size
 
     def confirm_sell(self):
         self.move_to(964, 182)
-        self.click(0.4)
+        self.click(2)
+        

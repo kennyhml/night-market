@@ -90,7 +90,9 @@ class MarketUI(TarkovBot):
         self.check_status()
         self.notify(f"Searching for {item.name}...")
         start = time.time()
-
+        while not self.items_listed():
+            self.sleep(0.1)
+            
         # searches items name
         searchbar = SearchBar(item)
         searchbar.search_item()

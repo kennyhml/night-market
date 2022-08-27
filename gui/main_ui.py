@@ -1333,6 +1333,9 @@ class Ui_Form(object):
         self.item_size.addItem("")
         self.item_size.addItem("")
         self.item_size.addItem("")
+        self.item_size.addItem("")
+        self.item_size.addItem("")
+        self.item_size.addItem("")
         self.item_size.setObjectName(u"item_size")
         self.item_size.setGeometry(QRect(620, 205, 81, 41))
         self.item_size.setFont(font3)
@@ -1800,6 +1803,76 @@ class Ui_Form(object):
         self.set_item_value_10.setFont(font15)
         self.set_item_value_10.setStyleSheet(u"color:rgb(255,255,255);\n"
 "background-color: rgb(35,35,40)")
+        self.item_image_path = QTextEdit(self.maintab_database)
+        self.item_image_path.setObjectName(u"item_image_path")
+        self.item_image_path.setGeometry(QRect(360, 274, 221, 31))
+        self.item_image_path.setFont(font6)
+        self.item_image_path.setStyleSheet(u"QTextEdit {\n"
+"	background-color: rgb(30,30,40);\n"
+"	color: rgb(255,255,255);\n"
+"}\n"
+"")
+        self.item_image_path.setInputMethodHints(Qt.ImhDigitsOnly)
+        self.item_image_path.setLineWidth(1)
+        self.item_image_path.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.item_image_path.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.item_image_path.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.item_image_path.setAutoFormatting(QTextEdit.AutoNone)
+        self.item_image_path.setLineWrapMode(QTextEdit.NoWrap)
+        self.item_image_path.setReadOnly(True)
+        self.set_item_value_11 = QLabel(self.maintab_database)
+        self.set_item_value_11.setObjectName(u"set_item_value_11")
+        self.set_item_value_11.setGeometry(QRect(250, 270, 101, 41))
+        palette24 = QPalette()
+        palette24.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette24.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette24.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette24.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette24.setBrush(QPalette.Active, QPalette.Base, brush1)
+        palette24.setBrush(QPalette.Active, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette24.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+#endif
+        palette24.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        palette24.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette24.setBrush(QPalette.Inactive, QPalette.Base, brush1)
+        palette24.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette24.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+#endif
+        palette24.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette24.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        palette24.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette24.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette24.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+#endif
+        self.set_item_value_11.setPalette(palette24)
+        self.set_item_value_11.setFont(font15)
+        self.set_item_value_11.setStyleSheet(u"color:rgb(255,255,255);\n"
+"background-color: rgb(35,35,40)")
+        self.add_image = QPushButton(self.maintab_database)
+        self.add_image.setObjectName(u"add_image")
+        self.add_image.setGeometry(QRect(590, 274, 91, 31))
+        self.add_image.setFont(font12)
+        self.add_image.setCursor(QCursor(Qt.ArrowCursor))
+        self.add_image.setMouseTracking(False)
+        self.add_image.setStyleSheet(u"QPushButton:pressed {\n"
+"    background-color: rgb(141,124,102);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(118,111,102);\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    background-color: rgb(25,25,25);\n"
+"	color: rgb(0,255,0);\n"
+"}")
         self.main_tab.addTab(self.maintab_database, "")
         self.label_2.raise_()
         self.select_item.raise_()
@@ -1840,6 +1913,9 @@ class Ui_Form(object):
         self.set_item_value_9.raise_()
         self.item_stats_efficiency.raise_()
         self.set_item_value_10.raise_()
+        self.item_image_path.raise_()
+        self.set_item_value_11.raise_()
+        self.add_image.raise_()
         self.maintab_statistics = QWidget()
         self.maintab_statistics.setObjectName(u"maintab_statistics")
         self.statistics_plot = MplWidget(self.maintab_statistics)
@@ -1879,26 +1955,26 @@ class Ui_Form(object):
         self.bot_status = QLabel(self.MainUi)
         self.bot_status.setObjectName(u"bot_status")
         self.bot_status.setGeometry(QRect(320, 570, 361, 41))
-        palette24 = QPalette()
-        palette24.setBrush(QPalette.Active, QPalette.WindowText, brush)
-        palette24.setBrush(QPalette.Active, QPalette.Text, brush)
-        palette24.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette25 = QPalette()
+        palette25.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette25.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette25.setBrush(QPalette.Active, QPalette.ButtonText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette24.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+        palette25.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
 #endif
-        palette24.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
-        palette24.setBrush(QPalette.Inactive, QPalette.Text, brush)
-        palette24.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette25.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette25.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette25.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette24.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+        palette25.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
 #endif
-        palette24.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
-        palette24.setBrush(QPalette.Disabled, QPalette.Text, brush)
-        palette24.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        palette25.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette25.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette25.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette24.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+        palette25.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
 #endif
-        self.bot_status.setPalette(palette24)
+        self.bot_status.setPalette(palette25)
         self.bot_status.setFont(font10)
         self.bot_status.setStyleSheet(u"color:rgb(255,255,255)")
         self.buttons_statistics = QPushButton(self.MainUi)
@@ -1935,7 +2011,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.main_tab.setCurrentIndex(3)
+        self.main_tab.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -2103,13 +2179,16 @@ class Ui_Form(object):
 "The default values are the regular priorities, if left empty, regular priorities will be used.", None))
 #endif // QT_CONFIG(tooltip)
         self.item_profit.setPlaceholderText(QCoreApplication.translate("Form", u"1930", None))
-        self.select_vendor_2.setText(QCoreApplication.translate("Form", u"Slot size:", None))
-        self.item_size.setItemText(0, QCoreApplication.translate("Form", u"1", None))
-        self.item_size.setItemText(1, QCoreApplication.translate("Form", u"2", None))
-        self.item_size.setItemText(2, QCoreApplication.translate("Form", u"3", None))
-        self.item_size.setItemText(3, QCoreApplication.translate("Form", u"4", None))
-        self.item_size.setItemText(4, QCoreApplication.translate("Form", u"5", None))
-        self.item_size.setItemText(5, QCoreApplication.translate("Form", u"6", None))
+        self.select_vendor_2.setText(QCoreApplication.translate("Form", u"Size:", None))
+        self.item_size.setItemText(0, QCoreApplication.translate("Form", u"1x1", None))
+        self.item_size.setItemText(1, QCoreApplication.translate("Form", u"1x2", None))
+        self.item_size.setItemText(2, QCoreApplication.translate("Form", u"1x3", None))
+        self.item_size.setItemText(3, QCoreApplication.translate("Form", u"2x2", None))
+        self.item_size.setItemText(4, QCoreApplication.translate("Form", u"2x3", None))
+        self.item_size.setItemText(5, QCoreApplication.translate("Form", u"3x2", None))
+        self.item_size.setItemText(6, QCoreApplication.translate("Form", u"3x3", None))
+        self.item_size.setItemText(7, QCoreApplication.translate("Form", u"3x4", None))
+        self.item_size.setItemText(8, QCoreApplication.translate("Form", u"4x3", None))
 
 #if QT_CONFIG(tooltip)
         self.item_size.setToolTip(QCoreApplication.translate("Form", u"The vendor to sell the item at", None))
@@ -2214,6 +2293,22 @@ class Ui_Form(object):
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.item_stats_efficiency.setPlaceholderText(QCoreApplication.translate("Form", u"50%", None))
         self.set_item_value_10.setText(QCoreApplication.translate("Form", u"Efficiency:", None))
+#if QT_CONFIG(tooltip)
+        self.item_image_path.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
+"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
+"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+#endif // QT_CONFIG(tooltip)
+        self.item_image_path.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt;\"><br /></p></body></html>", None))
+        self.item_image_path.setPlaceholderText(QCoreApplication.translate("Form", u"images/inv/Toilet paper.png", None))
+        self.set_item_value_11.setText(QCoreApplication.translate("Form", u"Image path:", None))
+#if QT_CONFIG(tooltip)
+        self.add_image.setToolTip(QCoreApplication.translate("Form", u"Add a new preset", None))
+#endif // QT_CONFIG(tooltip)
+        self.add_image.setText(QCoreApplication.translate("Form", u"Add image", None))
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_database), QCoreApplication.translate("Form", u"Seite", None))
         self.select_statistic.setItemText(0, QCoreApplication.translate("Form", u"Average profit timeline - plot chart", None))
         self.select_statistic.setItemText(1, QCoreApplication.translate("Form", u"Total item profits - bar chart", None))

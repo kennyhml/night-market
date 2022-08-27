@@ -92,12 +92,13 @@ class TarkovBot:
 
     @staticmethod
     def get_screenshot(path, region=(0, 0, 1920, 1080)):
-        x1, y1, x2, y2 = region
-        
+        x, y, w, h = region
+        x, y, w, h = int(x), int(y), int(w), int(h)
+
         with mss() as sct:
-            region= {'top': y1, 'left': x1, 'width': x2, 'height': y2}
+            region_dict = {'left': x, 'top': y, 'width': w, 'height': h}
             # Grab the data
-            img = sct.grab(region)
+            img = sct.grab(region_dict)
 
             # Save to the picture file
             tools.to_png(img.rgb, img.size, output=path.replace('"', ""))

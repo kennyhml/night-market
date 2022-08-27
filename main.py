@@ -54,6 +54,7 @@ def main():
         market = MarketUI()
 
         for item in items:
+
             try:
                 market.open()
                 market.search_item(item)
@@ -68,7 +69,7 @@ def main():
 
                 if inventory.is_full():
                     vendor = VendorUi()
-                    current_money = vendor.sell(item.vendor, inventory)
+                    current_money = vendor.sell(item.vendor, inventory, items)
                     statistics.send_stats(current_money)
                     inventory.reset()
                     ui.display_timeline_profits()

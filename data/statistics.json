@@ -1,15 +1,15 @@
 {
     "Toilet paper": {
-        "total_quantity": 791,
-        "total_profit": 675456,
-        "times_searched": 1348,
-        "times_found": 200
+        "total_quantity": 1014,
+        "total_profit": 875271,
+        "times_searched": 1614,
+        "times_found": 252
     },
     "OFZ 30x160mm shell": {
-        "total_quantity": 426,
-        "total_profit": 1038506,
-        "times_searched": 2700,
-        "times_found": 311
+        "total_quantity": 608,
+        "total_profit": 1477787,
+        "times_searched": 3480,
+        "times_found": 430
     },
     "Round pliers": {
         "total_quantity": 30,
@@ -24,22 +24,22 @@
         "times_found": 18
     },
     "Old firesteel": {
-        "total_quantity": 176,
-        "total_profit": 435062,
-        "times_searched": 1834,
-        "times_found": 136
+        "total_quantity": 211,
+        "total_profit": 558640,
+        "times_searched": 2346,
+        "times_found": 162
     },
     "Golden egg": {
-        "total_quantity": 101,
-        "total_profit": 239218,
-        "times_searched": 1380,
-        "times_found": 75
+        "total_quantity": 121,
+        "total_profit": 270799,
+        "times_searched": 1758,
+        "times_found": 92
     },
     "Can of Dr. Lupo's coffee beans": {
-        "total_quantity": 192,
-        "total_profit": 364917,
-        "times_searched": 1712,
-        "times_found": 144
+        "total_quantity": 215,
+        "total_profit": 402042,
+        "times_searched": 2204,
+        "times_found": 165
     },
     "Ratchet wrench": {
         "total_quantity": 6,
@@ -48,16 +48,16 @@
         "times_found": 5
     },
     "Military gyrotachometer": {
-        "total_quantity": 121,
-        "total_profit": 401828,
-        "times_searched": 994,
-        "times_found": 75
+        "total_quantity": 137,
+        "total_profit": 465324,
+        "times_searched": 1242,
+        "times_found": 86
     },
     "Gunpowder \"Hawk\"": {
-        "total_quantity": 124,
-        "total_profit": 223723,
-        "times_searched": 1058,
-        "times_found": 65
+        "total_quantity": 147,
+        "total_profit": 254976,
+        "times_searched": 1306,
+        "times_found": 77
     },
     "Bottle of OLOLO Multivitamins": {
         "total_quantity": 15,
@@ -72,10 +72,10 @@
         "times_found": 18
     },
     "Set of files \"Master\"": {
-        "total_quantity": 181,
-        "total_profit": 360642,
-        "times_searched": 1311,
-        "times_found": 119
+        "total_quantity": 217,
+        "total_profit": 427014,
+        "times_searched": 1680,
+        "times_found": 148
     },
     "Golden 1GPhone smartphone": {
         "total_quantity": 2,
@@ -90,16 +90,16 @@
         "times_found": 13
     },
     "Battered antique book": {
-        "total_quantity": 45,
-        "total_profit": 206064,
-        "times_searched": 1384,
-        "times_found": 38
+        "total_quantity": 66,
+        "total_profit": 266719,
+        "times_searched": 1876,
+        "times_found": 55
     },
     "Cat figurine": {
-        "total_quantity": 149,
-        "total_profit": 307857,
-        "times_searched": 1296,
-        "times_found": 94
+        "total_quantity": 195,
+        "total_profit": 377446,
+        "times_searched": 1665,
+        "times_found": 117
     },
     "Silver Badge": {
         "total_quantity": 6,
@@ -120,29 +120,6 @@
         "times_found": 6
     },
     "timeline": {
-        "2022-08-24": {
-            "05:02:53": 165180,
-            "05:11:12": 239220,
-            "05:24:37": 196260,
-            "05:32:33": 201420,
-            "05:43:57": 173940,
-            "05:51:57": 172080,
-            "06:02:02": 183900,
-            "06:06:06": 186120,
-            "06:16:19": 178320,
-            "07:26:40": 258540,
-            "07:56:25": 239400,
-            "20:56:12": 417600,
-            "21:04:57": 512160,
-            "21:15:52": 433260,
-            "21:26:19": 434160,
-            "21:33:36": 422220,
-            "21:38:05": 430232,
-            "21:43:33": 477300,
-            "21:55:31": 451560,
-            "22:03:55": 445380,
-            "22:12:16": 430380
-        },
         "2022-08-25": {
             "18:14:55": 471060,
             "18:29:29": 396840,
@@ -181,6 +158,18 @@
             "21:07:58": 409380,
             "21:16:01": 426120,
             "22:13:42": 499260
+        },
+        "2022-08-27": {
+            "16:13:20": 227940,
+            "16:19:49": 283440,
+            "16:34:11": 267420,
+            "16:57:28": 531540,
+            "17:05:12": 447600,
+            "17:14:03": 417000,
+            "22:29:08": 447780,
+            "23:28:53": 598800,
+            "23:35:55": 525960,
+            "23:51:14": 446160
         }
     }
 }

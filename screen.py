@@ -241,10 +241,9 @@ class Screen(TarkovBot):
             " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890()-"
         )
         config = "--oem 3 --psm 6 -c tessedit_char_whitelist=" + allowed_characters
-        path = "images/temp/captcha.png"
+        path = "images/temp/captcha_target.png"
 
         # upscale the image for better matches
-        Screen.get_screenshot(path, region=(620, 63, 680, 980))
         discord = Discord()
         discord.send_image(path, "A captcha has appeared:")
 
@@ -291,6 +290,35 @@ class Screen(TarkovBot):
         image = cv.cvtColor(img, cv.COLOR_RGB2BGR)
         rgb=(205,204,194)
         variance=20
+
+        lower_bound = (
+            max(0, rgb[0] - variance),
+            max(0, rgb[1] - variance),
+            max(0, rgb[2] - variance),
+        )
+        upper_bound = (
+            min(255, rgb[0] + variance),
+            min(255, rgb[1] + variance),
+            min(255, rgb[2] + variance),
+        )
+
+        # image, lower_bound, upper_bound. CARE THEY ARE IN BGR
+        mask = cv.inRange(image, lower_bound, upper_bound)
+        matches = cv.findNonZero(mask)
+
+        if matches is None:
+            return
+
+        return len(matches) > 3
+
+    def captcha_succeeded(reg):
+        path = "images/temp/captcha_success.png"
+        Screen.get_screenshot(path, region=reg)
+        img = cv.imread(path, 1)
+
+        image = cv.cvtColor(img, cv.COLOR_RGB2BGR)
+        rgb=(63,224,68)
+        variance=40
 
         lower_bound = (
             max(0, rgb[0] - variance),

@@ -6,6 +6,7 @@ import ctypes
 from gui.main_ui import Ui_Form
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
+from data.items import Database
 
 app = QApplication()
 main_win = QtWidgets.QMainWindow()
@@ -150,7 +151,7 @@ class MainUi(QMainWindow, Ui_Form):
             "currency": "₽",
             "trader": "Therapist",
             "refresh": 3,
-            "size": 1,
+            "size": "1x1",
         }
 
         self.data[item_name] = data
@@ -245,6 +246,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.item_refreshes.setValue(self.data[current_item]["refresh"])
         self.item_size.setCurrentText(str(self.data[current_item]["size"]))
         self.item_enabled.setChecked(self.data[current_item]["enabled"])
+        self.item_image_path.setText(Database.load_inventory_image(current_item))
 
         profit = int(self.data[current_item]["price"].replace(" ", "")) - int(
             self.data[current_item]["buy_at"].replace(" ", "")
@@ -257,6 +259,11 @@ class MainUi(QMainWindow, Ui_Form):
         print("Ui populated.")
 
         self.save_settings()
+
+    def add_inv_image(self):
+        data = Database()
+        data.add_inventory_image(self.current_item.currentText())
+        self.populate_ui()
 
     def get_efficiency(self, item):
 
@@ -358,7 +365,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.buttons_statistics.clicked.connect(lambda: self.open_tab(3))
         self.add_item.clicked.connect(self.add_item_data)
         self.delete_item.clicked.connect(self.delete_item_data)
-
+        self.add_image.clicked.connect(self.add_inv_image)
     def connect_changes(self):
 
         self.mouse_movement_mode.currentIndexChanged.connect(self.save_settings)

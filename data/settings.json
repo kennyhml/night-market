@@ -3,7 +3,7 @@
     "mouse_speed": 1,
     "item_searching": "Type out",
     "use_wishlist": false,
-    "allowed_inv_slots": 90,
+    "allowed_inv_slots": 20,
     "empty_inv_at": 50,
     "post_discord": false,
     "discord_mention": false,

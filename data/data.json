@@ -6,7 +6,7 @@
         "buy_at": "5 100",
         "refresh": 1,
         "currency": "\u20bd",
-        "size": "1"
+        "size": "1x1"
     },
     "OFZ 30x160mm shell": {
         "enabled": true,
@@ -15,7 +15,7 @@
         "buy_at": "34 500",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": "2"
+        "size": "1x2"
     },
     "Round pliers": {
         "enabled": false,
@@ -24,7 +24,7 @@
         "buy_at": "16 200",
         "refresh": 2,
         "currency": "\u20bd",
-        "size": "1"
+        "size": "1x1"
     },
     "Axel parrot figurine": {
         "enabled": false,
@@ -33,7 +33,7 @@
         "buy_at": "31 500",
         "refresh": 2,
         "currency": "\u20bd",
-        "size": "2"
+        "size": "1x2"
     },
     "Old firesteel": {
         "enabled": true,
@@ -42,7 +42,7 @@
         "buy_at": "38 800",
         "refresh": 3,
         "currency": "\u20bd",
-        "size": "1"
+        "size": "1x1"
     },
     "Golden egg": {
         "enabled": true,
@@ -51,7 +51,7 @@
         "buy_at": "42 000",
         "refresh": 2,
         "currency": "\u20bd",
-        "size": "1"
+        "size": "1x1"
     },
     "Can of Dr. Lupo's coffee beans": {
         "enabled": true,
@@ -60,7 +60,7 @@
         "buy_at": "32 200",
         "refresh": 3,
         "currency": "\u20bd",
-        "size": "1"
+        "size": "1x1"
     },
     "Ratchet wrench": {
         "enabled": false,
@@ -69,7 +69,7 @@
         "buy_at": "77 000",
         "refresh": 1,
         "currency": "\u20bd",
-        "size": "2"
+        "size": "1x2"
     },
     "Military gyrotachometer": {
         "enabled": true,
@@ -78,7 +78,7 @@
         "buy_at": "38 300",
         "refresh": 1,
         "currency": "\u20bd",
-        "size": "2"
+        "size": "1x2"
     },
     "Gunpowder \"Hawk\"": {
         "enabled": true,
@@ -87,7 +87,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 1,
-        "size": "2"
+        "size": "1x2"
     },
     "Bottle of OLOLO Multivitamins": {
         "enabled": false,
@@ -96,7 +96,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1"
+        "size": "1x1"
     },
     "Golden rooster": {
         "enabled": false,
@@ -105,7 +105,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 9,
-        "size": "4"
+        "size": "2x2"
     },
     "Set of files \"Master\"": {
         "enabled": true,
@@ -114,7 +114,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 2,
-        "size": "4"
+        "size": "2x2"
     },
     "Golden 1GPhone smartphone": {
         "enabled": false,
@@ -123,7 +123,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1"
+        "size": "1x1"
     },
     "Raven figurine": {
         "enabled": false,
@@ -132,7 +132,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1"
+        "size": "1x2"
     },
     "Battered antique book": {
         "enabled": true,
@@ -141,7 +141,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 3,
-        "size": "2"
+        "size": "1x2"
     },
     "Cat figurine": {
         "enabled": true,
@@ -150,7 +150,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 2,
-        "size": "3"
+        "size": "1x3"
     },
     "Silver Badge": {
         "enabled": false,
@@ -159,7 +159,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1"
+        "size": "1x1"
     },
     "LVNDMARK's rat poison": {
         "enabled": false,
@@ -168,15 +168,6 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "2"
-    },
-    "Missam forklift key": {
-        "enabled": false,
-        "price": "18 900",
-        "buy_at": "18 233",
-        "currency": "\u20bd",
-        "trader": "Therapist",
-        "refresh": 5,
-        "size": "1"
+        "size": "1x2"
     }
 }
