@@ -10,6 +10,7 @@ import os
 from mss import mss, tools
 import json
 from pytesseract import pytesseract as tes
+pg.FAILSAFE = False
 
 class TarkovBot:
     """Main Tarkov bot handle
@@ -146,7 +147,7 @@ class TarkovBot:
     def notify(self, message: str, console=True, discord=False):
         """Prints, logs and posts a message"""
         caller = inspect.currentframe().f_back.f_code.co_name
-        lg.info(f"{caller} informed: {message}")
+        lg.info(f"{caller} - {message}")
 
         if console:
             print(message)

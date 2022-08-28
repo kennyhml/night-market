@@ -5,9 +5,9 @@ import pyautogui as pg
 
 
 class SearchBar(TarkovBot):
-    """Flea market ui search bar
+    """Flea market search bar
     -------------------------------
-    Searches for the passed image, awaits changes for fastest speed,
+    Searches for the passed image, awaits changes for fastest speed,\n
     uses clipboard to paste names instead of writing it out.
 
     Parameters:
@@ -17,14 +17,19 @@ class SearchBar(TarkovBot):
 
     Raises:
     ------------
+    :class:`TimeoutError`
+        When something took too long
+
+    :class:`NoItemsListed`
+        When no items were listed after 5 seconds
     """
 
     def __init__(self, item):
         super().__init__()
         self.item: Item = item
 
-    def is_searching(self) -> bool:
-        """Checks if the search bar is currently searching"""
+    def done_searching(self) -> bool:
+        """Checks if the search bar is done searching"""
         return pg.locateOnScreen(
             "images/searching.png", region=(572, 102, 30, 34), confidence=0.7
         )
@@ -41,9 +46,28 @@ class SearchBar(TarkovBot):
             self.move_to(pos)
             self.click(0.3)
 
+    def await_item_found(self):
+        """Waits for the magnifying glass icon to be visible"""
+        self.notify("Awaiting search finished...")
+        c = 0
+        while not self.done_searching():
+            self.sleep(0.1)
+            c += 1
+            if c > 100:
+                raise TimeoutError("More than 10s passed while searching!")
+
+    def await_item_icon(self):
+        """Waits for enough white pixels on the icon position"""
+        self.notify("Awaiting item icon...")
+        c = 0
+        while not Screen.icon_loaded():
+            self.sleep(0.1)
+            c += 1
+            if c > 50:
+                raise NoItemsListed
+
     def search_item(self):
-        """Searches for the items name"""
-        self.check_status()
+        """Searches for the items name in the searchbar"""
 
         # disable the old price filter
         self.disable_price_filter()
@@ -60,26 +84,14 @@ class SearchBar(TarkovBot):
         self.move_to(84, 165)
         self.sleep(0.2)
 
-        # await items found
-        c = 0
-        while self.is_searching():
-            self.sleep(0.1)
-            c += 1
-
-            if c > 100:
-                raise TimeoutError("More than 10s passed while searching!")
-
-        c = 0
-        while not Screen.icon_loaded():
-            self.sleep(0.1)
-            c += 1
-
-            if c > 100:
-                raise NoItemsListed
+        # await item found
+        self.await_item_found()
+        self.await_item_icon()
 
         # click the found item bar to make them display
         self.notify("Item found!")
         self.click(0.3)
 
+
 class NoItemsListed(Exception):
-    """Hurensohn"""
+    """Raised when no item was listed after 5s"""

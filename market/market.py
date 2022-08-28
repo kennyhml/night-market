@@ -20,13 +20,13 @@ class MarketUI(TarkovBot):
     - `MarketDidntOpenError` if the market could not be opened.
     """
 
+    # locations of purchase and price regions from top down
     purchase_grid = [(1678, y_axis, 192, 73) for y_axis in range(143, 937, 72)]
     price_grid = [(1333, y_axis, 172, 26) for y_axis in range(160, 951, 72)]
 
     def __init__(self) -> None:
         super().__init__()
         self.discord = Discord()
-        self.started_searching = time.time()
 
     def is_open(self) -> bool:
         """Checks if the market is open"""
@@ -43,8 +43,9 @@ class MarketUI(TarkovBot):
         )
 
     def captcha_appeared(self) -> bool:
+        """Checks if a captcha has appeared"""
         return pg.locateOnScreen(
-            "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
+            "images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
         )
 
     def topslot_is_loaded(self) -> bool:
@@ -54,25 +55,33 @@ class MarketUI(TarkovBot):
         )
 
     def await_market_open(self):
-        """Awaits the market to open to idle less"""
+        """Awaits the market to open, raises a TimeoutError after 5 minutes"""
         counter = 0
-
         while not self.is_open():
             self.sleep(0.1)
             counter += 1
-
             if counter > 50:
                 raise TimeoutError
 
-    def open(self):
-        """Opens the flea market tab"""
-        self.started_searching = time.time()
-        self.check_status()
+    def await_items_listed(self):
+        self.notify("Awaiting items to be listed...")
+        c = 0
+        while not self.items_listed():
+            self.sleep(0.1)
+            c += 1
+            if c > 100:
+                raise TimeoutError(
+                    "Could not detect items listed, this could "
+                    "be caused by an internet error or the price "
+                    "filter being set incorrectly."
+                )
 
-        # check if flea market is currently open (mostly will be the case)
+    def open(self):
+        """Opens the flea market tab, most of the time will already be open"""
         if self.is_open():
             return
 
+        # not already open
         self.move_to(1251, 1063)
         self.click()
         self.await_market_open()
@@ -87,13 +96,13 @@ class MarketUI(TarkovBot):
         item: :class:`Item`
             The item object to search and buy if possible
         """
-        self.check_status()
         self.notify(f"Searching for {item.name}...")
         start = time.time()
-        while not self.items_listed():
-            self.sleep(0.1)
-            
-        # searches items name
+
+        # wait for the item to be listed to avoid the filter bug
+        self.await_items_listed()
+
+        # search items name
         searchbar = SearchBar(item)
         searchbar.search_item()
 
@@ -101,23 +110,14 @@ class MarketUI(TarkovBot):
         filter = Filter(item)
         filter.configurate()
         self.sleep(0.2)
-        # await items listed
-        c = 0
-        while not self.items_listed():
-            self.sleep(0.1)
-            c += 1
-            if c > 100:
-                raise TimeoutError(
-                    "Could not detect items listed, this could "
-                    "be caused by an internet error or the price "
-                    "filter being set incorrectly."
-                )
 
-        self.notify(f"Searching for {item.name} took {round(time.time() - start, 2)}s")
+        # await items listed
+        self.await_items_listed()
+        self.notify(f"Searching for {item.name} took {self.get_time(start)}s")
 
     def refresh(self):
         c = 0
-        self.move_to(1776,182)
+        self.move_to(1776, 182)
 
         while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
             self.sleep(0.1)
@@ -198,7 +198,7 @@ class MarketUI(TarkovBot):
                         # someone was faster, continue to next slot
                         self.notify("Purchase failed!")
                         continue
-                    
+
                     inventory.add_items(int(amount), item.size)
                     purchase = purchase_ui.post_profit(item, inventory, int(amount))
 

@@ -8,6 +8,7 @@ import pyautogui as pg
 
 @dataclass
 class Item:
+    """Stores item properties, created by database"""
     name: str
     price: float
     buy_at: int
@@ -41,18 +42,30 @@ class Inventory(TarkovBot):
         self.slots_taken += amount * int(size)
 
 class Database(TarkovBot):
+    """Database handler
+    ---------------------
+    Handles all the information about items from the data files,
+    creates instances of :class:`Item` from their json values.
+    Checks if items have images and adds item images.
+    """
     def __init__(self) -> None:
-        self.load_items()
+        self.load_config()
         self.images = glob.glob("images/*.png")
 
     def load_config(self):
+        """Read from data"""
         with open("data/data.json") as f:
             self.item_data = json.load(f)
 
     def load_images(self):
+        """Get a list of all images in the items folder"""
         self.images = glob.glob("images/items/*.png")
 
+    def get_items(self):
+        return self.item_data
+
     def has_image(self, target):
+        """Checks if an item already has an image"""
         self.load_images()
         images = [
             image.removeprefix("images/items\\").removesuffix(".png")
@@ -61,8 +74,14 @@ class Database(TarkovBot):
         return target.name in images
 
     def add_image(self, item: Item):
+        """Adds the image of an item to the image database"""
+        self.notify(item, "does not have an image yet, adding...")
+
+        # remove the " from the name to avoid path errors
         path = item.name.replace('"', "")
         self.get_screenshot(f"images/items/{path}.png", region=(879, 147, 64, 64))
+
+        # edit the bottom right corner to paint over any numbers shown
         img = Image.open(f"images/items/{path}.png")
         bottom_corner = img.crop((60, 48, 61, 49))
         for x in range(53, 63):
@@ -70,49 +89,52 @@ class Database(TarkovBot):
                 img.paste(bottom_corner, (x, y, x + 1, y + 1))
         img.save(f"images/items/{path}.png")
 
-    def slot_is_empty(self, slot) -> bool:
-        return pg.locateOnScreen("images/empty.png", region=slot, confidence=0.7)
-
     @staticmethod
     def load_inventory_image(item):
+        """Checks if an item already has an inventory image"""
+
+        # get list of all images in the directory
         directory = "images/inv"
         all_items = [
             image.removeprefix("images/inv\\").removesuffix(".png")
             for image in glob.glob("images/inv/*.png")
         ]
-        img = item.replace('"', "")
 
+        # check if the item is in the images
+        img = item.replace('"', "")
         if img in all_items:
             return directory + "/" + img
         return "No image, please take one!"
 
     def add_inventory_image(self, item):
+        """Adds an items inventory image to database"""
+        # get the items x and y axis by size
         item_size = self.item_data[item]["size"].split("x")
         path = item.replace('"', "")
+
+        # 1270, 260 = topleft corner, now get width & height of item by size
         size = int(item_size[0]) * 64, int(item_size[1]) * 64
         Screen.get_screenshot(f"images/inv/{path}.png", region=(1270, 260, *size))
 
     def get_items_to_purchase(self):
+        """Returns a list of items from the data dict"""
         return [
             self.data_to_item(item)
             for item in self.get_items()
             if self.item_data[item]["enabled"]
         ]
         
-    def load_items(self):
-        self.load_config()
-
-    def get_items(self):
-        return self.item_data
-
     def items_sold_at(self, vendor):
+        """Returns a list of all items sold at a certain vendor"""
         return [item for item in self.item_data if item["trader"] == vendor]
 
     def get_size(self, size):
+        """Gets the size of an item as integer"""
         size = size.split("x")
         return int(size[0]) * int(size[1])
 
     def data_to_item(self, entry) -> Item:
+        """Converts an item dict to an Item instance"""
         return Item(
             name=entry,
             price=self.item_data[entry]["price"].replace(" ", ""),

@@ -1,6 +1,5 @@
 import difflib
 from time import time
-from tracemalloc import start
 import pyautogui as pg
 from screen import Screen
 from tarkov import TarkovBot
@@ -8,6 +7,7 @@ from nightmart_bot import Discord
 
 path = "images/captcha/"
 
+# captcha names as tesseract gets them and the corresponding image
 CAPTCHA_ITEMS = {
     "Golden neck chain": path + "golden_neck_chain.png",
     "Gas analyzer": path + "gas_analyzer.png",
@@ -31,13 +31,13 @@ CAPTCHA_ITEMS = {
     "Strike Cigarettes": path + "strike_cigarettes.png",
     "42 Signature Blend English Tea": path + "42_signature_blend_english_tea.png",
     "Bottle of water (0.6L)": path + "bottle_of_water (0.6L).png",
-    "Immobilzing splint": path + "immobilizing_splint.png",
+    "Immobilizing splint": path + "immobilizing_splint.png",
     "Printer paper": path + "printer_paper.png",
     "Red Rebel ice pick": path + "red_rebel_ice_pick.png",
     "Antique teapot": path + "antique_teapot.png",
     "Freeman crowbar": path + "freeman_crowbar.png",
-    "Golen rooster": path + "golden_rooster.png",
-    'Gunpoweder "Eagle"': path + "gunpoweder_eagle.png",
+    "Golden rooster": path + "golden_rooster.png",
+    'Gunpowder "Eagle"': path + "gunpoweder_eagle.png",
     "Morphine injector": path + "morphine_injector.png",
     "Electric drill": path + "electric_drill.png",
     "Pliers": path + "pliers.png",
@@ -47,7 +47,7 @@ CAPTCHA_ITEMS = {
     "Toilet paper": path + "toilet_paper.png",
     "T-Shaped plug": path + "t-shaped_plug.png",
     "Pack of sodium bicarbonate": path + "pack_of_sodium_bicarbonate.png",
-    "Can of hot rod energy": path + "can_of_hot_rod_energy_drink.png",
+    "Can of Hot Rod energy drink": path + "can_of_hot_rod_energy_drink.png",
     "Spark plug": path + "spark_plug.png",
     "Screwdriver": path + "screwdriver.png",
     "Pack of sugar": path + "pack_of_sugar.png",
@@ -56,25 +56,25 @@ CAPTCHA_ITEMS = {
     "Wrench": path + "wrench.png",
     "Xenomorph sealing foam": path + "xenomorph_sealing_foam.png",
     "Can of condensed milk": path + "can_of_condensed_milk.png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
-    "": path + ".png",
 }
 
 
 class CaptchaSolver(TarkovBot):
+    """Captcha handler for purchase attempts
+    --------------------------
+    Solves captcha popups by OCR'ing the target items name and
+    comparing it to a database of known items.
+
+    Uses pyautogui's locateAllOnScreen and some processing to
+    tick all the items.
+    """
+
     def __init__(self) -> None:
         super().__init__()
         self.discord = Discord()
 
     def solve(self):
-        """Solves the captcha"""
+        """Solves a captcha currently on the screen"""
         start = time()
 
         # process the captcha and get the desired item
@@ -89,34 +89,49 @@ class CaptchaSolver(TarkovBot):
         filtered_points = self.find_all_occurrences(image, image_region)
         self.check_all_items(filtered_points)
 
+        # wait for the green blinking and escape to close the captcha instantly
         if self.confirm():
             while not Screen.captcha_succeeded(item_region):
                 self.sleep(0.1)
             self.press("esc")
-            self.discord.send_message(
-                f"Captcha took {self.get_time(start)}s to solve!"
-            )
+            self.discord.send_message(f"Captcha took {self.get_time(start)}s to solve!")
             return
 
+        # captcha failed, try again
+        self.press("esc")
+        self.sleep(5)
         self.solve()
 
     def get_captcha_boundaries(self):
-        self.check_status()
+        """Gets the captcha boundaries by locating the "SECURITY CHECK"
+        position and the exit button, constructing the item frame from
+        the coordinates, then using the distance to the confirm buttons
+        y-level to crop out the item region.
+
+        Returns:
+        ---------
+        image region: :class:`tuple`
+            The region of the images that need to be analyzed
+
+        target region: :class:`tuple`
+            The region of the target item to process and determine
+        """
+        # region where the captcha could possibly be
         captcha_region = (577, 45, 775, 1007)
         self.notify("Getting captcha boundaries...")
 
-        # find top left and top right on the screen
-        sec_check = pg.locateOnScreen(
+        # find top left and top right on the captcha prompt
+        security_check = pg.locateOnScreen(
             "images/captcha.png", region=captcha_region, confidence=0.7
         )
-        exit_but = pg.locateOnScreen(
+        exit_button = pg.locateOnScreen(
             "images/purchase_prompt.png", region=captcha_region, confidence=0.7
         )
 
         try:
             # calculate the boundaries needed
-            top_left = sec_check[0] - 50, sec_check[1]
-            top_right = exit_but[0] + exit_but[2], exit_but[1]
+            top_left = security_check[0] - 50, security_check[1]
+            top_right = exit_button[0] + exit_button[2], exit_button[1]
 
             # screenshot the calculated boundaries
             self.get_screenshot(
@@ -124,12 +139,12 @@ class CaptchaSolver(TarkovBot):
                 region=(*top_left, top_right[0] - top_left[0], 110),
             )
 
-            # get the upper x axis of confirm button to end the images crop region
-            bottom = pg.locateOnScreen(
+            # get the upper y axis of confirm button to end the images crop region
+            end_y_axis = pg.locateOnScreen(
                 "images/captcha_confirm.png", region=captcha_region, confidence=0.7
-            )
-            end_y_axis = bottom[1]
+            )[1]
 
+            # return calculated boundaries of the target and item region
             return (
                 (
                     top_left[0],
@@ -143,22 +158,12 @@ class CaptchaSolver(TarkovBot):
         except Exception as e:
             self.notify(f"Critical exception calculating captcha boundaries!\n{e}")
 
-    def await_captcha_disappear(self):
-        start = time()
-        while pg.locateOnScreen(
-            "Images/captcha.png", region=(577, 45, 775, 1007), confidence=0.7
-        ):
-            self.sleep(0.1)
-            if self.has_timedout(start, 6):
-                return False
-
-        else:
-            return True
-
     def get_captcha_target(self):
         """Processes the image of the captcha and returns the filtered item"""
-        # read the image and filter the returned text
-        raw_text: str = Screen.read_captcha()
+        self.check_status()
+        self.notify("Determining captcha target...")
+
+        raw_text = Screen.read_captcha()
         return self.filter_captcha_target(raw_text)
 
     def compare_target_to_database(self, target):
@@ -166,19 +171,20 @@ class CaptchaSolver(TarkovBot):
         self.check_status()
         self.notify("Searching for items image in database...")
 
-        # find the image in our data
-        for known_item in CAPTCHA_ITEMS:
-            if target == known_item:
-                self.discord.send_message("This item is known and can be solved!")
-                return CAPTCHA_ITEMS[target]  # return image
+        # try to return the image directly
+        try:
+            return CAPTCHA_ITEMS[target]
 
-        self.discord.send_message(
-            "Item could not be determined! Looking for closest match..."
-        )
+        # target wasnt recognized perfectly
+        except KeyError:
+            pass
 
+        # get the closest matching item name
+        self.discord.send_message("Item not be determined! Checking closest match...")
         closest_match = difflib.get_close_matches(
             target, list(CAPTCHA_ITEMS), n=1, cutoff=0.5
         )
+        # return the image of the closest matching item name
         if closest_match:
             self.discord.send_message(f"Found match as: {closest_match}!")
             return CAPTCHA_ITEMS[closest_match[0]]
@@ -224,10 +230,8 @@ class CaptchaSolver(TarkovBot):
         return self.filter_close_points(set(item_centers))
 
     def check_all_items(self, positions):
-        """Check all the items"""
-        self.check_status()
+        """Check all the items in order"""
         self.notify("Ticking all points...")
-        self.notify(f"Checking {len(positions)} items...")
 
         for position in positions:
             self.move_to(position)
@@ -235,21 +239,18 @@ class CaptchaSolver(TarkovBot):
 
     def confirm(self):
         """Confirm the captcha"""
-        self.check_status()
         self.notify("Confirming captcha...")
 
-        # find the confirm button, remember we dont know the size of the captcha
+        # find the confirm button
         confirm = pg.locateCenterOnScreen(
             "images/captcha_confirm.png", region=(590, 48, 739, 992), confidence=0.7
         )
 
-        # hope that the button was found, click it
+        # check that the button was found, click it
         if confirm:
             self.move_to(confirm)
             self.click(0.3)
             return True
 
-        # now we are in trouble
-        self.discord.send_message(
-            "WARNING! Could not locate the confirmation button!!!"
-        )
+        # trouble
+        self.discord.send_message("WARNING! Could not locate the confirmation button!")

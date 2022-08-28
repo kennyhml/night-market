@@ -18,8 +18,12 @@ VENDORS = {
 }
 
 
-class VendorUi(TarkovBot):
-
+class VendorHandler(TarkovBot):
+    """Handles selling items at the vendor
+    ------------------------
+    Contains all methods needed to open the trader and sell
+    all the items. Returns the current money after selling.
+    """
     grid = [
         (x_axis, y_axis, 64, 64)
         for y_axis in range(261, 827, 63)
@@ -27,12 +31,14 @@ class VendorUi(TarkovBot):
     ]
 
     def is_open(self) -> bool:
+        """Checks if the trader is open"""
         return pg.locateOnScreen(
             "images/trader_open.png", region=(1234, 837, 35, 33), confidence=0.7
         )
 
     def on_sell_tab(self):
-        return pg.pixelMatchesColor(275, 41, (186, 190, 190), tolerance=20)
+        """Checks if the sell tab is open"""
+        return pg.pixelMatchesColor(275, 41, (186, 190, 190), tolerance=30)
 
     def open(self):
         """Opens the main trader window"""
@@ -42,10 +48,12 @@ class VendorUi(TarkovBot):
 
     def open_sell_tab(self):
         """Opens the selling tab"""
-        self.move_to(236, 45)
-        self.click(1)
+        if not self.on_sell_tab():
+            self.move_to(236, 45)
+            self.click(1)
 
     def open_trader(self, vendor: Vendor):
+        """Opens the trader"""
         self.move_to(vendor.location)
         self.click(0.8)
 
