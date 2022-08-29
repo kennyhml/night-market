@@ -13,7 +13,11 @@ main_win = QtWidgets.QMainWindow()
 
 
 class MainUi(QMainWindow, Ui_Form):
-
+    """Main night market ui handle
+    ------------------------------
+    Inherits basic stuff from designer UI_Form, subclassed to add
+    functionality to the widgets.
+    """
     raw_data_dict = {
         "enabled": True,
         "price": "10 000",
@@ -35,6 +39,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.update_statistics()
 
     def update_statistics(self):
+        """Displays the currently selected statistic"""
         match self.select_statistic.currentText():
 
             case "Average profit timeline - plot chart":
@@ -47,24 +52,28 @@ class MainUi(QMainWindow, Ui_Form):
                 self.display__bar_chart(criteria="efficiency")
 
     def display(self):
+        """Displays the ui"""
         main_win.show()
         sys.exit(app.exec())
 
     def open_tab(self, index):
+        """Opens a tab by index"""
         self.main_tab.setCurrentIndex(index)
 
     def start_key_refresh_timer(self):
+        """Starts a timer to check the key ever 10 minutes"""
         timer = QtCore.QTimer()
         timer.timeout.connect(self.refresh_key)
         timer.start(600000)
 
     def set_bot_status(self, status):
-        """Updates the ui bot status text to the passed status."""
+        """Updates the ui bot status text to the passed status"""
         self.bot_status.setText(
             f'<html><head/><body><p><span style="color:#55ffff;">Bot Status: </span>{status}</p></body></html>'
         )
 
     def read_files(self):
+        """Reads from settings to update all the data"""
         with open("data\settings.json", "r") as json_file:
             self.settings = json.load(json_file)
 
@@ -75,6 +84,7 @@ class MainUi(QMainWindow, Ui_Form):
             self.stats = json.load(json_file)
 
     def save_files(self):
+        """Writes all the data into settings"""
         with open("data\settings.json", "w") as json_file:
             json.dump(self.settings, json_file, indent=4)
 
@@ -86,14 +96,13 @@ class MainUi(QMainWindow, Ui_Form):
 
     def add_item_data(self):
         """Adds a preset to the config, the preset will hold static default value."""
-
         # get preset name and confirm
         item_name, confirmed = QtWidgets.QInputDialog.getText(
             self, "Add item", "Please enter the name of the item!"
         )
-
-        if not (confirmed or item_name):  # confirmed and name is valid
-            print("Invalid preset name, preset must contain characters or numbers!")
+        if not item_name:  # confirmed and name is valid
+            if confirmed:
+                print("Invalid preset name, preset must contain characters or numbers!")
             return
 
         # make sure the name doesnt already exist
@@ -164,7 +173,6 @@ class MainUi(QMainWindow, Ui_Form):
 
     def delete_item_data(self):
         """Deletes the currently active preset"""
-
         if len(self.data) <= 2:  # make sure there will be a preset left
             print(
                 "Could not delete the item, you must"
@@ -185,7 +193,7 @@ class MainUi(QMainWindow, Ui_Form):
             self.populate_ui()
 
     def sync_stats_data(self):
-
+        """Syncs statistic.json entries with data.json"""
         raw_data = {
             "total_quantity": 0,
             "total_profit": 0,
@@ -197,11 +205,32 @@ class MainUi(QMainWindow, Ui_Form):
             if entry not in self.stats:
                 self.stats[entry] = raw_data
 
-    def format(self, num):
+    def format(self, num) -> str:
+        """Formats an integer with blank spaces, eg: `10000 -> 10 000`"""
         if isinstance(num, str):
             num = num.replace(" ", "")
-        return f"{int(num):_}".replace("_", " ")
+        try:
+            return f"{int(num):_}".replace("_", " ")
+        except:
+            return num
+    def populate_profit_data(self):
+        
+        data = self.data[self.current_item.currentText()]
+        try:
+            profit = int(data["price"].replace(" ", "")) - int(data["buy_at"].replace(" ", ""))
+        except:
+            profit = 0
+        if profit >= 0:
+            rgb = (0, 255, 0)
+        else:
+            rgb = (255,0, 0)
 
+        self.item_profit.setText(self.format(profit))
+        self.item_profit.setStyleSheet(u"QTextEdit {\n"
+"	background-color: rgb(30,30,40);\n"
+f"	color: rgb{rgb};\n"
+"}\n"
+"")  
     def populate_ui(self):
         self.save_changes = False
 
@@ -237,22 +266,16 @@ class MainUi(QMainWindow, Ui_Form):
                 )
 
         current_item = self.current_item.currentText()
-
-        self.item_value.setText(self.format(self.data[current_item]["price"]))
-        self.item_max_price.setText(self.format(self.data[current_item]["buy_at"]))
-
         self.item_currency.setCurrentText(self.data[current_item]["currency"])
         self.item_vendor.setCurrentText(self.data[current_item]["trader"])
         self.item_refreshes.setValue(self.data[current_item]["refresh"])
         self.item_size.setCurrentText(str(self.data[current_item]["size"]))
         self.item_enabled.setChecked(self.data[current_item]["enabled"])
         self.item_image_path.setText(Database.load_inventory_image(current_item))
+        self.item_value.setText(self.format(self.data[current_item]["price"]))
+        self.item_max_price.setText(self.format(self.data[current_item]["buy_at"]))
 
-        profit = int(self.data[current_item]["price"].replace(" ", "")) - int(
-            self.data[current_item]["buy_at"].replace(" ", "")
-        )
-        self.item_profit.setText(str(profit))
-
+        self.populate_profit_data()
         self.save_changes = True
         self.populate_item_statistics()
         self.sync_stats_data()
@@ -303,7 +326,7 @@ class MainUi(QMainWindow, Ui_Form):
     def populate_item_statistics(self):
         current_item = self.current_item.currentText()
         data = self.stats[current_item]
-
+        """
         self.item_stats_searched.setText(self.format(data["times_searched"]))
         self.item_stats_bought.setText(self.format(data["total_quantity"]))
         self.item_stats_total_profit.setText(self.format(data["total_profit"]))
@@ -312,7 +335,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.item_stats_rank.setText(f"#{str(self.get_rank(current_item))}")
         self.item_stats_efficiency.setText(f"{str(self.get_efficiency(current_item))}%")
         self.item_stats_rarity.setText(f"{str(self.get_rarity(current_item))}%")
-
+        """
         if int(data["total_quantity"]):
             avg_profit = int(data["total_profit"]) // int(data["total_quantity"])
             self.item_stats_avg_profit.setText(self.format(avg_profit))
@@ -366,6 +389,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.add_item.clicked.connect(self.add_item_data)
         self.delete_item.clicked.connect(self.delete_item_data)
         self.add_image.clicked.connect(self.add_inv_image)
+
     def connect_changes(self):
 
         self.mouse_movement_mode.currentIndexChanged.connect(self.save_settings)
@@ -381,6 +405,10 @@ class MainUi(QMainWindow, Ui_Form):
         self.discord_webhook.textChanged.connect(self.save_settings)
         self.discord_id.textChanged.connect(self.save_settings)
 
+        self.item_value.textChanged.connect(self.save_item_settings)
+        self.item_max_price.textChanged.connect(self.save_item_settings)
+        self.item_value.textChanged.connect(self.populate_profit_data)
+        self.item_max_price.textChanged.connect(self.populate_profit_data)
         self.item_value.textChanged.connect(self.save_item_settings)
         self.item_max_price.textChanged.connect(self.save_item_settings)
         self.item_currency.currentIndexChanged.connect(self.save_item_settings)
@@ -401,18 +429,12 @@ class MainUi(QMainWindow, Ui_Form):
         times = []
 
         for day in data:
-            print(day)
             times_included = set([int(pot[:2]) for pot in data[day]])
 
             for point_of_time in times_included:
-                print(f"Times included in this day: {times_included}")
                 matching_times = [timepoint for timepoint in data[day] if int(timepoint[:2]) == point_of_time]
-                print(f"Matching timepoints: {matching_times}")
-
                 summe = sum([data[day][time] for time in matching_times])
                 profit = summe / (len(matching_times))
-                print(f"Sum of {point_of_time + 1}:00 - {profit}")
-
                 profits.append(profit)
                 times.append(f"{day[8:11]}th {point_of_time + 1}:00")
 

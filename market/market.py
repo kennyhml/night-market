@@ -76,6 +76,16 @@ class MarketUI(TarkovBot):
                     "filter being set incorrectly."
                 )
 
+    def await_refresh_available(self):
+        """Waits to be able to refresh"""
+        self.notify("Waiting to refresh again...")
+        c = 0
+        while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
+            self.sleep(0.1)
+            c += 1
+            if c > 100:
+                raise TimeoutError("Could not refresh after 5s!")
+
     def open(self):
         """Opens the flea market tab, most of the time will already be open"""
         if self.is_open():
@@ -99,9 +109,6 @@ class MarketUI(TarkovBot):
         self.notify(f"Searching for {item.name}...")
         start = time.time()
 
-        # wait for the item to be listed to avoid the filter bug
-        self.await_items_listed()
-
         # search items name
         searchbar = SearchBar(item)
         searchbar.search_item()
@@ -116,25 +123,16 @@ class MarketUI(TarkovBot):
         self.notify(f"Searching for {item.name} took {self.get_time(start)}s")
 
     def refresh(self):
-        c = 0
+        """Refreshes the currently listed item"""
+        # get cursor in position for new purchase and await refresh
         self.move_to(1776, 182)
-
-        while not pg.pixelMatchesColor(1833, 121, (207, 217, 222), tolerance=30):
-            self.sleep(0.1)
-            c += 1
-            if c > 100:
-                raise TimeoutError("Could not refresh after 5s!")
+        self.await_refresh_available()
 
         self.press("F5")
         self.sleep(0.1)
-        start = time.time()
-        c = 0
-        while not self.items_listed():
-            self.sleep(0.01)
-            c += 1
-            if c > 1000:
-                raise TimeoutError("Timed out awaiting items listed!")
 
+        start = time.time()
+        self.await_items_listed()
         self.notify(f"Items listed after {self.get_time(start)}s")
 
     def get_available_purchases(self, item: Item, inventory: Inventory):
@@ -145,6 +143,17 @@ class MarketUI(TarkovBot):
         -----------
         item: :class:`Item`
             The item we want to buy
+
+        inventory: :class:`Inventory`
+            The instance of the current inventory to add slots to
+
+        Returns:
+        -----------
+        inventory: :class:`Inventory`
+            The updated inventory
+        
+        purchases: :class:`list[Purchase]`
+            A list of purchases
         """
         self.check_status()
         self.notify("Getting available purchases...")

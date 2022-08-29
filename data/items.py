@@ -4,7 +4,6 @@ import glob
 from screen import Screen
 from PIL import Image
 from tarkov import TarkovBot
-import pyautogui as pg
 
 @dataclass
 class Item:
@@ -32,7 +31,7 @@ class Inventory(TarkovBot):
 
     def is_full(self) -> bool:
         """Checks if the inventory is full"""
-        return self.slots_taken > self.max_slots
+        return self.slots_taken >= self.max_slots
 
     def reset(self) -> None:
         """Resets the taken slots"""
@@ -103,8 +102,8 @@ class Database(TarkovBot):
         # check if the item is in the images
         img = item.replace('"', "")
         if img in all_items:
-            return directory + "/" + img
-        return "No image, please take one!"
+            return "Available"
+        return "Missing"
 
     def add_inventory_image(self, item):
         """Adds an items inventory image to database"""

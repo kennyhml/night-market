@@ -2,7 +2,7 @@
     "Toilet paper": {
         "enabled": true,
         "trader": "Therapist",
-        "price": "5 543",
+        "price": "5 544",
         "buy_at": "5 100",
         "refresh": 1,
         "currency": "\u20bd",
@@ -29,7 +29,7 @@
     "Axel parrot figurine": {
         "enabled": false,
         "trader": "Therapist",
-        "price": "32 130",
+        "price": "32 133",
         "buy_at": "31 500",
         "refresh": 2,
         "currency": "\u20bd",

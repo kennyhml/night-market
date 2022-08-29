@@ -38,6 +38,14 @@ class Filter(TarkovBot):
         """Checks if a currency is already set"""
         return pg.pixelMatchesColor(515, 148, (191, 198, 194), tolerance=20)
 
+    def items_listed(self) -> bool:
+        """Checks if items are already listed"""
+        return pg.locateOnScreen(
+            "images/price_sort_arrow.png",
+            region=(1419, 112, 28, 22),
+            confidence=0.7,
+        )    
+
     def open(self):
         """Opens the filter ui"""
         self.check_status()
@@ -50,7 +58,6 @@ class Filter(TarkovBot):
         while not self.filter_is_open():
             self.sleep(0.1)
             c += 1
-            
             if c > 100:
                 raise TimeoutError("Filter didnt open within 10s!")
 
@@ -92,6 +99,8 @@ class Filter(TarkovBot):
     def confirm_search(self):
         """Confirm the filter"""
         self.move_to(611, 439)
+        while not self.items_listed():
+            self.sleep(0.1)
         self.click(0.2)
 
     def configurate(self):

@@ -1,10 +1,6 @@
 from threading import Thread
 import discord
 
-from data.items import Inventory
-from market.purchase import Purchase
-
-
 class Discord:
     """Discord handle to send purchases and statistics
     ------------------------------
@@ -50,7 +46,7 @@ class Discord:
             name="Posting to discord!",
         ).start()
 
-    def send_purchase_embed(self, purchase: Purchase, inventory: Inventory):
+    def send_purchase_embed(self, purchase, inventory):
         """Sends a purchase to discord"""
 
         # create the embed
@@ -115,7 +111,7 @@ class Discord:
         profit_items = f"{data['total_profit'][1]:_}".replace("_", " ")
         total_profit = f"{profit_items} ({profit_diff}) ₽"
 
-        hourly_rate = f"{data['hourly_rate']:_}".replace("_", " ") + " ₽"
+        hourly_rate = f"{data['hourly_profit']:_}".replace("_", " ") + " ₽"
         current_money = f"{data['current_money']:_}".replace("_", " ") + " ₽"
 
         # set thumbnail

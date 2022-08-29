@@ -8274,16 +8274,16 @@ background-color: rgb(35,35,40)</string>
      <widget class="QTextEdit" name="item_image_path">
       <property name="geometry">
        <rect>
-        <x>360</x>
+        <x>590</x>
         <y>274</y>
-        <width>221</width>
+        <width>81</width>
         <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Segoe UI Variable Display Light</family>
-        <pointsize>13</pointsize>
+        <pointsize>15</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -8332,18 +8332,18 @@ The default values are the regular priorities, if left empty, regular priorities
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI Variable Display Light'; font-size:15pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="placeholderText">
-       <string>images/inv/Toilet paper.png</string>
+       <string>Missing</string>
       </property>
      </widget>
      <widget class="QLabel" name="set_item_value_11">
       <property name="geometry">
        <rect>
-        <x>250</x>
-        <y>270</y>
+        <x>490</x>
+        <y>268</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -8557,15 +8557,15 @@ p, li { white-space: pre-wrap; }
 background-color: rgb(35,35,40)</string>
       </property>
       <property name="text">
-       <string>Image path:</string>
+       <string>Image:</string>
       </property>
      </widget>
      <widget class="QPushButton" name="add_image">
       <property name="geometry">
        <rect>
-        <x>590</x>
+        <x>670</x>
         <y>274</y>
-        <width>91</width>
+        <width>31</width>
         <height>31</height>
        </rect>
       </property>
@@ -8598,7 +8598,69 @@ QPushButton {
 }</string>
       </property>
       <property name="text">
-       <string>Add image</string>
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="amount_label">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>280</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>13</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255,255,255);
+background-color: rgb(35,35,40)</string>
+      </property>
+      <property name="text">
+       <string>Buy amount:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="item_buy_amount">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>280</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>The amount of times you would like to refresh</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QSpinBox {
+	color: rgb(255,255,255);
+background-color: rgb(35,35,40)
+}
+
+</string>
+      </property>
+      <property name="maximum">
+       <number>120</number>
       </property>
      </widget>
      <zorder>label_2</zorder>
@@ -8643,6 +8705,8 @@ QPushButton {
      <zorder>item_image_path</zorder>
      <zorder>set_item_value_11</zorder>
      <zorder>add_image</zorder>
+     <zorder>amount_label</zorder>
+     <zorder>item_buy_amount</zorder>
     </widget>
     <widget class="QWidget" name="maintab_statistics">
      <attribute name="title">

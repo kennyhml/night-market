@@ -72,12 +72,12 @@ def main():
                         item, inventory
                     )
                 except OutOfMoneyError:
-                    empty_inventory(statistics, item.vendor, inventory, item, items)
+                    empty_inventory(statistics, inventory, items)
 
                 # add the purchase to stats
                 statistics.add_purchase(purchases, founds, item)
                 if inventory.is_full():
-                    empty_inventory(statistics, item.vendor, inventory, item, items)
+                    empty_inventory(statistics, inventory, items)
 
             except BotTerminated:
                 return
@@ -97,10 +97,10 @@ def main():
 
 
 def empty_inventory(
-    statistics: Statistics, inventory: Inventory, item: Item, items: list[Item]
+    statistics: Statistics, inventory: Inventory, items: list[Item]
 ):
     vendor = VendorHandler()
-    current_money = vendor.sell(item.vendor, inventory, items)
+    current_money = vendor.sell(items)
     statistics.send_stats(current_money)
     inventory.reset()
     ui.display_timeline_profits()

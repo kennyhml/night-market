@@ -1805,7 +1805,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.item_image_path = QTextEdit(self.maintab_database)
         self.item_image_path.setObjectName(u"item_image_path")
-        self.item_image_path.setGeometry(QRect(360, 274, 221, 31))
+        self.item_image_path.setGeometry(QRect(590, 274, 81, 31))
         self.item_image_path.setFont(font6)
         self.item_image_path.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
@@ -1822,7 +1822,7 @@ class Ui_Form(object):
         self.item_image_path.setReadOnly(True)
         self.set_item_value_11 = QLabel(self.maintab_database)
         self.set_item_value_11.setObjectName(u"set_item_value_11")
-        self.set_item_value_11.setGeometry(QRect(250, 270, 101, 41))
+        self.set_item_value_11.setGeometry(QRect(490, 268, 101, 41))
         palette24 = QPalette()
         palette24.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette24.setBrush(QPalette.Active, QPalette.Button, brush1)
@@ -1857,7 +1857,7 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)")
         self.add_image = QPushButton(self.maintab_database)
         self.add_image.setObjectName(u"add_image")
-        self.add_image.setGeometry(QRect(590, 274, 91, 31))
+        self.add_image.setGeometry(QRect(670, 274, 31, 31))
         self.add_image.setFont(font12)
         self.add_image.setCursor(QCursor(Qt.ArrowCursor))
         self.add_image.setMouseTracking(False)
@@ -1873,6 +1873,24 @@ class Ui_Form(object):
 "    background-color: rgb(25,25,25);\n"
 "	color: rgb(0,255,0);\n"
 "}")
+        self.amount_label = QLabel(self.maintab_database)
+        self.amount_label.setObjectName(u"amount_label")
+        self.amount_label.setGeometry(QRect(250, 280, 91, 21))
+        self.amount_label.setFont(font6)
+        self.amount_label.setStyleSheet(u"color:rgb(255,255,255);\n"
+"background-color: rgb(35,35,40)")
+        self.amount_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.item_buy_amount = QSpinBox(self.maintab_database)
+        self.item_buy_amount.setObjectName(u"item_buy_amount")
+        self.item_buy_amount.setGeometry(QRect(380, 280, 71, 21))
+        self.item_buy_amount.setFont(font13)
+        self.item_buy_amount.setStyleSheet(u"QSpinBox {\n"
+"	color: rgb(255,255,255);\n"
+"background-color: rgb(35,35,40)\n"
+"}\n"
+"\n"
+"")
+        self.item_buy_amount.setMaximum(120)
         self.main_tab.addTab(self.maintab_database, "")
         self.label_2.raise_()
         self.select_item.raise_()
@@ -1916,6 +1934,8 @@ class Ui_Form(object):
         self.item_image_path.raise_()
         self.set_item_value_11.raise_()
         self.add_image.raise_()
+        self.amount_label.raise_()
+        self.item_buy_amount.raise_()
         self.maintab_statistics = QWidget()
         self.maintab_statistics.setObjectName(u"maintab_statistics")
         self.statistics_plot = MplWidget(self.maintab_statistics)
@@ -2303,12 +2323,16 @@ class Ui_Form(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt;\"><br /></p></body></html>", None))
-        self.item_image_path.setPlaceholderText(QCoreApplication.translate("Form", u"images/inv/Toilet paper.png", None))
-        self.set_item_value_11.setText(QCoreApplication.translate("Form", u"Image path:", None))
+        self.item_image_path.setPlaceholderText(QCoreApplication.translate("Form", u"Missing", None))
+        self.set_item_value_11.setText(QCoreApplication.translate("Form", u"Image:", None))
 #if QT_CONFIG(tooltip)
         self.add_image.setToolTip(QCoreApplication.translate("Form", u"Add a new preset", None))
 #endif // QT_CONFIG(tooltip)
-        self.add_image.setText(QCoreApplication.translate("Form", u"Add image", None))
+        self.add_image.setText(QCoreApplication.translate("Form", u"Add", None))
+        self.amount_label.setText(QCoreApplication.translate("Form", u"Buy amount:", None))
+#if QT_CONFIG(tooltip)
+        self.item_buy_amount.setToolTip(QCoreApplication.translate("Form", u"The amount of times you would like to refresh", None))
+#endif // QT_CONFIG(tooltip)
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_database), QCoreApplication.translate("Form", u"Seite", None))
         self.select_statistic.setItemText(0, QCoreApplication.translate("Form", u"Average profit timeline - plot chart", None))
         self.select_statistic.setItemText(1, QCoreApplication.translate("Form", u"Total item profits - bar chart", None))

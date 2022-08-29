@@ -101,7 +101,7 @@ class Screen(TarkovBot):
 
         canvas.save(image)
 
-
+    @staticmethod
     def crop_inventory_money():
         path = "images/temp/money.png"
 
@@ -116,7 +116,6 @@ class Screen(TarkovBot):
         img = img.crop((left_bound, 0, right_bound, h))
 
         img.save(path)
-
 
     @staticmethod
     def remove_rubel_right(image_path):
@@ -311,6 +310,7 @@ class Screen(TarkovBot):
 
         return len(matches) > 3
 
+    @staticmethod
     def captcha_succeeded(reg):
         path = "images/temp/captcha_success.png"
         Screen.get_screenshot(path, region=reg)
