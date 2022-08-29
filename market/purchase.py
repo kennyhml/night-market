@@ -69,7 +69,7 @@ class PurchaseHandler(TarkovBot):
 
     def is_pending(self, region):
         return pg.locateOnScreen(
-            "Images/pending.png", region=region, confidence=0.5, grayscale=True
+            "Images/pending.png", region=region, confidence=0.6, grayscale=True
         )
 
     def amount_changed(self) -> bool:
