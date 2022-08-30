@@ -138,7 +138,8 @@ class PurchaseHandler(TarkovBot):
 
         while not self.amount:
             self.sleep(0)
-
+        if self.amount > 30:
+            self.amount = 10
         success, fixed_amount = self.await_purchase_result()
         return success, fixed_amount if fixed_amount else self.amount
 
@@ -208,7 +209,7 @@ class PurchaseHandler(TarkovBot):
             # output ocr result
             if result:
                 self.notify(f"Getting amount took {self.get_time(start)}s")
-                self.amount = result
+                self.amount = int(result)
                 return
 
         self.amount = 1

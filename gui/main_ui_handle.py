@@ -26,6 +26,7 @@ class MainUi(QMainWindow, Ui_Form):
         "trader": "Therapist",
         "refresh": 3,
         "size": 1,
+        "buy_amount": 0
     }
 
     def __init__(self) -> None:
@@ -205,6 +206,14 @@ class MainUi(QMainWindow, Ui_Form):
             if entry not in self.stats:
                 self.stats[entry] = raw_data
 
+        to_rm = []
+        for entry in self.stats:
+            if entry not in self.data and entry != "timeline":
+                to_rm.append(entry)
+
+        for entry in to_rm:
+            self.stats.pop(entry)
+
     def format(self, num) -> str:
         """Formats an integer with blank spaces, eg: `10000 -> 10 000`"""
         if isinstance(num, str):
@@ -236,13 +245,14 @@ f"	color: rgb{rgb};\n"
 
         self.read_files()
         self.mouse_movement_mode.setCurrentText(self.settings["mouse_movement"])
-        self.mouse_speed.setValue(self.settings["mouse_speed"])
+        self.mouse_speed.setValue(self.settings["search_speed"])
+        self.mouse_speed_2.setValue(self.settings["sell_speed"])
 
         self.item_search_mode.setCurrentText(self.settings["item_searching"])
         self.use_wishlist_tab.setChecked(self.settings["use_wishlist"])
 
         # inventory related
-        self.allowed_inv_slots.setValue(self.settings["allowed_inv_slots"])
+        self.allowed_inv_slots.setValue(self.settings["allowed_scrolls"])
         self.empty_inv_at.setValue(self.settings["empty_inv_at"])
 
         # discord related
@@ -293,7 +303,10 @@ f"	color: rgb{rgb};\n"
         data = self.stats[item]
 
         full_efficiency = 400
-        ru_per_search = data["total_profit"] / data["times_searched"]
+        try:
+            ru_per_search = data["total_profit"] / data["times_searched"]
+        except ZeroDivisionError:
+            return 0
 
         return round((ru_per_search / full_efficiency) * 100, 2)
 
@@ -326,7 +339,7 @@ f"	color: rgb{rgb};\n"
     def populate_item_statistics(self):
         current_item = self.current_item.currentText()
         data = self.stats[current_item]
-        """
+
         self.item_stats_searched.setText(self.format(data["times_searched"]))
         self.item_stats_bought.setText(self.format(data["total_quantity"]))
         self.item_stats_total_profit.setText(self.format(data["total_profit"]))
@@ -335,7 +348,7 @@ f"	color: rgb{rgb};\n"
         self.item_stats_rank.setText(f"#{str(self.get_rank(current_item))}")
         self.item_stats_efficiency.setText(f"{str(self.get_efficiency(current_item))}%")
         self.item_stats_rarity.setText(f"{str(self.get_rarity(current_item))}%")
-        """
+
         if int(data["total_quantity"]):
             avg_profit = int(data["total_profit"]) // int(data["total_quantity"])
             self.item_stats_avg_profit.setText(self.format(avg_profit))
@@ -362,12 +375,13 @@ f"	color: rgb{rgb};\n"
 
         # general searching stuff
         self.settings["mouse_movement"] = self.mouse_movement_mode.currentText()
-        self.settings["mouse_speed"] = self.mouse_speed.value()
+        self.settings["search_speed"] = self.mouse_speed.value()
+        self.settings["sell_speed"] = self.mouse_speed_2.value()
         self.settings["item_searching"] = self.item_search_mode.currentText()
         self.settings["use_wishlist"] = self.use_wishlist_tab.isChecked()
 
         # inventory related
-        self.settings["allowed_inv_slots"] = self.allowed_inv_slots.value()
+        self.settings["allowed_scrolls"] = self.allowed_inv_slots.value()
         self.settings["empty_inv_at"] = self.empty_inv_at.value()
 
         # discord related
@@ -380,6 +394,36 @@ f"	color: rgb{rgb};\n"
         self.save_files()
         print("New settings applied.")
 
+    def reset_current_item(self):
+        # make sure the data is up to date
+        self.read_files()
+        current_item = self.current_item.currentText()
+
+        self.stats[current_item] = {
+        "total_quantity": 0,
+        "total_profit": 0,
+        "times_searched": 0,
+        "times_found": 0
+    }
+        self.save_files()
+        self.populate_item_statistics()
+
+    def reset_all_items(self):
+        self.read_files()
+
+        for item in self.stats:
+            if item == "timeline":
+                self.stats[item] = {}
+                continue
+            self.stats[item] = {
+        "total_quantity": 0,
+        "total_profit": 0,
+        "times_searched": 0,
+        "times_found": 0
+    }
+        self.save_files()
+        self.populate_item_statistics()
+
     def connect_buttons(self):
 
         self.buttons_general.clicked.connect(lambda: self.open_tab(0))
@@ -389,12 +433,15 @@ f"	color: rgb{rgb};\n"
         self.add_item.clicked.connect(self.add_item_data)
         self.delete_item.clicked.connect(self.delete_item_data)
         self.add_image.clicked.connect(self.add_inv_image)
+        self.reset_item_stats.clicked.connect(self.reset_current_item)
+        self.reset_all_items_stats.clicked.connect(self.reset_all_items)
 
     def connect_changes(self):
 
         self.mouse_movement_mode.currentIndexChanged.connect(self.save_settings)
         self.item_search_mode.currentIndexChanged.connect(self.save_settings)
         self.mouse_speed.valueChanged.connect(self.save_settings)
+        self.mouse_speed_2.valueChanged.connect(self.save_settings)
         self.use_wishlist_tab.stateChanged.connect(self.save_settings)
 
         self.allowed_inv_slots.valueChanged.connect(self.save_settings)

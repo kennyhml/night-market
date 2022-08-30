@@ -25,7 +25,7 @@ class Inventory(TarkovBot):
     """
     def __init__(self):
         super().__init__()
-        self.total_slots = self.config["allowed_inv_slots"]
+        self.allowed_scrolls = self.config["allowed_scrolls"]
         self.max_slots = self.config["empty_inv_at"]
         self.slots_taken = 0
 
@@ -66,11 +66,12 @@ class Database(TarkovBot):
     def has_image(self, target):
         """Checks if an item already has an image"""
         self.load_images()
+        target = target.name.replace('"', '')
         images = [
             image.removeprefix("images/items\\").removesuffix(".png")
             for image in self.images
         ]
-        return target.name in images
+        return target in images
 
     def add_image(self, item: Item):
         """Adds the image of an item to the image database"""

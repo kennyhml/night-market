@@ -152,15 +152,6 @@
         "refresh": 2,
         "size": "1x3"
     },
-    "Silver Badge": {
-        "enabled": false,
-        "price": "37 983",
-        "buy_at": "36 835",
-        "currency": "\u20bd",
-        "trader": "Therapist",
-        "refresh": 5,
-        "size": "1x1"
-    },
     "LVNDMARK's rat poison": {
         "enabled": false,
         "price": "32 062",

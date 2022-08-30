@@ -75,9 +75,9 @@ class TarkovBot:
         lg.info(f"Clicking button: {button}; Delay: {delay}")
 
         # split the delay before and after the click
-        self.sleep((delay / 2) * self.config["mouse_speed"])
+        self.sleep(delay / 2)
         pg.click(button=button)
-        self.sleep((delay / 2) * self.config["mouse_speed"])
+        self.sleep(delay / 2)
 
     def press(self, key) -> None:
         """Presses a passed key"""

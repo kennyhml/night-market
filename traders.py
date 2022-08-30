@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from data.items import Inventory, Item
-from tarkov import TarkovBot
+from data.items import Inventory, Item, Database
+from tarkov import TarkovBot, lg
 import pyautogui as pg
 from screen import Screen
 from PIL import Image
@@ -31,6 +31,21 @@ class VendorHandler(TarkovBot):
         for x_axis in range(1270, 1900, 63)
     ]
 
+    def click(self, delay=0.3, button="left") -> None:
+        """Override click method for click delays"""
+        self.check_status()
+        lg.info(f"Clicking button: {button}; Delay: {delay}")
+        
+        multiplier = self.config["sell_speed"]
+        if multiplier != 1:
+            multiplier = 1 + (multiplier * 0.2)
+        delay = delay * multiplier
+
+        # split the delay before and after the click
+        self.sleep((delay / 2))
+        pg.click(button=button)
+        self.sleep((delay / 2))
+
     def is_open(self) -> bool:
         """Checks if the trader is open"""
         return pg.locateOnScreen(
@@ -58,7 +73,7 @@ class VendorHandler(TarkovBot):
         self.move_to(vendor.location)
         self.click(0.8)
 
-    def sell(self, items: list[Item]) -> int:
+    def sell(self, items: list[Item], inventory: Inventory) -> int:
         """Sells the item at their respective vendors"""
         # open the main vendor tab
         self.open()
@@ -78,7 +93,7 @@ class VendorHandler(TarkovBot):
             self.notify(f"Selling at {vendor}: {sell_at[vendor]}")
             self.open_trader(VENDORS[vendor])
             self.open_sell_tab()
-            self.sell_items(sell_at[vendor])
+            self.sell_items(sell_at[vendor], inventory)
             self.confirm_sell()
 
             # check if its the last vendor in the list to not leave the tab
@@ -101,6 +116,9 @@ class VendorHandler(TarkovBot):
         """Finds all occurrences of an item in the inventory"""
         # find all points of the image
         image = item.name.replace('"', "")
+        database = Database()
+        if not database.has_image(item):
+            return
         points = set(
             pg.locateAllOnScreen(
                 f"images/inv/{image}.png",
@@ -111,11 +129,13 @@ class VendorHandler(TarkovBot):
         # if item could be rotated, check for the flipped image
         if not item.size in [1, 4]:
             original = Image.open(f"images/inv/{image}.png")
-            turned = original.rotate(270, expand=True)
-            points.union(
+            w,h = original.size
+            no_price = original.crop((20, 20, w, h))
+            turned = no_price.rotate(270, expand=True)
+            points = points.union(
                 set(
                     pg.locateAllOnScreen(
-                        turned, region=(1270, 259, 643, 748), confidence=0.5
+                        turned, region=(1270, 259, 643, 748), confidence=0.7
                     )
                 )
             )
@@ -124,12 +144,12 @@ class VendorHandler(TarkovBot):
         occurrences = Screen.filter_close_points(points, diff=10)
         return [Screen.rect_to_center(point) for point in occurrences]
 
-    def sell_items(self, items: list[Item]) -> None:
+    def sell_items(self, items: list[Item], inventory: Inventory) -> None:
         """Takes a list of items and sells all of them"""
         sell_slots = 0
 
         # number of scrolls
-        for i in range(5):
+        for i in range(inventory.allowed_scrolls):
             # only scroll down if its not the first sale
             if i:
                 self.scroll_down()
@@ -138,6 +158,8 @@ class VendorHandler(TarkovBot):
             # check each item in the passed items
             for item in items:
                 points = self.locate_all_occurences(item)
+                if not points:
+                    continue
                 for point in points:
                     # check if the sell field is nearly full
                     if sell_slots > 64:

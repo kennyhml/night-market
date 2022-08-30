@@ -1,5 +1,5 @@
 from data.items import Item
-from tarkov import TarkovBot
+from tarkov import TarkovBot, lg
 import pyautogui as pg
 
 class Filter(TarkovBot):
@@ -29,7 +29,21 @@ class Filter(TarkovBot):
     def __init__(self, item) -> None:
         super().__init__()
         self.item: Item = item
+        
+    def click(self, delay=0.3, button="left") -> None:
+        """Override click method for click delays"""
 
+        self.check_status()
+        lg.info(f"Clicking button: {button}; Delay: {delay}")
+        multiplier = self.config["search_speed"]
+        if multiplier != 1:
+            multiplier = 1 + (multiplier * 0.2)
+
+        # split the delay before and after the click
+        self.sleep((delay / 2) * multiplier)
+        pg.click(button=button)
+        self.sleep((delay / 2) * multiplier)
+    
     def filter_is_open(self) -> bool:
         """Checks if the menu is open"""
         return pg.pixelMatchesColor(859, 81, (174, 106, 81), tolerance=20)
@@ -76,7 +90,7 @@ class Filter(TarkovBot):
 
         # get currency point from currency dict and set it
         self.move_to(654, 124)
-        self.click(0.2)
+        self.click(0.2 * self.config["search_speed"])
         self.move_to(self.CURRENCIES[self.item.currency])
         self.click(0.2)
 

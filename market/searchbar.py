@@ -1,6 +1,6 @@
 from screen import Screen
 from data.items import Item
-from tarkov import TarkovBot
+from tarkov import TarkovBot, lg
 import pyautogui as pg
 
 
@@ -27,6 +27,21 @@ class SearchBar(TarkovBot):
     def __init__(self, item):
         super().__init__()
         self.item: Item = item
+
+    def click(self, delay=0.3, button="left") -> None:
+        """Override click method for click delays"""
+
+        self.check_status()
+        lg.info(f"Clicking button: {button}; Delay: {delay}")
+        multiplier = self.config["search_speed"]
+        if multiplier != 1:
+            multiplier = 1 + (multiplier * 0.2)
+        delay = delay * multiplier
+
+        # split the delay before and after the click
+        self.sleep((delay / 2))
+        pg.click(button=button)
+        self.sleep((delay / 2))
 
     def done_searching(self) -> bool:
         """Checks if the search bar is done searching"""

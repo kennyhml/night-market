@@ -100,7 +100,7 @@ def empty_inventory(
     statistics: Statistics, inventory: Inventory, items: list[Item]
 ):
     vendor = VendorHandler()
-    current_money = vendor.sell(items)
+    current_money = vendor.sell(items, inventory)
     statistics.send_stats(current_money)
     inventory.reset()
     ui.display_timeline_profits()

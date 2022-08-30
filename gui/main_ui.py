@@ -200,10 +200,10 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)\n"
 "}\n"
 "")
-        self.allowed_inv_slots.setMinimum(20)
-        self.allowed_inv_slots.setMaximum(90)
-        self.allowed_inv_slots.setSingleStep(10)
-        self.allowed_inv_slots.setValue(60)
+        self.allowed_inv_slots.setMinimum(1)
+        self.allowed_inv_slots.setMaximum(10)
+        self.allowed_inv_slots.setSingleStep(1)
+        self.allowed_inv_slots.setValue(1)
         self.inventory_allowed_slots = QLabel(self.maintab_general_config)
         self.inventory_allowed_slots.setObjectName(u"inventory_allowed_slots")
         self.inventory_allowed_slots.setGeometry(QRect(20, 210, 211, 21))
@@ -225,8 +225,8 @@ class Ui_Form(object):
 "background-color: rgb(35,35,40)\n"
 "}\n"
 "")
-        self.empty_inv_at.setMinimum(20)
-        self.empty_inv_at.setMaximum(90)
+        self.empty_inv_at.setMinimum(0)
+        self.empty_inv_at.setMaximum(120)
         self.empty_inv_at.setSingleStep(10)
         self.empty_inv_at.setValue(60)
         self.item_searching = QLabel(self.maintab_general_config)
@@ -255,7 +255,7 @@ class Ui_Form(object):
         self.item_search_mode.setInsertPolicy(QComboBox.InsertAtBottom)
         self.lb_AdcanvedOptions_50 = QLabel(self.maintab_general_config)
         self.lb_AdcanvedOptions_50.setObjectName(u"lb_AdcanvedOptions_50")
-        self.lb_AdcanvedOptions_50.setGeometry(QRect(20, 460, 271, 21))
+        self.lb_AdcanvedOptions_50.setGeometry(QRect(20, 470, 271, 21))
         font4 = QFont()
         font4.setFamilies([u"Segoe UI Variable Display Light"])
         font4.setPointSize(10)
@@ -269,21 +269,21 @@ class Ui_Form(object):
         self.lb_AdcanvedOptions_50.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lb_AdcanvedOptions_44 = QLabel(self.maintab_general_config)
         self.lb_AdcanvedOptions_44.setObjectName(u"lb_AdcanvedOptions_44")
-        self.lb_AdcanvedOptions_44.setGeometry(QRect(141, 500, 16, 31))
+        self.lb_AdcanvedOptions_44.setGeometry(QRect(110, 510, 21, 31))
         self.lb_AdcanvedOptions_44.setFont(font4)
         self.lb_AdcanvedOptions_44.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lb_AdcanvedOptions_25 = QLabel(self.maintab_general_config)
         self.lb_AdcanvedOptions_25.setObjectName(u"lb_AdcanvedOptions_25")
-        self.lb_AdcanvedOptions_25.setGeometry(QRect(81, 500, 16, 31))
+        self.lb_AdcanvedOptions_25.setGeometry(QRect(63, 510, 30, 31))
         self.lb_AdcanvedOptions_25.setFont(font4)
         self.lb_AdcanvedOptions_25.setStyleSheet(u"background-color: rgb(35,35,40)")
         self.lb_AdcanvedOptions_25.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.mouse_speed = QSlider(self.maintab_general_config)
         self.mouse_speed.setObjectName(u"mouse_speed")
-        self.mouse_speed.setGeometry(QRect(18, 480, 251, 22))
+        self.mouse_speed.setGeometry(QRect(18, 490, 251, 22))
         self.mouse_speed.setStyleSheet(u"background-color: rgb(35,35,40)")
         self.mouse_speed.setMinimum(1)
-        self.mouse_speed.setMaximum(5)
+        self.mouse_speed.setMaximum(6)
         self.mouse_speed.setSingleStep(1)
         self.mouse_speed.setPageStep(1)
         self.mouse_speed.setValue(1)
@@ -296,17 +296,17 @@ class Ui_Form(object):
         self.mouse_speed.setTickInterval(1)
         self.lb_AdcanvedOptions_53 = QLabel(self.maintab_general_config)
         self.lb_AdcanvedOptions_53.setObjectName(u"lb_AdcanvedOptions_53")
-        self.lb_AdcanvedOptions_53.setGeometry(QRect(200, 500, 16, 31))
+        self.lb_AdcanvedOptions_53.setGeometry(QRect(160, 510, 20, 31))
         self.lb_AdcanvedOptions_53.setFont(font4)
         self.lb_AdcanvedOptions_53.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lb_AdcanvedOptions_54 = QLabel(self.maintab_general_config)
         self.lb_AdcanvedOptions_54.setObjectName(u"lb_AdcanvedOptions_54")
-        self.lb_AdcanvedOptions_54.setGeometry(QRect(262, 500, 21, 31))
+        self.lb_AdcanvedOptions_54.setGeometry(QRect(206, 510, 31, 31))
         self.lb_AdcanvedOptions_54.setFont(font4)
         self.lb_AdcanvedOptions_54.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lb_AdcanvedOptions_26 = QLabel(self.maintab_general_config)
         self.lb_AdcanvedOptions_26.setObjectName(u"lb_AdcanvedOptions_26")
-        self.lb_AdcanvedOptions_26.setGeometry(QRect(19, 500, 20, 31))
+        self.lb_AdcanvedOptions_26.setGeometry(QRect(19, 510, 20, 31))
         self.lb_AdcanvedOptions_26.setFont(font4)
         self.lb_AdcanvedOptions_26.setStyleSheet(u"background-color: rgb(35,35,40)")
         self.lb_AdcanvedOptions_26.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
@@ -527,12 +527,12 @@ class Ui_Form(object):
         self.label_127.setFont(font8)
         self.post_to_discord = QCheckBox(self.maintab_general_config)
         self.post_to_discord.setObjectName(u"post_to_discord")
-        self.post_to_discord.setGeometry(QRect(20, 360, 261, 21))
+        self.post_to_discord.setGeometry(QRect(170, 310, 141, 21))
         self.post_to_discord.setFont(font2)
         self.post_to_discord.setStyleSheet(u"background-color: rgb(35,35,40)")
         self.label_7 = QLabel(self.maintab_general_config)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setGeometry(QRect(10, -10, 721, 561))
+        self.label_7.setGeometry(QRect(10, 0, 721, 561))
         self.label_7.setStyleSheet(u"QLabel{\n"
 "\n"
 "background-color: rgb(35,35,40)\n"
@@ -548,6 +548,65 @@ class Ui_Form(object):
 "\n"
 "background-color: rgb(35,35,40)")
         self.label_8.setAlignment(Qt.AlignCenter)
+        self.lb_AdcanvedOptions_55 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_55.setObjectName(u"lb_AdcanvedOptions_55")
+        self.lb_AdcanvedOptions_55.setGeometry(QRect(260, 510, 31, 31))
+        self.lb_AdcanvedOptions_55.setFont(font4)
+        self.lb_AdcanvedOptions_55.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.mouse_speed_2 = QSlider(self.maintab_general_config)
+        self.mouse_speed_2.setObjectName(u"mouse_speed_2")
+        self.mouse_speed_2.setGeometry(QRect(19, 420, 251, 22))
+        self.mouse_speed_2.setStyleSheet(u"background-color: rgb(35,35,40)")
+        self.mouse_speed_2.setMinimum(1)
+        self.mouse_speed_2.setMaximum(6)
+        self.mouse_speed_2.setSingleStep(1)
+        self.mouse_speed_2.setPageStep(1)
+        self.mouse_speed_2.setValue(1)
+        self.mouse_speed_2.setSliderPosition(1)
+        self.mouse_speed_2.setTracking(True)
+        self.mouse_speed_2.setOrientation(Qt.Horizontal)
+        self.mouse_speed_2.setInvertedAppearance(False)
+        self.mouse_speed_2.setInvertedControls(False)
+        self.mouse_speed_2.setTickPosition(QSlider.TicksBelow)
+        self.mouse_speed_2.setTickInterval(1)
+        self.lb_AdcanvedOptions_27 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_27.setObjectName(u"lb_AdcanvedOptions_27")
+        self.lb_AdcanvedOptions_27.setGeometry(QRect(64, 440, 30, 31))
+        self.lb_AdcanvedOptions_27.setFont(font4)
+        self.lb_AdcanvedOptions_27.setStyleSheet(u"background-color: rgb(35,35,40)")
+        self.lb_AdcanvedOptions_27.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_AdcanvedOptions_56 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_56.setObjectName(u"lb_AdcanvedOptions_56")
+        self.lb_AdcanvedOptions_56.setGeometry(QRect(161, 440, 20, 31))
+        self.lb_AdcanvedOptions_56.setFont(font4)
+        self.lb_AdcanvedOptions_56.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_AdcanvedOptions_57 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_57.setObjectName(u"lb_AdcanvedOptions_57")
+        self.lb_AdcanvedOptions_57.setGeometry(QRect(207, 440, 31, 31))
+        self.lb_AdcanvedOptions_57.setFont(font4)
+        self.lb_AdcanvedOptions_57.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_AdcanvedOptions_45 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_45.setObjectName(u"lb_AdcanvedOptions_45")
+        self.lb_AdcanvedOptions_45.setGeometry(QRect(111, 440, 21, 31))
+        self.lb_AdcanvedOptions_45.setFont(font4)
+        self.lb_AdcanvedOptions_45.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_AdcanvedOptions_51 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_51.setObjectName(u"lb_AdcanvedOptions_51")
+        self.lb_AdcanvedOptions_51.setGeometry(QRect(21, 400, 271, 21))
+        self.lb_AdcanvedOptions_51.setFont(font4)
+        self.lb_AdcanvedOptions_51.setStyleSheet(u"background-color: rgb(35,35,40)")
+        self.lb_AdcanvedOptions_51.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_AdcanvedOptions_58 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_58.setObjectName(u"lb_AdcanvedOptions_58")
+        self.lb_AdcanvedOptions_58.setGeometry(QRect(261, 440, 31, 31))
+        self.lb_AdcanvedOptions_58.setFont(font4)
+        self.lb_AdcanvedOptions_58.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_AdcanvedOptions_28 = QLabel(self.maintab_general_config)
+        self.lb_AdcanvedOptions_28.setObjectName(u"lb_AdcanvedOptions_28")
+        self.lb_AdcanvedOptions_28.setGeometry(QRect(20, 440, 20, 31))
+        self.lb_AdcanvedOptions_28.setFont(font4)
+        self.lb_AdcanvedOptions_28.setStyleSheet(u"background-color: rgb(35,35,40)")
+        self.lb_AdcanvedOptions_28.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.main_tab.addTab(self.maintab_general_config, "")
         self.label_7.raise_()
         self.use_wishlist_tab.raise_()
@@ -580,6 +639,15 @@ class Ui_Form(object):
         self.frame_5.raise_()
         self.post_to_discord.raise_()
         self.label_8.raise_()
+        self.lb_AdcanvedOptions_55.raise_()
+        self.mouse_speed_2.raise_()
+        self.lb_AdcanvedOptions_27.raise_()
+        self.lb_AdcanvedOptions_56.raise_()
+        self.lb_AdcanvedOptions_57.raise_()
+        self.lb_AdcanvedOptions_45.raise_()
+        self.lb_AdcanvedOptions_51.raise_()
+        self.lb_AdcanvedOptions_58.raise_()
+        self.lb_AdcanvedOptions_28.raise_()
         self.maintab_license = QWidget()
         self.maintab_license.setObjectName(u"maintab_license")
         self.label_6 = QLabel(self.maintab_license)
@@ -986,7 +1054,6 @@ class Ui_Form(object):
         self.select_item.setStyleSheet(u"background-color: rgb(35,35,40)")
         self.select_item.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.current_item = QComboBox(self.maintab_database)
-        self.current_item.addItem("")
         self.current_item.setObjectName(u"current_item")
         self.current_item.setGeometry(QRect(110, 55, 211, 50))
         font11 = QFont()
@@ -1806,7 +1873,15 @@ class Ui_Form(object):
         self.item_image_path = QTextEdit(self.maintab_database)
         self.item_image_path.setObjectName(u"item_image_path")
         self.item_image_path.setGeometry(QRect(590, 274, 81, 31))
-        self.item_image_path.setFont(font6)
+        font16 = QFont()
+        font16.setFamilies([u"Segoe UI Variable Display Light"])
+        font16.setPointSize(15)
+        font16.setBold(False)
+        font16.setItalic(False)
+        font16.setUnderline(False)
+        font16.setStrikeOut(False)
+        font16.setKerning(False)
+        self.item_image_path.setFont(font16)
         self.item_image_path.setStyleSheet(u"QTextEdit {\n"
 "	background-color: rgb(30,30,40);\n"
 "	color: rgb(255,255,255);\n"
@@ -1891,6 +1966,44 @@ class Ui_Form(object):
 "\n"
 "")
         self.item_buy_amount.setMaximum(120)
+        self.reset_item_stats = QPushButton(self.maintab_database)
+        self.reset_item_stats.setObjectName(u"reset_item_stats")
+        self.reset_item_stats.setGeometry(QRect(490, 490, 91, 41))
+        self.reset_item_stats.setFont(font12)
+        self.reset_item_stats.setCursor(QCursor(Qt.ArrowCursor))
+        self.reset_item_stats.setMouseTracking(False)
+        self.reset_item_stats.setStyleSheet(u"QPushButton:pressed {\n"
+"    background-color: rgb(141,124,102);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(118,111,102);\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton {\n"
+"    background-color: rgb(25,25,25);\n"
+"	color: rgb(255,0,0);\n"
+"}")
+        self.reset_all_items_stats = QPushButton(self.maintab_database)
+        self.reset_all_items_stats.setObjectName(u"reset_all_items_stats")
+        self.reset_all_items_stats.setGeometry(QRect(600, 490, 91, 41))
+        self.reset_all_items_stats.setFont(font12)
+        self.reset_all_items_stats.setCursor(QCursor(Qt.ArrowCursor))
+        self.reset_all_items_stats.setMouseTracking(False)
+        self.reset_all_items_stats.setStyleSheet(u"QPushButton:pressed {\n"
+"    background-color: rgb(141,124,102);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(118,111,102);\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton {\n"
+"    background-color: rgb(25,25,25);\n"
+"	color: rgb(255,0,0);\n"
+"}")
         self.main_tab.addTab(self.maintab_database, "")
         self.label_2.raise_()
         self.select_item.raise_()
@@ -1936,6 +2049,8 @@ class Ui_Form(object):
         self.add_image.raise_()
         self.amount_label.raise_()
         self.item_buy_amount.raise_()
+        self.reset_item_stats.raise_()
+        self.reset_all_items_stats.raise_()
         self.maintab_statistics = QWidget()
         self.maintab_statistics.setObjectName(u"maintab_statistics")
         self.statistics_plot = MplWidget(self.maintab_statistics)
@@ -2031,7 +2146,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.main_tab.setCurrentIndex(2)
+        self.main_tab.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -2044,10 +2159,7 @@ class Ui_Form(object):
         self.buttons_database.setText(QCoreApplication.translate("Form", u"Database config", None))
         self.buttons_license.setText(QCoreApplication.translate("Form", u"My license", None))
 #if QT_CONFIG(tooltip)
-        self.use_wishlist_tab.setToolTip(QCoreApplication.translate("Form", u"Enable to apply the same smart pathing concept of stage 2 and 3 to stage 1.\n"
-"\n"
-"Allows shadowhunter to use transform on stage 1, recommended to enable for high mobility classes.\n"
-"Other classes with low cooldowns like sorc and bard will not benefit from this.", None))
+        self.use_wishlist_tab.setToolTip(QCoreApplication.translate("Form", u"Use the wishlist tab to scrap the market instead", None))
 #endif // QT_CONFIG(tooltip)
         self.use_wishlist_tab.setText(QCoreApplication.translate("Form", u"Use wishlist tab", None))
         self.mouse_movements.setText(QCoreApplication.translate("Form", u"Mouse movement:", None))
@@ -2055,7 +2167,12 @@ class Ui_Form(object):
         self.mouse_movement_mode.setItemText(1, QCoreApplication.translate("Form", u"humanized", None))
 
 #if QT_CONFIG(tooltip)
-        self.mouse_movement_mode.setToolTip(QCoreApplication.translate("Form", u"Select what button you move with", None))
+        self.mouse_movement_mode.setToolTip(QCoreApplication.translate("Form", u"You can either have the mouse warp or use humanized movement.\n"
+"\n"
+"Personally ive been letting it warp around at supersonic speed for all weeks of development\n"
+"without any issues at all, and its very unlikely to even be noticed.\n"
+"\n"
+"Humanized will be a little bit slower but if you feel safer, its worth it.", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         self.label_61.setToolTip(QCoreApplication.translate("Form", u"This is a globally shared setting and not \n"
@@ -2068,62 +2185,88 @@ class Ui_Form(object):
 #endif // QT_CONFIG(tooltip)
         self.label_78.setText("")
 #if QT_CONFIG(tooltip)
-        self.allowed_inv_slots.setToolTip(QCoreApplication.translate("Form", u"Tell the bot what character to log into after reconnecting to the game", None))
+        self.allowed_inv_slots.setToolTip(QCoreApplication.translate("Form", u"Determine how many times the bot is allowed to scroll (to keep items on bottom safe)", None))
 #endif // QT_CONFIG(tooltip)
-        self.inventory_allowed_slots.setText(QCoreApplication.translate("Form", u"Allowed inventory slots:", None))
+        self.inventory_allowed_slots.setText(QCoreApplication.translate("Form", u"Allowed scrolls:", None))
         self.inventory_empty_at_slots.setText(QCoreApplication.translate("Form", u"Empty at inventory slots:", None))
 #if QT_CONFIG(tooltip)
-        self.empty_inv_at.setToolTip(QCoreApplication.translate("Form", u"Tell the bot what character to log into after reconnecting to the game", None))
+        self.empty_inv_at.setToolTip(QCoreApplication.translate("Form", u"Determine at how many slots you want the bot to sell, it keeps track of how much it bought.", None))
 #endif // QT_CONFIG(tooltip)
         self.item_searching.setText(QCoreApplication.translate("Form", u"Item searching:", None))
         self.item_search_mode.setItemText(0, QCoreApplication.translate("Form", u"Copy & paste", None))
         self.item_search_mode.setItemText(1, QCoreApplication.translate("Form", u"Type out", None))
 
 #if QT_CONFIG(tooltip)
-        self.item_search_mode.setToolTip(QCoreApplication.translate("Form", u"Select what button you move with", None))
+        self.item_search_mode.setToolTip(QCoreApplication.translate("Form", u"When the bot searches an item name or price, you can either let it copy paste it in, or type it out.\n"
+"\n"
+"Unless you are actively using your clipboard while rdp session runs, \n"
+"Id definitely recommend pasting it in, typing is slower.", None))
 #endif // QT_CONFIG(tooltip)
-        self.lb_AdcanvedOptions_50.setText(QCoreApplication.translate("Form", u"Mouse speed multiplier:", None))
-        self.lb_AdcanvedOptions_44.setText(QCoreApplication.translate("Form", u"3", None))
-        self.lb_AdcanvedOptions_25.setText(QCoreApplication.translate("Form", u"2", None))
+        self.lb_AdcanvedOptions_50.setText(QCoreApplication.translate("Form", u"Filter speed delays:", None))
+        self.lb_AdcanvedOptions_44.setText(QCoreApplication.translate("Form", u"1.4", None))
+        self.lb_AdcanvedOptions_25.setText(QCoreApplication.translate("Form", u"1.2", None))
 #if QT_CONFIG(tooltip)
-        self.mouse_speed.setToolTip(QCoreApplication.translate("Form", u"Multiply Stage 1 delays by:", None))
+        self.mouse_speed.setToolTip(QCoreApplication.translate("Form", u"Multiplies your delays by the value its on. a 0.3s delay will turn into 0.6s on 2x", None))
 #endif // QT_CONFIG(tooltip)
-        self.lb_AdcanvedOptions_53.setText(QCoreApplication.translate("Form", u"4", None))
-        self.lb_AdcanvedOptions_54.setText(QCoreApplication.translate("Form", u"5", None))
+        self.lb_AdcanvedOptions_53.setText(QCoreApplication.translate("Form", u"1.6", None))
+        self.lb_AdcanvedOptions_54.setText(QCoreApplication.translate("Form", u"1.8", None))
         self.lb_AdcanvedOptions_26.setText(QCoreApplication.translate("Form", u"1", None))
         self.label_123.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#00aaff;\">1. Settings &gt; advanced &gt; enable developer mode</span></p></body></html>", None))
         self.label_175.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#00aaff;\">3. Paste the ID into the text bar above.</span></p></body></html>", None))
         self.label_124.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#00aaff;\">2. Right click your profile, press '</span><span style=\" color:#00aaff;\">Copy ID</span><span style=\" font-weight:600; color:#00aaff;\">'</span></p></body></html>", None))
+#if QT_CONFIG(tooltip)
+        self.at_on_events.setToolTip(QCoreApplication.translate("Form", u"Mention you on discord if the bot crashes or something of that sort", None))
+#endif // QT_CONFIG(tooltip)
         self.at_on_events.setText(QCoreApplication.translate("Form", u"@ on special events", None))
         self.lb_AdcanvedOptions_16.setText(QCoreApplication.translate("Form", u"Account ID to @:", None))
+#if QT_CONFIG(tooltip)
+        self.discord_id.setToolTip(QCoreApplication.translate("Form", u"Your discord ID", None))
+#endif // QT_CONFIG(tooltip)
         self.discord_id.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:10pt;\"><br /></p></body></html>", None))
         self.discord_id.setPlaceholderText(QCoreApplication.translate("Form", u"153933119928532992", None))
+#if QT_CONFIG(tooltip)
+        self.test_discord_id_2.setToolTip(QCoreApplication.translate("Form", u"Pings you", None))
+#endif // QT_CONFIG(tooltip)
         self.test_discord_id_2.setText(QCoreApplication.translate("Form", u"Test", None))
         self.lb_AdcanvedOptions_6.setText(QCoreApplication.translate("Form", u"Webhook link:", None))
+#if QT_CONFIG(tooltip)
+        self.discord_webhook.setToolTip(QCoreApplication.translate("Form", u"Your webhook", None))
+#endif // QT_CONFIG(tooltip)
         self.discord_webhook.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:10pt;\"><br /></p></body></html>", None))
         self.discord_webhook.setPlaceholderText(QCoreApplication.translate("Form", u"https://discord.com/api/webhook...", None))
+#if QT_CONFIG(tooltip)
+        self.discord_webhook_valid.setToolTip(QCoreApplication.translate("Form", u"Check if the webhook is valid", None))
+#endif // QT_CONFIG(tooltip)
         self.discord_webhook_valid.setText(QCoreApplication.translate("Form", u"Validate", None))
         self.discord_webhook_status.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#008100;\">A weebhook is active.</span></p></body></html>", None))
         self.label_126.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#00aaff;\">1. Right click Channel &gt; Edit &gt; Integrations &gt; Create Webhook</span></p></body></html>", None))
         self.label_176.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#00aaff;\">3. Paste the into &quot;Webhook Link&quot; Text Field, and validate it!</span></p></body></html>", None))
         self.label_127.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#00aaff;\">2. Press &quot;Copy Webhook URL&quot;.</span></p></body></html>", None))
 #if QT_CONFIG(tooltip)
-        self.post_to_discord.setToolTip(QCoreApplication.translate("Form", u"Enable to apply the same smart pathing concept of stage 2 and 3 to stage 1.\n"
-"\n"
-"Allows shadowhunter to use transform on stage 1, recommended to enable for high mobility classes.\n"
-"Other classes with low cooldowns like sorc and bard will not benefit from this.", None))
+        self.post_to_discord.setToolTip(QCoreApplication.translate("Form", u"Post to discord at all", None))
 #endif // QT_CONFIG(tooltip)
         self.post_to_discord.setText(QCoreApplication.translate("Form", u"Post to discord", None))
         self.label_7.setText("")
         self.label_8.setText(QCoreApplication.translate("Form", u"Bot configuration", None))
+        self.lb_AdcanvedOptions_55.setText(QCoreApplication.translate("Form", u"2", None))
+#if QT_CONFIG(tooltip)
+        self.mouse_speed_2.setToolTip(QCoreApplication.translate("Form", u"Multiplies your delays by the value its on. a 0.3s delay will turn into 0.6s on 2x", None))
+#endif // QT_CONFIG(tooltip)
+        self.lb_AdcanvedOptions_27.setText(QCoreApplication.translate("Form", u"1.2", None))
+        self.lb_AdcanvedOptions_56.setText(QCoreApplication.translate("Form", u"1.6", None))
+        self.lb_AdcanvedOptions_57.setText(QCoreApplication.translate("Form", u"1.8", None))
+        self.lb_AdcanvedOptions_45.setText(QCoreApplication.translate("Form", u"1.4", None))
+        self.lb_AdcanvedOptions_51.setText(QCoreApplication.translate("Form", u"Sell speed delays:", None))
+        self.lb_AdcanvedOptions_58.setText(QCoreApplication.translate("Form", u"2", None))
+        self.lb_AdcanvedOptions_28.setText(QCoreApplication.translate("Form", u"1", None))
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_general_config), QCoreApplication.translate("Form", u"Chaos Bot", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"<html><head/><body><p>Subscription type:</p></body></html>", None))
         self.label_84.setText(QCoreApplication.translate("Form", u"<html><head/><body><p>Registered devices:</p></body></html>", None))
@@ -2146,17 +2289,15 @@ class Ui_Form(object):
         self.label_120.setText(QCoreApplication.translate("Form", u"4. Do not risk showing the bot running to anyone but your closest friends, you will not get banned for using it but player reports with decent evidence may get you suspended.", None))
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_license), QCoreApplication.translate("Form", u"Help / Info", None))
         self.select_item.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#ffffff;\">Item:</span></p></body></html>", None))
-        self.current_item.setItemText(0, QCoreApplication.translate("Form", u"test", None))
-
 #if QT_CONFIG(tooltip)
-        self.current_item.setToolTip(QCoreApplication.translate("Form", u"Your items", None))
+        self.current_item.setToolTip(QCoreApplication.translate("Form", u"The item you would like to select the configuration and statistics for.", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        self.delete_item.setToolTip(QCoreApplication.translate("Form", u"Delete the current preset", None))
+        self.delete_item.setToolTip(QCoreApplication.translate("Form", u"Remove the current displayed item from your database", None))
 #endif // QT_CONFIG(tooltip)
         self.delete_item.setText(QCoreApplication.translate("Form", u"Delete item", None))
 #if QT_CONFIG(tooltip)
-        self.add_item.setToolTip(QCoreApplication.translate("Form", u"Add a new preset", None))
+        self.add_item.setToolTip(QCoreApplication.translate("Form", u"Add a new item to the database", None))
 #endif // QT_CONFIG(tooltip)
         self.add_item.setText(QCoreApplication.translate("Form", u"Add item", None))
         self.item_currency.setItemText(0, QCoreApplication.translate("Form", u"\u20bd", None))
@@ -2175,28 +2316,25 @@ class Ui_Form(object):
         self.item_vendor.setToolTip(QCoreApplication.translate("Form", u"The vendor to sell the item at", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        self.item_refreshes.setToolTip(QCoreApplication.translate("Form", u"The amount of times you would like to refresh", None))
+        self.item_refreshes.setToolTip(QCoreApplication.translate("Form", u"The amount of times to refresh on this item", None))
 #endif // QT_CONFIG(tooltip)
         self.set_item_refreshes.setText(QCoreApplication.translate("Form", u"Refreshes:", None))
 #if QT_CONFIG(tooltip)
-        self.item_value.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_value.setToolTip(QCoreApplication.translate("Form", u"What the vendor pays for this item, you can see this by buying one and going into the vendor.", None))
 #endif // QT_CONFIG(tooltip)
         self.item_value.setPlaceholderText(QCoreApplication.translate("Form", u"32 130", None))
         self.set_item_value.setText(QCoreApplication.translate("Form", u"Value:", None))
 #if QT_CONFIG(tooltip)
-        self.item_max_price.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_max_price.setToolTip(QCoreApplication.translate("Form", u"The item price the bot will put into the filter.\n"
+"If you set it to 32 200, it wont see items for 32 360 for example.", None))
 #endif // QT_CONFIG(tooltip)
         self.item_max_price.setPlaceholderText(QCoreApplication.translate("Form", u"30 200", None))
         self.set_item_price.setText(QCoreApplication.translate("Form", u"Max. price:", None))
         self.set_item_value_2.setText(QCoreApplication.translate("Form", u"Min. profit:", None))
 #if QT_CONFIG(tooltip)
-        self.item_profit.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_profit.setToolTip(QCoreApplication.translate("Form", u"The least profit a purchase of this item could possibly make.\n"
+"\n"
+"Results from item value - maximum purchase price.", None))
 #endif // QT_CONFIG(tooltip)
         self.item_profit.setPlaceholderText(QCoreApplication.translate("Form", u"1930", None))
         self.select_vendor_2.setText(QCoreApplication.translate("Form", u"Size:", None))
@@ -2211,75 +2349,69 @@ class Ui_Form(object):
         self.item_size.setItemText(8, QCoreApplication.translate("Form", u"4x3", None))
 
 #if QT_CONFIG(tooltip)
-        self.item_size.setToolTip(QCoreApplication.translate("Form", u"The vendor to sell the item at", None))
+        self.item_size.setToolTip(QCoreApplication.translate("Form", u"The dimensions of the item, this is important in two aspects:\n"
+"\n"
+"1. The bot wants to know how many slots of the inventory are currently filled\n"
+"\n"
+"2. The bot needs to know it to take the correct screenshot of the items inventory image\n"
+"\n"
+"Please remember its X by Y, not Y by X", None))
 #endif // QT_CONFIG(tooltip)
         self.label_2.setText("")
         self.label_3.setText(QCoreApplication.translate("Form", u"Item configuration", None))
         self.label_4.setText("")
         self.set_item_value_3.setText(QCoreApplication.translate("Form", u"Searched:", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_searched.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_searched.setToolTip(QCoreApplication.translate("Form", u"The amount of times the item has been searched or refreshed for, regardless of finding hits or not", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_searched.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_searched.setPlaceholderText(QCoreApplication.translate("Form", u"3000x", None))
+        self.item_stats_searched.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_found.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_found.setToolTip(QCoreApplication.translate("Form", u"The amount of times at least 1 item was available for purchase on search", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_found.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_found.setPlaceholderText(QCoreApplication.translate("Form", u"1000x", None))
+        self.item_stats_found.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
         self.set_item_value_4.setText(QCoreApplication.translate("Form", u"Found:", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_bought.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_bought.setToolTip(QCoreApplication.translate("Form", u"The amount of times this item has been bought", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_bought.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_bought.setPlaceholderText(QCoreApplication.translate("Form", u"1000x", None))
+        self.item_stats_bought.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
         self.set_item_value_5.setText(QCoreApplication.translate("Form", u"Bought:", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_avg_profit.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_avg_profit.setToolTip(QCoreApplication.translate("Form", u"The average profit you make per purchase on this item", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_avg_profit.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_avg_profit.setPlaceholderText(QCoreApplication.translate("Form", u"1 323", None))
+        self.item_stats_avg_profit.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
         self.set_item_value_6.setText(QCoreApplication.translate("Form", u"Avg. profit:", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_total_profit.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_total_profit.setToolTip(QCoreApplication.translate("Form", u"The total profit this item has netted you", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_total_profit.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_total_profit.setPlaceholderText(QCoreApplication.translate("Form", u"1 233 924", None))
+        self.item_stats_total_profit.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
         self.set_item_value_7.setText(QCoreApplication.translate("Form", u"Total profit:", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_rank.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_rank.setToolTip(QCoreApplication.translate("Form", u"The rank of this item compared to your other items, criteria is the efficiency", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_rank.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -2287,52 +2419,66 @@ class Ui_Form(object):
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.set_item_value_8.setText(QCoreApplication.translate("Form", u"Rank:", None))
+#if QT_CONFIG(tooltip)
+        self.item_enabled.setToolTip(QCoreApplication.translate("Form", u"Enable to add the item to the list of items the bot will search", None))
+#endif // QT_CONFIG(tooltip)
         self.item_enabled.setText(QCoreApplication.translate("Form", u"Enabled", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"Item statistics", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_rarity.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_rarity.setToolTip(QCoreApplication.translate("Form", u"The rarity of the item, if the rarity is 10% you can expect to find at least one item in 10 searches", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_rarity.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_rarity.setPlaceholderText(QCoreApplication.translate("Form", u"10%", None))
+        self.item_stats_rarity.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
         self.set_item_value_9.setText(QCoreApplication.translate("Form", u"Rarity:", None))
 #if QT_CONFIG(tooltip)
-        self.item_stats_efficiency.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_stats_efficiency.setToolTip(QCoreApplication.translate("Form", u"The items efficiency is a little maths we came up with on our own, its determined as follows:\n"
+"\n"
+"Lets assume the optimal profit is 500 000 RUB / hour, one hour holds roughly 1200 searches / refreshes.\n"
+"The maximum efficiency would be roughly 400 RUB per search, this means the items efficiency will be:\n"
+"\n"
+"((items profit / times searched) / max efficiency) * 100 ", None))
 #endif // QT_CONFIG(tooltip)
         self.item_stats_efficiency.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.item_stats_efficiency.setPlaceholderText(QCoreApplication.translate("Form", u"50%", None))
+        self.item_stats_efficiency.setPlaceholderText(QCoreApplication.translate("Form", u"0", None))
         self.set_item_value_10.setText(QCoreApplication.translate("Form", u"Efficiency:", None))
 #if QT_CONFIG(tooltip)
-        self.item_image_path.setToolTip(QCoreApplication.translate("Form", u"Define your skill priority order, they will be checked from left to right. For example:\n"
-"'4,5,6,7,8,1,2,3' would use skill 4 if it is available before proceeding to any other skill.\n"
-"The default values are the regular priorities, if left empty, regular priorities will be used.", None))
+        self.item_image_path.setToolTip(QCoreApplication.translate("Form", u"Displays if the item has an image already or not, if it does not, the item will not be sold.", None))
 #endif // QT_CONFIG(tooltip)
         self.item_image_path.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Segoe UI Variable Display Light'; font-size:15pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt;\"><br /></p></body></html>", None))
         self.item_image_path.setPlaceholderText(QCoreApplication.translate("Form", u"Missing", None))
         self.set_item_value_11.setText(QCoreApplication.translate("Form", u"Image:", None))
 #if QT_CONFIG(tooltip)
-        self.add_image.setToolTip(QCoreApplication.translate("Form", u"Add a new preset", None))
+        self.add_image.setToolTip(QCoreApplication.translate("Form", u"Add this items image, please refer to the discord guide.", None))
 #endif // QT_CONFIG(tooltip)
         self.add_image.setText(QCoreApplication.translate("Form", u"Add", None))
         self.amount_label.setText(QCoreApplication.translate("Form", u"Buy amount:", None))
 #if QT_CONFIG(tooltip)
-        self.item_buy_amount.setToolTip(QCoreApplication.translate("Form", u"The amount of times you would like to refresh", None))
+        self.item_buy_amount.setToolTip(QCoreApplication.translate("Form", u"The amount of items to buy to stop buying any more in the current session.\n"
+"\n"
+"This can be useful if you dont intend to sell the item and just want to stock up on them\n"
+"\n"
+"Leave at 0 to just continue buying at any amount.", None))
 #endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.reset_item_stats.setToolTip(QCoreApplication.translate("Form", u"Reset the statistics of the current item", None))
+#endif // QT_CONFIG(tooltip)
+        self.reset_item_stats.setText(QCoreApplication.translate("Form", u"Reset item", None))
+#if QT_CONFIG(tooltip)
+        self.reset_all_items_stats.setToolTip(QCoreApplication.translate("Form", u"Resets the stats of all items INLUDING TIMELINE", None))
+#endif // QT_CONFIG(tooltip)
+        self.reset_all_items_stats.setText(QCoreApplication.translate("Form", u"Reset all items", None))
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_database), QCoreApplication.translate("Form", u"Seite", None))
         self.select_statistic.setItemText(0, QCoreApplication.translate("Form", u"Average profit timeline - plot chart", None))
         self.select_statistic.setItemText(1, QCoreApplication.translate("Form", u"Total item profits - bar chart", None))
