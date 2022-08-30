@@ -4,7 +4,7 @@
     "sell_speed": 1,
     "item_searching": "Type out",
     "use_wishlist": false,
-    "allowed_scrolls": 5,
+    "allowed_scrolls": 8,
     "empty_inv_at": 50,
     "post_discord": false,
     "discord_mention": false,

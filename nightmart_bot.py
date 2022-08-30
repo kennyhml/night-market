@@ -81,15 +81,17 @@ class Discord:
         webhook = discord.Webhook.from_url(
             self.url, adapter=discord.RequestsWebhookAdapter()
         )
-
-        # post the embed
-        webhook.send(
-            file=file,
-            avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg",
-            embed=embed,
-            username="Night market",
-        )
-
+        try:
+            # post the embed
+            webhook.send(
+                file=file,
+                avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg",
+                embed=embed,
+                username="Night market",
+            )
+        except:
+            pass
+        
     def shorten_name(self, name):
         """Shortens a name down"""
         if len(name.split(" ")) > 4:

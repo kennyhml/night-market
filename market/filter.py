@@ -38,11 +38,12 @@ class Filter(TarkovBot):
         multiplier = self.config["search_speed"]
         if multiplier != 1:
             multiplier = 1 + (multiplier * 0.2)
+        delay = delay * multiplier
 
         # split the delay before and after the click
-        self.sleep((delay / 2) * multiplier)
+        self.sleep((delay / 2))
         pg.click(button=button)
-        self.sleep((delay / 2) * multiplier)
+        self.sleep((delay / 2))
     
     def filter_is_open(self) -> bool:
         """Checks if the menu is open"""
@@ -105,11 +106,13 @@ class Filter(TarkovBot):
 
         if not pg.pixelMatchesColor(834,157, (176,200,222), tolerance=20):
             self.click(0.2)
-
-        self.set_clipboard(str(self.item.buy_at))
-        pg.hotkey("ctrl", "v")
-        self.sleep(0.2)
-        
+        if self.config["item_searching"] == "Copy & paste":
+            self.set_clipboard(str(self.item.buy_at))
+            pg.hotkey("ctrl", "v")
+            self.sleep(0.2)
+        else:
+            pg.typewrite(self.item.buy_at, interval=0.05)
+            
     def confirm_search(self):
         """Confirm the filter"""
         self.move_to(611, 439)

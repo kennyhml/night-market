@@ -2,7 +2,7 @@ from screen import Screen
 from data.statistics import Statistics
 from gui.main_ui_handle import MainUi
 from market.market import MarketUI
-from market.purchase import OutOfMoneyError
+from market.purchase import OutOfMoneyError, InventoryFullError
 from market.searchbar import NoItemsListed
 from data.items import Database, Inventory, Item
 from nightmart_bot import Discord
@@ -71,7 +71,10 @@ def main():
                     inventory, purchases, founds = market.get_available_purchases(
                         item, inventory
                     )
-                except OutOfMoneyError:
+                except (OutOfMoneyError, InventoryFullError):
+                    market.sleep(0.5)
+                    market.press("esc")
+                    market.sleep(0.5)
                     empty_inventory(statistics, inventory, items)
 
                 # add the purchase to stats

@@ -92,10 +92,13 @@ class SearchBar(TarkovBot):
         self.click(0.4)
 
         # put name into clipboard and paste it into searchbar
-        self.set_clipboard(self.item.name)
-        self.sleep(0.2)
-        pg.hotkey("ctrl", "v")
-        self.sleep(0.2)
+        if self.config["item_searching"] == "Copy & paste":
+            self.set_clipboard(self.item.name)
+            self.sleep(0.2)
+            pg.hotkey("ctrl", "v")
+            self.sleep(0.2)
+        else:
+            pg.typewrite(self.item.name, interval=0.05)
         self.move_to(84, 165)
         self.sleep(0.2)
 

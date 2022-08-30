@@ -1,15 +1,15 @@
 {
     "Toilet paper": {
-        "total_quantity": 1829,
-        "total_profit": 1531963,
-        "times_searched": 2946,
-        "times_found": 450
+        "total_quantity": 1947,
+        "total_profit": 1623274,
+        "times_searched": 3044,
+        "times_found": 472
     },
     "OFZ 30x160mm shell": {
-        "total_quantity": 1352,
-        "total_profit": 3273641,
-        "times_searched": 7266,
-        "times_found": 916
+        "total_quantity": 1377,
+        "total_profit": 3342293,
+        "times_searched": 7536,
+        "times_found": 933
     },
     "Round pliers": {
         "total_quantity": 30,
@@ -24,22 +24,22 @@
         "times_found": 18
     },
     "Old firesteel": {
-        "total_quantity": 415,
-        "total_profit": 1341723,
-        "times_searched": 4866,
-        "times_found": 325
+        "total_quantity": 420,
+        "total_profit": 1351939,
+        "times_searched": 5082,
+        "times_found": 330
     },
     "Golden egg": {
-        "total_quantity": 232,
-        "total_profit": 579606,
-        "times_searched": 3642,
-        "times_found": 185
+        "total_quantity": 242,
+        "total_profit": 601008,
+        "times_searched": 3816,
+        "times_found": 192
     },
     "Can of Dr. Lupo's coffee beans": {
-        "total_quantity": 364,
-        "total_profit": 709094,
-        "times_searched": 4716,
-        "times_found": 290
+        "total_quantity": 368,
+        "total_profit": 720155,
+        "times_searched": 4940,
+        "times_found": 293
     },
     "Ratchet wrench": {
         "total_quantity": 6,
@@ -48,16 +48,16 @@
         "times_found": 5
     },
     "Military gyrotachometer": {
-        "total_quantity": 263,
-        "total_profit": 837565,
-        "times_searched": 2494,
-        "times_found": 169
+        "total_quantity": 270,
+        "total_profit": 860576,
+        "times_searched": 2596,
+        "times_found": 174
     },
     "Gunpowder \"Hawk\"": {
-        "total_quantity": 213,
-        "total_profit": 367194,
-        "times_searched": 2558,
-        "times_found": 117
+        "total_quantity": 230,
+        "total_profit": 395208,
+        "times_searched": 2666,
+        "times_found": 123
     },
     "Bottle of OLOLO Multivitamins": {
         "total_quantity": 15,
@@ -72,10 +72,10 @@
         "times_found": 18
     },
     "Set of files \"Master\"": {
-        "total_quantity": 353,
-        "total_profit": 649943,
-        "times_searched": 3567,
-        "times_found": 256
+        "total_quantity": 372,
+        "total_profit": 688395,
+        "times_searched": 3717,
+        "times_found": 265
     },
     "Golden 1GPhone smartphone": {
         "total_quantity": 2,
@@ -90,16 +90,16 @@
         "times_found": 13
     },
     "Battered antique book": {
-        "total_quantity": 220,
-        "total_profit": 783805,
-        "times_searched": 4384,
-        "times_found": 173
+        "total_quantity": 229,
+        "total_profit": 823777,
+        "times_searched": 4596,
+        "times_found": 179
     },
     "Cat figurine": {
-        "total_quantity": 350,
-        "total_profit": 765675,
-        "times_searched": 3537,
-        "times_found": 243
+        "total_quantity": 358,
+        "total_profit": 781488,
+        "times_searched": 3690,
+        "times_found": 250
     },
     "LVNDMARK's rat poison": {
         "total_quantity": 7,
@@ -190,7 +190,14 @@
             "18:49:14": 322200,
             "18:59:41": 333120,
             "19:12:21": 330480,
-            "19:31:38": 312780
+            "19:31:38": 312780,
+            "19:41:13": 315240,
+            "19:49:55": 325080,
+            "19:57:52": 344880,
+            "20:09:31": 316920,
+            "20:13:55": 331620,
+            "20:24:28": 301860,
+            "21:02:48": 0
         }
     }
 }
