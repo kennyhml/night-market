@@ -93,6 +93,7 @@ class TarkovBot:
 
     @staticmethod
     def get_screenshot(path, region=(0, 0, 1920, 1080)):
+        start = time.time()
         x, y, w, h = region
         x, y, w, h = int(x), int(y), int(w), int(h)
 

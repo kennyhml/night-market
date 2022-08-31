@@ -151,7 +151,7 @@ class MarketUI(TarkovBot):
         -----------
         inventory: :class:`Inventory`
             The updated inventory
-        
+
         purchases: :class:`list[Purchase]`
             A list of purchases
         """
@@ -172,15 +172,15 @@ class MarketUI(TarkovBot):
                 self.refresh()
 
             # loop over slots, avoided for loop because may need the same slot twice
-            while box_nr < 9:
+            while box_nr < 6:
 
                 # get region of the status and price
                 status_region = self.purchase_grid[box_nr]
                 price_region = self.price_grid[box_nr]
-                path = "images/temp/price.png"
 
                 # get item status
                 if purchase_ui.is_available(status_region):
+                    start = time.time()
                     founds.add(attempt)
 
                     if grab_img:
@@ -188,36 +188,41 @@ class MarketUI(TarkovBot):
                         grab_img = False
 
                     # thread the price OCR beforehand so we have the data ready
-                    self.get_screenshot(path, region=price_region)
                     get_price = Thread(
                         target=purchase_ui.get_item_price,
-                        args=(item, path),
+                        args=(item, price_region),
                         name="Processing price",
                     )
                     get_price.start()
 
                     # attempt to purchase the item, get success state and quantity
-                    success, amount = purchase_ui.do_purchase(
+                    success, amount, skip = purchase_ui.do_purchase(
                         self.rect_to_center(status_region)
                     )
-                    self.notify(f"Purchase succeeded: {success}\nQuanitity: {amount}")
+                    self.notify(
+                        f"Purchase succeeded: {success}\nQuanitity: {amount}\nTime: {self.get_time(start)}s"
+                    )
 
                     # add the purchase to our purchases to post to discord later
                     if not success:
                         # someone was faster, continue to next slot
                         self.notify("Purchase failed!")
                         continue
-
+                    start = time.time()
                     inventory.add_items(int(amount), item.size)
                     purchase = purchase_ui.post_profit(item, inventory, int(amount))
+                    box_nr += 1
 
                     if purchase:
                         purchases.append(purchase)
+                    self.notify(f"Processing took {self.get_time(start)}s")
 
                     # wait for the status to refresh...
-                    box_nr = 0
+                    if not skip:
+                        box_nr = 0
                     while purchase_ui.is_pending(status_region):
                         pass
+                    self.notify(f"Purchase was pending for {self.get_time(start)}s")
 
                     if self.topslot_is_loaded():
                         continue

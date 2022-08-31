@@ -90,6 +90,7 @@ def main():
                     Screen.get_screenshot("images/temp/error.png"), f"Timed out!"
                 )
                 market.press("esc")
+                market.sleep(0.5)
 
             except Exception as e:
                 discord.send_image(
@@ -97,6 +98,7 @@ def main():
                     f"Unhandled error!\n{e}",
                 )
                 market.press("esc")
+                market.sleep(0.5)
 
 
 def empty_inventory(

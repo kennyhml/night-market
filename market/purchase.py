@@ -23,6 +23,7 @@ class PurchaseHandler(TarkovBot):
 
     amount = None
     price = None
+    discord = Discord()
 
     def purchase_window_open(self) -> bool:
         """Checks if the purchase prompt has opened yet"""
@@ -116,11 +117,11 @@ class PurchaseHandler(TarkovBot):
         """
         self.notify("Buying available item...")
         self.move_to(point)
-        self.click()
+        self.click(0.1)
 
         self.get_screenshot(("images/temp/pre_purchase.png"), region=(1509, 69, 89, 23))
         if not self.await_prompt():
-            return False, None
+            return False, None, False
 
         # Grab the amount of items to check if we need to hit the "all" button
         self.amount = 1 if self.item_is_regular_amount() else None
@@ -130,18 +131,22 @@ class PurchaseHandler(TarkovBot):
             get_amount.start()
 
             self.move_to(1146, 490)
-            self.click()
-            self.move_to(1780, 118)
+            self.click(0.1)
+            self.move_to(point)
         
         # Y to confirm, check purchase succeeded, return item quantity
         self.press("Y")
-
+        start = time()
         while not self.amount:
-            self.sleep(0)
+            self.sleep(0.05)
+            print("Waiting for price to be processed...")
+        self.notify(f"Had to wait an additional {self.get_time(start)}s for the amount!")
+        
         if self.amount > 30:
             self.amount = 10
+
         success, fixed_amount = self.await_purchase_result()
-        return success, fixed_amount if fixed_amount else self.amount
+        return success, fixed_amount if fixed_amount else self.amount, fixed_amount
 
     def await_purchase_result(self):
         """Checks if a purchase fails, succeeds or errors.
@@ -184,7 +189,7 @@ class PurchaseHandler(TarkovBot):
             elif self.out_of_money():
                 raise OutOfMoneyError
 
-            elif self.has_timedout(start, 0.6):
+            elif self.has_timedout(start, 0.5):
                 print("Timedout, no success!")
                 return False, None
 
@@ -193,14 +198,14 @@ class PurchaseHandler(TarkovBot):
 
     def get_item_amount(self):
         """Gets the amount of items that can be bought"""
-        self.check_status()
         self.notify("Checking item amount...")
         start = time()
 
         if pg.locateOnScreen(
             "images/11.png", region=(1108, 472, 25, 32), confidence=0.8
         ):
-             self.amount = 11
+            self.amount = 11
+            return
 
         # get image showing the amount, process and pass to tesseract
         for region in [(1108, 472, 25, 32), (969, 514, 30, 24)]:
@@ -229,10 +234,12 @@ class PurchaseHandler(TarkovBot):
         except: pass
         return price
 
-    def get_item_price(self, item: Item, img):
+    def get_item_price(self, item: Item, region):
         """Processes the image of the item price and ocr's it"""
         self.price = None
-        self.price = self.validate_price(item, Screen.read_price(img))
+        path = "images/temp/price.png"
+        self.get_screenshot(path, region)
+        self.price = self.validate_price(item, Screen.read_price(path))
 
     def post_profit(self, item: Item, inventory: Inventory, amount):
         """Sends all previously bought items to discord, the thread is started
@@ -246,7 +253,7 @@ class PurchaseHandler(TarkovBot):
         purchases: :class:`List`
             The list of purchases containing image path and purchase quantity
         """
-        discord = Discord()
+       
         try:
             # get price from image, amount from data
             bought_for = self.price
@@ -261,7 +268,7 @@ class PurchaseHandler(TarkovBot):
             )
 
             Thread(
-                target=lambda: discord.send_purchase_embed(purchase, inventory)
+                target=lambda: self.discord.send_purchase_embed(purchase, inventory)
             ).start()
             return purchase
 
