@@ -5,9 +5,11 @@ from screen import Screen
 from PIL import Image
 from tarkov import TarkovBot
 
+
 @dataclass
 class Item:
     """Stores item properties, created by database"""
+
     name: str
     price: float
     buy_at: int
@@ -15,6 +17,7 @@ class Item:
     vendor: str
     refreshes: int
     size: int
+    buy_amount: int
 
 
 @dataclass
@@ -23,6 +26,7 @@ class Inventory(TarkovBot):
     which to empty and amount of slots currently taken, alongside methods
     to request the state
     """
+
     def __init__(self):
         super().__init__()
         self.allowed_scrolls = self.config["allowed_scrolls"]
@@ -40,6 +44,7 @@ class Inventory(TarkovBot):
     def add_items(self, amount, size):
         self.slots_taken += amount * int(size)
 
+
 class Database(TarkovBot):
     """Database handler
     ---------------------
@@ -47,6 +52,7 @@ class Database(TarkovBot):
     creates instances of :class:`Item` from their json values.
     Checks if items have images and adds item images.
     """
+
     def __init__(self) -> None:
         self.load_config()
         self.images = glob.glob("images/*.png")
@@ -66,7 +72,7 @@ class Database(TarkovBot):
     def has_image(self, target):
         """Checks if an item already has an image"""
         self.load_images()
-        target = target.name.replace('"', '')
+        target = target.name.replace('"', "")
         images = [
             image.removeprefix("images/items\\").removesuffix(".png")
             for image in self.images
@@ -79,7 +85,8 @@ class Database(TarkovBot):
 
         # remove the " from the name to avoid path errors
         path = item.name.replace('"', "")
-        self.get_screenshot(f"images/items/{path}.png", region=(879, 147, 64, 64))
+        self.get_screenshot(
+            f"images/items/{path}.png", region=(879, 147, 64, 64))
 
         # edit the bottom right corner to paint over any numbers shown
         img = Image.open(f"images/items/{path}.png")
@@ -114,16 +121,18 @@ class Database(TarkovBot):
 
         # 1270, 260 = topleft corner, now get width & height of item by size
         size = int(item_size[0]) * 64, int(item_size[1]) * 64
-        Screen.get_screenshot(f"images/inv/{path}.png", region=(1270, 260, *size))
+        Screen.get_screenshot(
+            f"images/inv/{path}.png", region=(1270, 260, *size))
 
     def get_items_to_purchase(self):
         """Returns a list of items from the data dict"""
+        self.load_config()
         return [
             self.data_to_item(item)
             for item in self.get_items()
             if self.item_data[item]["enabled"]
         ]
-        
+
     def items_sold_at(self, vendor):
         """Returns a list of all items sold at a certain vendor"""
         return [item for item in self.item_data if item["trader"] == vendor]
@@ -142,6 +151,6 @@ class Database(TarkovBot):
             currency=self.item_data[entry]["currency"],
             vendor=self.item_data[entry]["trader"],
             refreshes=self.item_data[entry]["refresh"],
-            size=self.get_size(self.item_data[entry]["size"])
+            size=self.get_size(self.item_data[entry]["size"]),
+            buy_amount=self.item_data[entry]["buy_amount"],
         )
-

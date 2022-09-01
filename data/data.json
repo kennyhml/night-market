@@ -4,9 +4,10 @@
         "trader": "Therapist",
         "price": "5 544",
         "buy_at": "5 100",
-        "refresh": 1,
+        "refresh": 3,
         "currency": "\u20bd",
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "OFZ 30x160mm shell": {
         "enabled": true,
@@ -15,7 +16,8 @@
         "buy_at": "34 500",
         "refresh": 5,
         "currency": "\u20bd",
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Round pliers": {
         "enabled": false,
@@ -24,7 +26,8 @@
         "buy_at": "16 200",
         "refresh": 2,
         "currency": "\u20bd",
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "Axel parrot figurine": {
         "enabled": false,
@@ -33,7 +36,8 @@
         "buy_at": "31 500",
         "refresh": 2,
         "currency": "\u20bd",
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Old firesteel": {
         "enabled": true,
@@ -42,7 +46,8 @@
         "buy_at": "38 800",
         "refresh": 3,
         "currency": "\u20bd",
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "Golden egg": {
         "enabled": true,
@@ -51,7 +56,8 @@
         "buy_at": "42 000",
         "refresh": 2,
         "currency": "\u20bd",
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "Can of Dr. Lupo's coffee beans": {
         "enabled": true,
@@ -60,7 +66,8 @@
         "buy_at": "32 200",
         "refresh": 3,
         "currency": "\u20bd",
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "Ratchet wrench": {
         "enabled": false,
@@ -69,7 +76,8 @@
         "buy_at": "77 000",
         "refresh": 1,
         "currency": "\u20bd",
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Military gyrotachometer": {
         "enabled": true,
@@ -78,7 +86,8 @@
         "buy_at": "38 300",
         "refresh": 1,
         "currency": "\u20bd",
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Gunpowder \"Hawk\"": {
         "enabled": true,
@@ -87,7 +96,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 1,
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Bottle of OLOLO Multivitamins": {
         "enabled": false,
@@ -96,7 +106,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "Golden rooster": {
         "enabled": false,
@@ -105,7 +116,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 9,
-        "size": "2x2"
+        "size": "2x2",
+        "buy_amount": 0
     },
     "Set of files \"Master\"": {
         "enabled": true,
@@ -114,7 +126,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 2,
-        "size": "2x2"
+        "size": "2x2",
+        "buy_amount": 0
     },
     "Golden 1GPhone smartphone": {
         "enabled": false,
@@ -123,7 +136,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1x1"
+        "size": "1x1",
+        "buy_amount": 0
     },
     "Raven figurine": {
         "enabled": false,
@@ -132,7 +146,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Battered antique book": {
         "enabled": true,
@@ -141,7 +156,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 3,
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     },
     "Cat figurine": {
         "enabled": true,
@@ -150,7 +166,8 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 2,
-        "size": "1x3"
+        "size": "1x3",
+        "buy_amount": 0
     },
     "LVNDMARK's rat poison": {
         "enabled": false,
@@ -159,6 +176,7 @@
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 5,
-        "size": "1x2"
+        "size": "1x2",
+        "buy_amount": 0
     }
 }

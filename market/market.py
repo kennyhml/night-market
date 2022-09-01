@@ -5,9 +5,8 @@ from market.searchbar import SearchBar
 from market.purchase import PurchaseHandler
 from tarkov import TarkovBot
 import pyautogui as pg
-from nightmart_bot import Discord
 import time
-
+from nightmart_bot import Discord
 
 class MarketUI(TarkovBot):
     """Main flea market ui handle
@@ -26,7 +25,6 @@ class MarketUI(TarkovBot):
 
     def __init__(self) -> None:
         super().__init__()
-        self.discord = Discord()
 
     def is_open(self) -> bool:
         """Checks if the market is open"""
@@ -88,15 +86,22 @@ class MarketUI(TarkovBot):
 
     def open(self):
         """Opens the flea market tab, most of the time will already be open"""
-        if self.is_open():
-            return
-
-        # not already open
-        self.move_to(1251, 1063)
-        self.click()
-        self.await_market_open()
+        if not self.is_open():
+            # not already open
+            self.move_to(1251, 1063)
+            self.click()
+            self.await_market_open()
 
         self.notify("Opened the flea market!")
+        if self.config["use_wishlist"] and pg.pixelMatchesColor(
+            161, 83, (188, 188, 164), tolerance=40
+        ):
+            self.move_to(250, 86)
+
+        elif not pg.pixelMatchesColor(162, 91, (190, 188, 161), tolerance=40):
+            self.move_to(112, 86)
+
+        self.click()
 
     def search_item(self, item: Item) -> None:
         """Searches for an item and sets the filter given the items properties
@@ -121,7 +126,7 @@ class MarketUI(TarkovBot):
         # await items listed
         self.await_items_listed()
         self.notify(f"Searching for {item.name} took {self.get_time(start)}s")
-
+        
     def refresh(self):
         """Refreshes the currently listed item"""
         # get cursor in position for new purchase and await refresh
@@ -134,6 +139,18 @@ class MarketUI(TarkovBot):
         start = time.time()
         self.await_items_listed()
         self.notify(f"Items listed after {self.get_time(start)}s")
+
+    def check_anomaly(self):
+        if not self.config["purchase_failsafe"]:
+            return
+            
+        if pg.pixelMatchesColor(1875, 180, (170, 179, 183), tolerance=40):
+            discord = Discord()
+            discord.send_image(
+                self.get_screenshot("images/temp/anomaly"),
+                "**Anomaly detected!** Not purchasing...",
+            )
+            raise TooManyItems
 
     def get_available_purchases(self, item: Item, inventory: Inventory):
         """Main purchase finding function, checks the status of each item slot
@@ -180,6 +197,7 @@ class MarketUI(TarkovBot):
 
                 # get item status
                 if purchase_ui.is_available(status_region):
+                    self.check_anomaly()
                     start = time.time()
                     founds.add(attempt)
 
@@ -237,3 +255,12 @@ class MarketUI(TarkovBot):
                     break
 
         return inventory, purchases, len(founds)
+
+    def unstuck(self):
+        self.press("esc", 1)
+        self.open()
+        self.sleep(0.5)
+
+
+class TooManyItems(Exception):
+    """Raised when too many items are listed"""

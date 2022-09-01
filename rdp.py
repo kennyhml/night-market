@@ -48,24 +48,28 @@ class Installer:
 
         print(f"Executed {path} successfully!")
 
-    def setup_files(self):
+    def setup_files(self) -> None:
         """Installs and unpacks the zip files"""
         print("Setting up the required files...")
+
         self.download(self.zip_link, "images/temp/")
         self.download(self.updater_link, "images/temp/")
-
         self.unpack("images/tempautoupdate.zip", self.rdp_dir)
         self.unpack("images/temp/RDPWrap-v1.6.2.zip", self.rdp_dir)
+
         print("Files should all be in place!")
 
-    def run_installers(self):
+    def run_installers(self) -> None:
         """Runs the bat files"""
         print("Running installs...")
+
         self.run_batch("\\helper\\autoupdate__enable_autorun_on_startup.bat")
         self.run_batch("\\autoupdate.bat")
 
     def run(self):
+        """Sets up everything"""
         print("Setting up your RDPWrapper...")
+
         self.setup_files()
         self.run_installers()
         print(

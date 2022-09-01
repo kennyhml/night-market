@@ -3,7 +3,7 @@ from time import time
 from data.items import Inventory, Item
 from nightmart_bot import Discord
 from screen import Screen
-from tarkov import TarkovBot
+from tarkov import TarkovBot, lg
 import pyautogui as pg
 from data.captcha import CaptchaSolver
 from threading import Thread
@@ -110,6 +110,21 @@ class PurchaseHandler(TarkovBot):
             if c > 50:
                 raise TimeoutError("Timed out awaiting the purchase prompt!")
         return True
+
+    def click(self, delay=0.3, button="left") -> None:
+        """Override click method for click delays"""
+        self.check_status()
+        lg.info(f"Clicking button: {button}; Delay: {delay}")
+
+        multiplier = self.config["purchase_speed"]
+        if multiplier != 1:
+            multiplier = 1 + (multiplier * 0.1)
+        delay = delay * multiplier
+
+        # split the delay before and after the click
+        self.sleep(delay / 2)
+        pg.click(button=button)
+        self.sleep(delay / 2)
 
     def do_purchase(self, point):
         """Hits the button, awaits until the confirm prompt loads and gets the
@@ -266,10 +281,11 @@ class PurchaseHandler(TarkovBot):
                 profit=profit,
                 image=item.name,
             )
+            if self.config["post_discord"]:
+                Thread(
+                    target=lambda: self.discord.send_purchase_embed(purchase, inventory)
+                ).start()
 
-            Thread(
-                target=lambda: self.discord.send_purchase_embed(purchase, inventory)
-            ).start()
             return purchase
 
         except Exception as e:
@@ -278,9 +294,6 @@ class PurchaseHandler(TarkovBot):
     def get_new_amount(self):
         """Gets the new amount after a purchase errored"""
         new_amount = Screen.get_new_quantity()
-
-        discord = Discord()
-        discord.send_image("images/temp/amount.png", f"Determined as {new_amount}")
         return new_amount
 
 

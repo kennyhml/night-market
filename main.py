@@ -1,17 +1,15 @@
-from screen import Screen
+
 from data.statistics import Statistics
 from gui.main_ui_handle import MainUi
-from market.market import MarketUI
+from market.market import MarketUI, TooManyItems
 from market.purchase import OutOfMoneyError, InventoryFullError
 from market.searchbar import NoItemsListed
 from data.items import Database, Inventory, Item
-from nightmart_bot import Discord
-from tarkov import BotTerminated, TarkovBot
+from tarkov import BotTerminated, TarkovBot, lg
 
 from traders import VendorHandler
 from threading import Thread
 from pynput import keyboard
-import time
 
 def on__key_press(key):
     """Connets inputs from listener thread to their corresponding function"""
@@ -19,10 +17,11 @@ def on__key_press(key):
     if key == keyboard.Key.f1:  # started
         # make sure bot is not already active
         if not (TarkovBot.paused or TarkovBot.running):
+            ui.set_bot_status("Active - Farming money!")
 
             ui.save_changes = False  # disable changes
             TarkovBot.running = True  # set active
-            time.sleep(5)
+            TarkovBot.sleep_start_delay()
             bot = Thread(target=main, daemon=True, name="Main bot Thread")
             bot.start()
 
@@ -37,9 +36,11 @@ def on__key_press(key):
     elif key == keyboard.Key.f2:  # paused
         if TarkovBot.running and not TarkovBot.paused:  # not currently paused
             TarkovBot.paused = True  # pause the bot
+            ui.set_bot_status("Paused - Press F2 to resume!")
 
         elif TarkovBot.running and TarkovBot.paused:  # already paused (so resume)
             TarkovBot.paused = False
+            ui.set_bot_status("Active - Farming money!")
 
 def main():
     """
@@ -48,14 +49,13 @@ def main():
     """
     # initialize database from data file
     data = Database()
-    items = data.get_items_to_purchase()
-    statistics = Statistics(items)
+    statistics = Statistics(data.get_items_to_purchase())
     inventory = Inventory()
     market = MarketUI()
-    discord = Discord()
 
     while True:
-        # iterate over all items checking each
+        
+        items = data.get_items_to_purchase()
         for item in items:
             try:
                 try:
@@ -72,10 +72,11 @@ def main():
                         item, inventory
                     )
                 except (OutOfMoneyError, InventoryFullError):
-                    market.sleep(0.5)
-                    market.press("esc")
-                    market.sleep(0.5)
+                    market.press("esc", 1)
                     empty_inventory(statistics, inventory, items)
+
+                except TooManyItems:
+                    continue
 
                 # add the purchase to stats
                 statistics.add_purchase(purchases, founds, item)
@@ -84,21 +85,10 @@ def main():
 
             except BotTerminated:
                 return
-
-            except TimeoutError:
-                discord.send_image(
-                    Screen.get_screenshot("images/temp/error.png"), f"Timed out!"
-                )
-                market.press("esc")
-                market.sleep(0.5)
-
-            except Exception as e:
-                discord.send_image(
-                    Screen.get_screenshot("images/temp/error.png"),
-                    f"Unhandled error!\n{e}",
-                )
-                market.press("esc")
-                market.sleep(0.5)
+                
+            except Exception:
+                lg.exception("Unhandled error in main function!")
+                market.unstuck()
 
 
 def empty_inventory(
@@ -109,7 +99,6 @@ def empty_inventory(
     statistics.send_stats(current_money)
     inventory.reset()
     ui.display_timeline_profits()
-
 
 if __name__ == "__main__":
 

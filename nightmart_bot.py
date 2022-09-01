@@ -1,5 +1,6 @@
 from threading import Thread
 import discord
+import json
 
 class Discord:
     """Discord handle to send purchases and statistics
@@ -11,6 +12,10 @@ class Discord:
     """
 
     def __init__(self) -> None:
+        with open("data/settings.json") as f:
+            self.data = json.load(f)
+        if not self.data["post_discord"]:
+            return
         self.url = "https://discord.com/api/webhooks/1012067077512761374/Z5iQrJVYJ65zCH-CGTrBhGEnjCBjj5pp2JIOdvwpD9wacxqZzZtfkXlhSFi_fmKls-OU"
         self.avatar = "https://lostarkcodex.com/icons/use_9_242.webp"
         self.webhook = discord.Webhook.from_url(
@@ -19,6 +24,8 @@ class Discord:
 
     def send_message(self, message):
         """Sends the given message to discord"""
+        if not self.data["post_discord"]:
+            return
         try:
             self.webhook.send(
                 content=message, avatar_url=self.avatar, username="Night market"
@@ -41,6 +48,8 @@ class Discord:
 
     def send_image(self, image, message):
         """Starts an image posting thread"""
+        if not self.data["post_discord"]:
+            return
         Thread(
             target=lambda: self.send_image_to_disc(image, message),
             name="Posting to discord!",
@@ -48,7 +57,8 @@ class Discord:
 
     def send_purchase_embed(self, purchase, inventory):
         """Sends a purchase to discord"""
-
+        if not self.data["post_discord"]:
+            return
         # create the embed
         embed = discord.Embed(
             type="rich",
@@ -99,6 +109,8 @@ class Discord:
         return name
 
     def send_statistics(self, data):
+        if not self.data["post_discord"]:
+            return
         """Sends a statistics embed to discord after emptying the inventory"""
         # create the embed
         embed = discord.Embed(

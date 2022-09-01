@@ -1,15 +1,17 @@
 {
-    "mouse_movement": "warping",
-    "search_speed": 2,
+    "mouse_movement": "Warping",
+    "search_speed": 1,
     "sell_speed": 1,
+    "purchase_speed": 7,
     "item_searching": "Type out",
     "use_wishlist": false,
-    "allowed_scrolls": 8,
+    "allowed_scrolls": 4,
     "empty_inv_at": 50,
-    "post_discord": false,
+    "post_discord": true,
     "discord_mention": false,
+    "purchase_failsafe": true,
     "discord_webhook": "",
     "discord_id": "",
     "tesseract_path": "C:/Program Files/Tesseract-OCR/tesseract.exe",
-    "allowed_inv_slots": 20
+    "start_delay": 3
 }

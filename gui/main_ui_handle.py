@@ -33,7 +33,7 @@ class MainUi(QMainWindow, Ui_Form):
         super().__init__()
         self.setupUi(main_win)
         self.populate_ui()
-        self.open_tab(2)
+        self.open_tab(0)
         self.connect_buttons()
         self.connect_changes()
         self.save_changes = True
@@ -247,6 +247,9 @@ f"	color: rgb{rgb};\n"
         self.mouse_movement_mode.setCurrentText(self.settings["mouse_movement"])
         self.mouse_speed.setValue(self.settings["search_speed"])
         self.mouse_speed_2.setValue(self.settings["sell_speed"])
+        self.purchase_speed.setValue(self.settings["purchase_speed"])
+        self.purchase_failsafe.setChecked(self.settings["purchase_failsafe"])
+        self.start_delay.setValue(self.settings["start_delay"])
 
         self.item_search_mode.setCurrentText(self.settings["item_searching"])
         self.use_wishlist_tab.setChecked(self.settings["use_wishlist"])
@@ -284,6 +287,7 @@ f"	color: rgb{rgb};\n"
         self.item_image_path.setText(Database.load_inventory_image(current_item))
         self.item_value.setText(self.format(self.data[current_item]["price"]))
         self.item_max_price.setText(self.format(self.data[current_item]["buy_at"]))
+        self.item_buy_amount.setValue(self.data[current_item]["buy_amount"])
 
         self.populate_profit_data()
         self.save_changes = True
@@ -367,6 +371,7 @@ f"	color: rgb{rgb};\n"
         self.data[current_item]["refresh"] = self.item_refreshes.value()
         self.data[current_item]["size"] = self.item_size.currentText()
         self.data[current_item]["enabled"] = self.item_enabled.isChecked()
+        self.data[current_item]["buy_amount"] = self.item_buy_amount.value()
         self.save_files()
 
     def save_settings(self):
@@ -377,9 +382,12 @@ f"	color: rgb{rgb};\n"
         self.settings["mouse_movement"] = self.mouse_movement_mode.currentText()
         self.settings["search_speed"] = self.mouse_speed.value()
         self.settings["sell_speed"] = self.mouse_speed_2.value()
+        self.settings["purchase_speed"] = self.purchase_speed.value()
+        self.settings["purchase_failsafe"] = self.purchase_failsafe.isChecked()
         self.settings["item_searching"] = self.item_search_mode.currentText()
         self.settings["use_wishlist"] = self.use_wishlist_tab.isChecked()
-
+        self.settings["start_delay"] = self.start_delay.value()
+        
         # inventory related
         self.settings["allowed_scrolls"] = self.allowed_inv_slots.value()
         self.settings["empty_inv_at"] = self.empty_inv_at.value()
@@ -443,9 +451,12 @@ f"	color: rgb{rgb};\n"
         self.mouse_speed.valueChanged.connect(self.save_settings)
         self.mouse_speed_2.valueChanged.connect(self.save_settings)
         self.use_wishlist_tab.stateChanged.connect(self.save_settings)
+        self.purchase_speed.valueChanged.connect(self.save_settings)
+        self.purchase_failsafe.stateChanged.connect(self.save_settings)
 
         self.allowed_inv_slots.valueChanged.connect(self.save_settings)
         self.empty_inv_at.valueChanged.connect(self.save_settings)
+        self.start_delay.valueChanged.connect(self.save_settings)
 
         self.post_to_discord.stateChanged.connect(self.save_settings)
         self.at_on_events.stateChanged.connect(self.save_settings)
@@ -461,6 +472,7 @@ f"	color: rgb{rgb};\n"
         self.item_currency.currentIndexChanged.connect(self.save_item_settings)
         self.item_vendor.currentIndexChanged.connect(self.save_item_settings)
         self.item_refreshes.valueChanged.connect(self.save_item_settings)
+        self.item_buy_amount.valueChanged.connect(self.save_item_settings)
         self.item_size.currentIndexChanged.connect(self.save_item_settings)
         self.item_enabled.clicked.connect(self.save_item_settings)
 

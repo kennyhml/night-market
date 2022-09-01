@@ -1,5 +1,6 @@
 import json
 import time
+from data.items import Item
 
 from nightmart_bot import Discord
 from datetime import datetime
@@ -26,14 +27,20 @@ class Statistics:
         with open("data\statistics.json", "r") as json_file:
             self.stats_data = json.load(json_file)
 
+        with open("data\data.json", "r") as json_file:
+            self.data = json.load(json_file)
+
     def save_data(self):
         with open("data\statistics.json", "w") as json_file:
             json.dump(self.stats_data, json_file, indent=4)
-
+            
+        with open("data\data.json", "w") as json_file:
+            json.dump(self.data, json_file, indent=4)
+            
     def get_data(self):
         return self.stats_data
 
-    def add_purchase(self, purchases, founds, item):
+    def add_purchase(self, purchases, founds, item: Item):
         """Adds a purchase to the statistics"""
         self.load_data()
         added_item = item.name
@@ -56,7 +63,7 @@ class Statistics:
         self.stats_data[added_item]["total_profit"] += int(profit)
 
         # add the overall purchase data
-        self.stats_data[added_item]["times_searched"] += purchases[0].item.refreshes + 1
+        self.stats_data[added_item]["times_searched"] += item.refreshes + 1
         self.stats_data[added_item]["times_found"] += founds
 
         # calculate the new average profit for the item
@@ -65,8 +72,12 @@ class Statistics:
             / self.items[added_item]["total_quantity"]
         )
 
-        self.save_data()
+        if item.buy_amount and quantity >= item.buy_amount:
+            self.data[added_item]["enabled"] = False
+            print(added_item, " has reached its maximum purchases and has been disabled!")
 
+        self.save_data()
+       
     def shorten_name(self, name):
         """Shortens a name with more than 4 segments"""
         if len(name.split(" ")) > 4:

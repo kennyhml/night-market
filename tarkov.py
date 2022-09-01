@@ -63,7 +63,7 @@ class TarkovBot:
         self.check_status()
         x, y = pg._normalizeXYArgs(x, y)
 
-        if self.config["mouse_movement"] == "warping":
+        if self.config["mouse_movement"] == "Warping":
             pg.moveTo(x, y)
             return
 
@@ -79,12 +79,22 @@ class TarkovBot:
         pg.click(button=button)
         self.sleep(delay / 2)
 
-    def press(self, key) -> None:
+    def press(self, key, delay=0) -> None:
         """Presses a passed key"""
         self.check_status()
 
         lg.info(f"Pressing {key}")
+        self.sleep(delay / 2)
         pg.press(key)
+        self.sleep(delay / 2)
+
+
+    @staticmethod
+    def sleep_start_delay():
+        with open("data/settings.json") as f:
+            data = json.load(f)
+        print("Bot has been started!")
+        time.sleep(data["start_delay"])
 
     @staticmethod
     def has_timedout(counter: float, max_time: int) -> bool:
