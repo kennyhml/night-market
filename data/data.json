@@ -43,14 +43,14 @@
         "enabled": true,
         "trader": "Therapist",
         "price": "39 943",
-        "buy_at": "38 800",
+        "buy_at": "39 300",
         "refresh": 3,
         "currency": "\u20bd",
         "size": "1x1",
         "buy_amount": 0
     },
     "Golden egg": {
-        "enabled": true,
+        "enabled": false,
         "trader": "Therapist",
         "price": "42 840",
         "buy_at": "42 000",
@@ -90,7 +90,7 @@
         "buy_amount": 0
     },
     "Gunpowder \"Hawk\"": {
-        "enabled": true,
+        "enabled": false,
         "price": "22 050",
         "buy_at": "21 000",
         "currency": "\u20bd",
@@ -122,7 +122,7 @@
     "Set of files \"Master\"": {
         "enabled": true,
         "price": "22 050",
-        "buy_at": "21 000",
+        "buy_at": "21 300",
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 2,
@@ -152,7 +152,7 @@
     "Battered antique book": {
         "enabled": true,
         "price": "39 708",
-        "buy_at": "38 572",
+        "buy_at": "38 872",
         "currency": "\u20bd",
         "trader": "Therapist",
         "refresh": 3,

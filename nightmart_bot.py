@@ -1,4 +1,5 @@
 
+from http.client import InvalidURL
 from threading import Thread
 import discord
 import json
@@ -17,11 +18,15 @@ class Discord:
             self.data = json.load(f)
         if not self.data["post_discord"]:
             return
-        self.url = "https://discord.com/api/webhooks/1012067077512761374/Z5iQrJVYJ65zCH-CGTrBhGEnjCBjj5pp2JIOdvwpD9wacxqZzZtfkXlhSFi_fmKls-OU"
+        self.url = self.data["discord_webhook"]
         self.avatar = "https://lostarkcodex.com/icons/use_9_242.webp"
-        self.webhook = discord.Webhook.from_url(
-            self.url, adapter=discord.RequestsWebhookAdapter()
-        )
+        try:
+            self.webhook = discord.Webhook.from_url(
+                self.url, adapter=discord.RequestsWebhookAdapter()
+            )
+        except:
+            print("Invalid URL!")
+            return
 
     def send_message(self, message):
         """Sends the given message to discord"""

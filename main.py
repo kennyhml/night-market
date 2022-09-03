@@ -1,5 +1,6 @@
 
 from data.statistics import Statistics
+from gui.login_ui_handle import Login
 from gui.main_ui_handle import MainUi
 from market.market import MarketUI, TooManyItems
 from market.purchase import OutOfMoneyError, InventoryFullError
@@ -115,6 +116,9 @@ def empty_inventory(
     ui.display_timeline_profits()
 
 if __name__ == "__main__":
+
+    login = Login()
+    login.display()
 
     listener = keyboard.Listener(on_press=on__key_press)
     listener.start()  # start listener thread
