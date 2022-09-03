@@ -3,7 +3,7 @@ from time import time
 from data.items import Inventory, Item
 from nightmart_bot import Discord
 from screen import Screen
-from tarkov import TarkovBot, lg
+from tarkov import BotTerminated, TarkovBot, lg
 import pyautogui as pg
 from data.captcha import CaptchaSolver
 from threading import Thread
@@ -55,12 +55,16 @@ class PurchaseHandler(TarkovBot):
         )
 
     def is_available(self, region):
-        return pg.locateOnScreen(
-            "images/purchase_3.png", region=region, confidence=0.5, grayscale=True
-        ) or pg.locateOnScreen(
-            "images/purchase_2.png", region=region, confidence=0.4, grayscale=True
-        ) or pg.locateOnScreen(
-            "images/purchase.png", region=region, confidence=0.6, grayscale=True
+        return (
+            pg.locateOnScreen(
+                "images/purchase_3.png", region=region, confidence=0.5, grayscale=True
+            )
+            or pg.locateOnScreen(
+                "images/purchase_2.png", region=region, confidence=0.4, grayscale=True
+            )
+            or pg.locateOnScreen(
+                "images/purchase.png", region=region, confidence=0.6, grayscale=True
+            )
         )
 
     def is_out_of_stock(self, region):
@@ -68,7 +72,8 @@ class PurchaseHandler(TarkovBot):
             "images/out of stock.png", region=region, confidence=0.7
         )
 
-    def is_pending(self, region):
+    @staticmethod
+    def is_pending(region):
         return pg.locateOnScreen(
             "Images/pending.png", region=region, confidence=0.6, grayscale=True
         )
@@ -148,15 +153,12 @@ class PurchaseHandler(TarkovBot):
             self.move_to(1146, 490)
             self.click(0.1)
             self.move_to(point)
-        
+
         # Y to confirm, check purchase succeeded, return item quantity
         self.press("Y")
-        start = time()
         while not self.amount:
             self.sleep(0.05)
-            print("Waiting for price to be processed...")
-        self.notify(f"Had to wait an additional {self.get_time(start)}s for the amount!")
-        
+
         if self.amount > 30:
             self.amount = 10
 
@@ -189,10 +191,10 @@ class PurchaseHandler(TarkovBot):
                 return True, None
 
             if self.amount_changed():
-                    self.notify("Purchase amount changed!")
-                    amount = self.get_new_amount()
-                    self.press("esc")
-                    return True, amount
+                self.notify("Purchase amount changed!")
+                amount = self.get_new_amount()
+                self.press("esc")
+                return True, amount
 
             elif self.offer_sold_out():
                 self.press("esc")
@@ -215,38 +217,40 @@ class PurchaseHandler(TarkovBot):
         """Gets the amount of items that can be bought"""
         self.notify("Checking item amount...")
         start = time()
-
-        if pg.locateOnScreen(
-            "images/11.png", region=(1108, 472, 25, 32), confidence=0.8
-        ):
-            self.amount = 11
-            return
-
-        # get image showing the amount, process and pass to tesseract
-        for region in [(1108, 472, 25, 32), (969, 514, 30, 24)]:
-
-            result = Screen.read_quantity(region)
-            # output ocr result
-            if result:
-                self.notify(f"Getting amount took {self.get_time(start)}s")
-                self.amount = int(result)
+        try:
+            if pg.locateOnScreen(
+                "images/11.png", region=(1108, 472, 25, 32), confidence=0.8
+            ):
+                self.amount = 11
                 return
 
-        self.amount = 1
+            # get image showing the amount, process and pass to tesseract
+            for region in [(1108, 472, 25, 32), (969, 514, 30, 24)]:
+
+                result = Screen.read_quantity(region)
+                # output ocr result
+                if result:
+                    self.notify(f"Getting amount took {self.get_time(start)}s")
+                    self.amount = int(result)
+                    return
+
+        finally:
+            self.amount = 2
 
     def validate_price(self, item: Item, price: int):
         """Takes an item and the price we think we bought it for and checks
         if that could be a valid price.
         """
         allowed_profit = 0.9
-        profit_limit = int(item.price) * allowed_profit
         try:
+            profit_limit = int(item.price) * allowed_profit
             if (
                 int(price) > int(item.buy_at)
                 or (int(item.price) - int(price)) > profit_limit
             ):
                 return item.buy_at
-        except: pass
+        except:
+            return item.price
         return price
 
     def get_item_price(self, item: Item, region):
@@ -268,7 +272,7 @@ class PurchaseHandler(TarkovBot):
         purchases: :class:`List`
             The list of purchases containing image path and purchase quantity
         """
-       
+
         try:
             # get price from image, amount from data
             bought_for = self.price

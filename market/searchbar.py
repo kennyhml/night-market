@@ -65,7 +65,7 @@ class SearchBar(TarkovBot):
         """Waits for the magnifying glass icon to be visible"""
         self.notify("Awaiting search finished...")
         c = 0
-        while not self.done_searching():
+        while self.done_searching():
             self.sleep(0.1)
             c += 1
             if c > 100:

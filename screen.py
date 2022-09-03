@@ -242,10 +242,6 @@ class Screen(TarkovBot):
         config = "--oem 3 --psm 6 -c tessedit_char_whitelist=" + allowed_characters
         path = "images/temp/captcha_target.png"
 
-        # upscale the image for better matches
-        discord = Discord()
-        discord.send_image(path, "A captcha has appeared:")
-
         # mask the image, upscale it a little
         img = Screen.mask(path)
         cv.imwrite(path, img)

@@ -1,3 +1,4 @@
+
 from threading import Thread
 import discord
 import json
@@ -55,6 +56,29 @@ class Discord:
             name="Posting to discord!",
         ).start()
 
+    def send_captcha(self, target, time):
+        embed = discord.Embed(
+            type="rich",
+            title=f"Solved a captcha!",
+            color=0x9807F2,
+        )
+
+        file = discord.File(f"images/temp/captcha.png", filename="image.png")
+        embed.add_field(name="Target item:", value=target)
+        embed.add_field(name="Time taken:", value=f"{time}s")
+        embed.set_image(url="attachment://image.png")
+        embed.set_footer(text="Night market on top!")
+        try:
+            # post the embed
+            self.webhook.send(
+                file=file,
+                avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg",
+                embed=embed,
+                username="Night market",
+            )
+        except Exception as e:
+            print(f"Failed to post to discord!\n{e}")
+            
     def send_purchase_embed(self, purchase, inventory):
         """Sends a purchase to discord"""
         if not self.data["post_discord"]:
@@ -65,43 +89,41 @@ class Discord:
             title=f"Purchased {purchase.item.name}!",
             color=0x9807F2,
         )
-        # read the items image into the embed
-        img = purchase.image.replace('"', "")
-        file = discord.File(f"images/items/{img}.png", filename="image.png")
-
-        # get inventory slots and profit in percent
-        taken, total = inventory.slots_taken, inventory.max_slots
-        profit_percent = round(
-            ((purchase.profit / purchase.amount) / int(purchase.item.price)) * 100
-        )
-
-        # create the embed with the data
-        embed.set_thumbnail(url="attachment://image.png")
-        embed.add_field(name="Bought for:ㅤㅤㅤ", value=f"{purchase.bought_at} ₽")
-        embed.add_field(name="Item value:ㅤㅤㅤ", value=f"{purchase.item.price} ₽")
-        embed.add_field(name="\u200b", value="\u200b")
-        embed.add_field(name="Quantity:ㅤㅤㅤ", value=f"{purchase.amount}")
-        embed.add_field(name="Profit made:ㅤㅤㅤ", value=f"{purchase.profit} ₽")
-        embed.add_field(name="\u200b", value="\u200b")
-        embed.add_field(name="Inventory:ㅤㅤㅤ", value=f"{taken}/{total}")
-        embed.add_field(name="Profit in %:ㅤㅤㅤ", value=f"{profit_percent} %")
-        embed.add_field(name="\u200b", value="\u200b")
-
-        embed.set_footer(text="Night market on top!")
-        webhook = discord.Webhook.from_url(
-            self.url, adapter=discord.RequestsWebhookAdapter()
-        )
         try:
+            # read the items image into the embed
+            img = purchase.image.replace('"', "")
+            file = discord.File(f"images/items/{img}.png", filename="image.png")
+
+            # get inventory slots and profit in percent
+            taken, total = inventory.slots_taken, inventory.max_slots
+            profit_percent = round(
+                ((purchase.profit / purchase.amount) / int(purchase.item.price)) * 100
+            )
+
+            # create the embed with the data
+            embed.set_thumbnail(url="attachment://image.png")
+            embed.add_field(name="Bought for:ㅤㅤㅤ", value=f"{purchase.bought_at} ₽")
+            embed.add_field(name="Item value:ㅤㅤㅤ", value=f"{purchase.item.price} ₽")
+            embed.add_field(name="\u200b", value="\u200b")
+            embed.add_field(name="Quantity:ㅤㅤㅤ", value=f"{purchase.amount}")
+            embed.add_field(name="Profit made:ㅤㅤㅤ", value=f"{purchase.profit} ₽")
+            embed.add_field(name="\u200b", value="\u200b")
+            embed.add_field(name="Inventory:ㅤㅤㅤ", value=f"{taken}/{total}")
+            embed.add_field(name="Profit in %:ㅤㅤㅤ", value=f"{profit_percent} %")
+            embed.add_field(name="\u200b", value="\u200b")
+
+            embed.set_footer(text="Night market on top!")
+
             # post the embed
-            webhook.send(
+            self.webhook.send(
                 file=file,
                 avatar_url="https://image-cdn-p.azureedge.net/title-image/tomjone/20220211010113113.jpg",
                 embed=embed,
                 username="Night market",
             )
-        except:
-            pass
-        
+        except Exception as e:
+            print(f"Failed to post to discord!\n{e}")
+
     def shorten_name(self, name):
         """Shortens a name down"""
         if len(name.split(" ")) > 4:

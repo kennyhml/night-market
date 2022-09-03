@@ -18,17 +18,6 @@ class MainUi(QMainWindow, Ui_Form):
     Inherits basic stuff from designer UI_Form, subclassed to add
     functionality to the widgets.
     """
-    raw_data_dict = {
-        "enabled": True,
-        "price": "10 000",
-        "buy_at": "9 000",
-        "currency": "₽",
-        "trader": "Therapist",
-        "refresh": 3,
-        "size": 1,
-        "buy_amount": 0
-    }
-
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(main_win)
@@ -162,6 +151,7 @@ class MainUi(QMainWindow, Ui_Form):
             "trader": "Therapist",
             "refresh": 3,
             "size": "1x1",
+            "buy_amount": 0
         }
 
         self.data[item_name] = data

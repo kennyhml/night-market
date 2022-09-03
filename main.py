@@ -88,12 +88,26 @@ def main():
                 
             except Exception:
                 lg.exception("Unhandled error in main function!")
-                market.unstuck()
+                market.press("esc")
 
 
 def empty_inventory(
     statistics: Statistics, inventory: Inventory, items: list[Item]
 ):
+    """Empties the inventory at the vendors
+
+    Parameters
+    -------------
+    statistics: :class:`Statistics`
+        The statistics instance of the current run to add the profit to
+
+    inventory: :class:`Inventory`
+        The inventory configuration dataclass
+        
+    items: :class:`list[Item]`
+        A list of the items to check if there are any to sell
+    """
+
     vendor = VendorHandler()
     current_money = vendor.sell(items, inventory)
     statistics.send_stats(current_money)

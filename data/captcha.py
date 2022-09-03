@@ -80,7 +80,6 @@ class CaptchaSolver(TarkovBot):
         # process the captcha and get the desired item
         image_region, item_region = self.get_captcha_boundaries()
         target_item = self.get_captcha_target()
-        self.discord.send_message(f"Captcha target item: {target_item}")
 
         # check if the item is in our database, get the image
         image = self.compare_target_to_database(target_item)
@@ -88,13 +87,14 @@ class CaptchaSolver(TarkovBot):
         # convert all occurrences into points, tick them all
         filtered_points = self.find_all_occurrences(image, image_region)
         self.check_all_items(filtered_points)
+        Screen.get_screenshot("images/temp/captcha.png", region=image_region)
 
         # wait for the green blinking and escape to close the captcha instantly
         if self.confirm():
             while not Screen.captcha_succeeded(item_region):
                 self.sleep(0.1)
             self.press("esc")
-            self.discord.send_message(f"Captcha took {self.get_time(start)}s to solve!")
+            self.discord.send_captcha(target_item, self.get_time(start))
             return
 
         # captcha failed, try again
@@ -180,13 +180,11 @@ class CaptchaSolver(TarkovBot):
             pass
 
         # get the closest matching item name
-        self.discord.send_message("Item not be determined! Checking closest match...")
         closest_match = difflib.get_close_matches(
             target, list(CAPTCHA_ITEMS), n=1, cutoff=0.5
         )
         # return the image of the closest matching item name
         if closest_match:
-            self.discord.send_message(f"Found match as: {closest_match}!")
             return CAPTCHA_ITEMS[closest_match[0]]
 
         self.discord.send_message("CRITICAL! Item could not be determined whatsoever!")
@@ -217,6 +215,7 @@ class CaptchaSolver(TarkovBot):
         """Find all occurences of the item within the captcha"""
         self.check_status()
         self.notify("Checking for occurrences...")
+        self.get_screenshot("images/temp/captcha.png", region)
 
         # get a list of all matches, note that this function will match the same image
         # muliple times on the same location!

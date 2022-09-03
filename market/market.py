@@ -53,12 +53,12 @@ class MarketUI(TarkovBot):
         )
 
     def await_market_open(self):
-        """Awaits the market to open, raises a TimeoutError after 5 minutes"""
+        """Awaits the market to open, raises a TimeoutError after 10s"""
         counter = 0
         while not self.is_open():
             self.sleep(0.1)
             counter += 1
-            if counter > 50:
+            if counter > 100:
                 raise TimeoutError
 
     def await_items_listed(self):
@@ -88,20 +88,25 @@ class MarketUI(TarkovBot):
         """Opens the flea market tab, most of the time will already be open"""
         if not self.is_open():
             # not already open
+            print("Opening...")
             self.move_to(1251, 1063)
             self.click()
             self.await_market_open()
 
         self.notify("Opened the flea market!")
+        self.sleep(1)
         if self.config["use_wishlist"] and pg.pixelMatchesColor(
             161, 83, (188, 188, 164), tolerance=40
         ):
             self.move_to(250, 86)
+            self.click()
+            print("Opening wishlist tab...")
 
         elif not pg.pixelMatchesColor(162, 91, (190, 188, 161), tolerance=40):
             self.move_to(112, 86)
+            self.click()
+            print("Opening purchase tab...")
 
-        self.click()
 
     def search_item(self, item: Item) -> None:
         """Searches for an item and sets the filter given the items properties
@@ -152,6 +157,22 @@ class MarketUI(TarkovBot):
             )
             raise TooManyItems
 
+    def process_price(self, item, region, handler):
+        self.notify("Started processing price...")
+        get_price = Thread(
+            target=handler.get_item_price,
+            args=(item, region),
+            name="Processing price",
+        )
+        get_price.start()
+
+    def go_next_purchase(self, region) -> bool:
+        while PurchaseHandler.is_pending(region):
+            pass
+        
+        return self.topslot_is_loaded()
+
+
     def get_available_purchases(self, item: Item, inventory: Inventory):
         """Main purchase finding function, checks the status of each item slot
         to determine if theres any available purchases.
@@ -198,7 +219,6 @@ class MarketUI(TarkovBot):
                 # get item status
                 if purchase_ui.is_available(status_region):
                     self.check_anomaly()
-                    start = time.time()
                     founds.add(attempt)
 
                     if grab_img:
@@ -206,45 +226,29 @@ class MarketUI(TarkovBot):
                         grab_img = False
 
                     # thread the price OCR beforehand so we have the data ready
-                    get_price = Thread(
-                        target=purchase_ui.get_item_price,
-                        args=(item, price_region),
-                        name="Processing price",
-                    )
-                    get_price.start()
-
                     # attempt to purchase the item, get success state and quantity
+                    self.process_price(item, price_region, purchase_ui)
                     success, amount, skip = purchase_ui.do_purchase(
                         self.rect_to_center(status_region)
                     )
-                    self.notify(
-                        f"Purchase succeeded: {success}\nQuanitity: {amount}\nTime: {self.get_time(start)}s"
-                    )
 
-                    # add the purchase to our purchases to post to discord later
+                    # check if the purchase succeeded
                     if not success:
-                        # someone was faster, continue to next slot
                         self.notify("Purchase failed!")
                         continue
-                    start = time.time()
+
                     inventory.add_items(int(amount), item.size)
                     purchase = purchase_ui.post_profit(item, inventory, int(amount))
-                    box_nr += 1
-
                     if purchase:
                         purchases.append(purchase)
-                    self.notify(f"Processing took {self.get_time(start)}s")
+                    box_nr += 1
 
-                    # wait for the status to refresh...
+                    # only skip to next slot if the purchase was full amount
                     if not skip:
                         box_nr = 0
-                    while purchase_ui.is_pending(status_region):
-                        pass
-                    self.notify(f"Purchase was pending for {self.get_time(start)}s")
 
-                    if self.topslot_is_loaded():
-                        continue
-                    break
+                    if not self.go_next_purchase(status_region):
+                        break
 
                 # item is already out of stock, just skip and get the next instead
                 elif purchase_ui.is_out_of_stock(status_region):

@@ -15,7 +15,7 @@ class Installer:
 
     zip_link = "https://github.com/stascorp/rdpwrap/releases/download/v1.6.2/RDPWrap-v1.6.2.zip"
     updater_link = "https://github.com/asmtron/rdpwrap/raw/master/autoupdate.zip"
-    rdp_dir = "C:\\Program Files\\RDP Wrapper test"
+    rdp_dir = "C:\\Program Files\\RDP Wrapper"
 
     def download(self, url: str, target_dir: str) -> None:
         """Download zip from URL and manifest to the target directory"""
