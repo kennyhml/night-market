@@ -1,5 +1,6 @@
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6 import QtGui
 import json
 import sys
 import ctypes
@@ -7,8 +8,9 @@ from gui.main_ui import Ui_Form
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
 from data.items import Database
-
-app = QApplication()
+import key_check
+import rdp
+from gui.login_ui_handle import app
 main_win = QtWidgets.QMainWindow()
 
 
@@ -27,6 +29,7 @@ class MainUi(QMainWindow, Ui_Form):
         self.connect_changes()
         self.save_changes = True
         self.update_statistics()
+        self.start_key_refresh_timer()
 
     def update_statistics(self):
         """Displays the currently selected statistic"""
@@ -44,11 +47,18 @@ class MainUi(QMainWindow, Ui_Form):
     def display(self):
         """Displays the ui"""
         main_win.show()
+        main_win.setWindowTitle(f"Night market")
+        main_win.setWindowIcon(QtGui.QIcon(("images/gui/rouble_icon.png")))
+        main_win.setIconSize(QtCore.QSize(96, 96))
         sys.exit(app.exec())
 
     def open_tab(self, index):
         """Opens a tab by index"""
         self.main_tab.setCurrentIndex(index)
+
+    def refresh_key(self):
+        if not key_check.check_key_valid_hwid():
+            sys.exit()
 
     def start_key_refresh_timer(self):
         """Starts a timer to check the key ever 10 minutes"""
@@ -203,6 +213,10 @@ class MainUi(QMainWindow, Ui_Form):
 
         for entry in to_rm:
             self.stats.pop(entry)
+
+    def install_rdp(self):
+        installer = rdp.Installer()
+        installer.run()
 
     def format(self, num) -> str:
         """Formats an integer with blank spaces, eg: `10000 -> 10 000`"""
