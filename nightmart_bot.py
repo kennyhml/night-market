@@ -148,9 +148,8 @@ class Discord:
         )
 
         # format the both ways of calculating profit and add them together
-        profit_diff = f"{data['total_profit'][0]:_}".replace("_", " ")
-        profit_items = f"{data['total_profit'][1]:_}".replace("_", " ")
-        total_profit = f"{profit_items} ({profit_diff}) ₽"
+        profit = f"{data['total_profit']:_}".replace("_", " ")
+        total_profit = f"{profit}₽"
 
         hourly_rate = f"{data['hourly_profit']:_}".replace("_", " ") + " ₽"
         current_money = f"{data['current_money']:_}".replace("_", " ") + " ₽"

@@ -1,9 +1,10 @@
 from PySide6 import QtCore, QtWidgets
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QMainWindow
 from PySide6 import QtGui
 import json
 import sys
 import ctypes
+import webbrowser
 from gui.main_ui import Ui_Form
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
@@ -447,6 +448,8 @@ f"	color: rgb{rgb};\n"
         self.add_image.clicked.connect(self.add_inv_image)
         self.reset_item_stats.clicked.connect(self.reset_current_item)
         self.reset_all_items_stats.clicked.connect(self.reset_all_items)
+        self.run_rdp_installer.clicked.connect(self.install_rdp)
+        self.open_rdp_guide.clicked.connect(lambda: webbrowser.open("https://discord.com/channels/1015628426293543033/1015634321811451958"))
 
     def connect_changes(self):
 

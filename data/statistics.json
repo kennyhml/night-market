@@ -1,15 +1,15 @@
 {
     "Toilet paper": {
-        "total_quantity": 3041,
-        "total_profit": 2562799,
-        "times_searched": 6156,
-        "times_found": 831
+        "total_quantity": 3426,
+        "total_profit": 2894295,
+        "times_searched": 7112,
+        "times_found": 951
     },
     "OFZ 30x160mm shell": {
-        "total_quantity": 2339,
-        "total_profit": 5653194,
-        "times_searched": 13272,
-        "times_found": 1597
+        "total_quantity": 2666,
+        "total_profit": 6457949,
+        "times_searched": 14700,
+        "times_found": 1797
     },
     "Round pliers": {
         "total_quantity": 30,
@@ -24,10 +24,10 @@
         "times_found": 18
     },
     "Old firesteel": {
-        "total_quantity": 677,
-        "total_profit": 2148981,
-        "times_searched": 8854,
-        "times_found": 530
+        "total_quantity": 817,
+        "total_profit": 2574479,
+        "times_searched": 9802,
+        "times_found": 630
     },
     "Golden egg": {
         "total_quantity": 427,
@@ -36,10 +36,10 @@
         "times_found": 329
     },
     "Can of Dr. Lupo's coffee beans": {
-        "total_quantity": 674,
-        "total_profit": 1359982,
-        "times_searched": 8680,
-        "times_found": 486
+        "total_quantity": 710,
+        "total_profit": 1438467,
+        "times_searched": 9620,
+        "times_found": 514
     },
     "Ratchet wrench": {
         "total_quantity": 6,
@@ -48,10 +48,10 @@
         "times_found": 5
     },
     "Military gyrotachometer": {
-        "total_quantity": 559,
-        "total_profit": 1724523,
-        "times_searched": 4458,
-        "times_found": 364
+        "total_quantity": 594,
+        "total_profit": 1817860,
+        "times_searched": 4928,
+        "times_found": 390
     },
     "Gunpowder \"Hawk\"": {
         "total_quantity": 365,
@@ -72,10 +72,10 @@
         "times_found": 18
     },
     "Set of files \"Master\"": {
-        "total_quantity": 682,
-        "total_profit": 1247547,
-        "times_searched": 6489,
-        "times_found": 493
+        "total_quantity": 818,
+        "total_profit": 1487556,
+        "times_searched": 7191,
+        "times_found": 579
     },
     "Golden 1GPhone smartphone": {
         "total_quantity": 2,
@@ -90,16 +90,16 @@
         "times_found": 13
     },
     "Battered antique book": {
-        "total_quantity": 438,
-        "total_profit": 1530640,
-        "times_searched": 8288,
-        "times_found": 336
+        "total_quantity": 495,
+        "total_profit": 1713515,
+        "times_searched": 9208,
+        "times_found": 374
     },
     "Cat figurine": {
-        "total_quantity": 595,
-        "total_profit": 1321029,
-        "times_searched": 6459,
-        "times_found": 429
+        "total_quantity": 686,
+        "total_profit": 1586255,
+        "times_searched": 7149,
+        "times_found": 491
     },
     "LVNDMARK's rat poison": {
         "total_quantity": 7,
@@ -108,21 +108,6 @@
         "times_found": 7
     },
     "timeline": {
-        "2022-09-01": {
-            "19:27:43": 353820,
-            "19:44:55": 327120,
-            "20:27:23": 377040,
-            "20:45:58": 317340,
-            "20:54:45": 355920,
-            "21:11:19": 303360,
-            "21:23:53": 459000,
-            "21:33:41": 431760,
-            "21:50:36": 298020,
-            "21:59:09": 317520,
-            "22:11:12": 309660,
-            "22:26:55": 278520,
-            "22:36:36": 292680
-        },
         "2022-09-02": {
             "17:48:09": 499680,
             "18:38:27": 12840,
@@ -178,7 +163,47 @@
             "19:19:45": 308760,
             "19:32:34": 303720,
             "19:39:09": 324120,
-            "19:45:47": 327600
+            "19:45:47": 327600,
+            "19:55:48": 352560,
+            "20:08:32": 343080,
+            "20:15:36": 349380,
+            "20:29:11": 341040,
+            "20:38:47": 345360,
+            "20:52:36": 340380,
+            "20:59:41": 345120,
+            "21:05:24": 348180,
+            "21:14:31": 352020,
+            "21:23:54": 350820,
+            "21:38:44": 345000,
+            "21:47:23": 347340,
+            "22:01:23": 347940,
+            "22:10:33": 352440,
+            "22:16:08": 358560,
+            "22:29:33": 358080
+        },
+        "2022-09-04": {
+            "13:01:04": 279180,
+            "13:38:00": 312420,
+            "14:11:43": 246600,
+            "14:22:59": 525000,
+            "14:48:25": 476760,
+            "14:56:48": 531840,
+            "15:11:18": 364080,
+            "15:16:41": 404580,
+            "15:27:47": 383400,
+            "15:34:46": 396360,
+            "15:41:46": 397260,
+            "15:46:15": 415620,
+            "15:57:40": 395880,
+            "16:07:32": 396120,
+            "16:20:34": 375420,
+            "16:32:24": 389460,
+            "16:39:58": 398160,
+            "16:44:40": 409980,
+            "16:48:24": 404520,
+            "16:54:25": 413520,
+            "17:08:11": 392760,
+            "17:21:19": 380220
         }
     }
 }

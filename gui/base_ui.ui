@@ -2317,6 +2317,68 @@ background-color: rgb(35,35,40)
        <number>5</number>
       </property>
      </widget>
+     <widget class="QPushButton" name="run_rdp_installer">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>510</y>
+        <width>151</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Check if the webhook is valid</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton:pressed {
+    background-color: rgb(100,30,30);
+}
+
+QPushButton {
+    background-color: rgb(30,30,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Run RDP installer</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="open_rdp_guide">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>510</y>
+        <width>171</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Variable Display Light</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Check if the webhook is valid</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton:pressed {
+    background-color: rgb(100,30,30);
+}
+
+QPushButton {
+    background-color: rgb(30,30,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Take me to RDP guide</string>
+      </property>
+     </widget>
      <zorder>label_7</zorder>
      <zorder>use_wishlist_tab</zorder>
      <zorder>mouse_movements</zorder>
@@ -2362,6 +2424,8 @@ background-color: rgb(35,35,40)
      <zorder>purchase_failsafe</zorder>
      <zorder>inventory_empty_at_slots_2</zorder>
      <zorder>start_delay</zorder>
+     <zorder>run_rdp_installer</zorder>
+     <zorder>open_rdp_guide</zorder>
     </widget>
     <widget class="QWidget" name="maintab_license">
      <attribute name="title">

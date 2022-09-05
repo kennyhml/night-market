@@ -653,6 +653,28 @@ class Ui_Form(object):
         self.start_delay.setMaximum(30)
         self.start_delay.setSingleStep(1)
         self.start_delay.setValue(5)
+        self.run_rdp_installer = QPushButton(self.maintab_general_config)
+        self.run_rdp_installer.setObjectName(u"run_rdp_installer")
+        self.run_rdp_installer.setGeometry(QRect(340, 510, 151, 30))
+        self.run_rdp_installer.setFont(font3)
+        self.run_rdp_installer.setStyleSheet(u"QPushButton:pressed {\n"
+"    background-color: rgb(100,30,30);\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    background-color: rgb(30,30,30);\n"
+"}")
+        self.open_rdp_guide = QPushButton(self.maintab_general_config)
+        self.open_rdp_guide.setObjectName(u"open_rdp_guide")
+        self.open_rdp_guide.setGeometry(QRect(510, 510, 171, 30))
+        self.open_rdp_guide.setFont(font3)
+        self.open_rdp_guide.setStyleSheet(u"QPushButton:pressed {\n"
+"    background-color: rgb(100,30,30);\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    background-color: rgb(30,30,30);\n"
+"}")
         self.main_tab.addTab(self.maintab_general_config, "")
         self.label_7.raise_()
         self.use_wishlist_tab.raise_()
@@ -699,6 +721,8 @@ class Ui_Form(object):
         self.purchase_failsafe.raise_()
         self.inventory_empty_at_slots_2.raise_()
         self.start_delay.raise_()
+        self.run_rdp_installer.raise_()
+        self.open_rdp_guide.raise_()
         self.maintab_license = QWidget()
         self.maintab_license.setObjectName(u"maintab_license")
         self.label_84 = QLabel(self.maintab_license)
@@ -2251,6 +2275,14 @@ class Ui_Form(object):
 #if QT_CONFIG(tooltip)
         self.start_delay.setToolTip(QCoreApplication.translate("Form", u"Determine at how many slots you want the bot to sell, it keeps track of how much it bought.", None))
 #endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.run_rdp_installer.setToolTip(QCoreApplication.translate("Form", u"Check if the webhook is valid", None))
+#endif // QT_CONFIG(tooltip)
+        self.run_rdp_installer.setText(QCoreApplication.translate("Form", u"Run RDP installer", None))
+#if QT_CONFIG(tooltip)
+        self.open_rdp_guide.setToolTip(QCoreApplication.translate("Form", u"Check if the webhook is valid", None))
+#endif // QT_CONFIG(tooltip)
+        self.open_rdp_guide.setText(QCoreApplication.translate("Form", u"Take me to RDP guide", None))
         self.main_tab.setTabText(self.main_tab.indexOf(self.maintab_general_config), QCoreApplication.translate("Form", u"Chaos Bot", None))
         self.label_84.setText(QCoreApplication.translate("Form", u"<html><head/><body><p>Registered devices:</p></body></html>", None))
         self.registered_devices.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" color:#ff0000;\">0/1</span></p></body></html>", None))

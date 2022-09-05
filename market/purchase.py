@@ -233,8 +233,11 @@ class PurchaseHandler(TarkovBot):
                     self.notify(f"Getting amount took {self.get_time(start)}s")
                     self.amount = int(result)
                     return
+            print("Amount not determined!")
+            self.amount = 2
 
-        finally:
+        except Exception as e:
+            print("ERROR GETTING ITEM AMOUNT", e)
             self.amount = 2
 
     def validate_price(self, item: Item, price: int):

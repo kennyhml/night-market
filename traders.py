@@ -34,8 +34,7 @@ class VendorHandler(TarkovBot):
     def click(self, delay=0.3, button="left") -> None:
         """Override click method for click delays"""
         self.check_status()
-        lg.info(f"Clicking button: {button}; Delay: {delay}")
-        
+
         multiplier = self.config["sell_speed"]
         if multiplier != 1:
             multiplier = 1 + (multiplier * 0.2)

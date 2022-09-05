@@ -21,6 +21,7 @@ class Statistics:
         self.session_start = time.time()
         self.last_profit = None
         self.start_money = None
+        self.total_profit = 0
         self.load_data()
 
     def load_data(self):
@@ -71,7 +72,7 @@ class Statistics:
             self.items[added_item]["total_profit"]
             / self.items[added_item]["total_quantity"]
         )
-
+        self.total_profit += profit
         if item.buy_amount and quantity >= item.buy_amount:
             self.data[added_item]["enabled"] = False
             print(added_item, " has reached its maximum purchases and has been disabled!")
@@ -145,9 +146,14 @@ class Statistics:
         self.last_sent = time.time()
         return time_taken
 
-    def get_total_profit(self):
+    def get_total_profit(self, calculated_profit=None):
         """Gets the sum of all items"""
-        return sum([self.items[item]["total_profit"] for item in self.items])
+        if not calculated_profit:
+            return self.total_profit
+
+        if calculated_profit - 50000 <= self.total_profit <= calculated_profit + 50000:
+            self.total_profit = calculated_profit
+        return self.total_profit
 
     def profit_to_money(self):
         """Gets the real money value of the current profit"""
@@ -155,20 +161,7 @@ class Statistics:
 
     def get_emptying_profit(self):
         """Gets the emptying profit"""
-        total_profit = self.get_total_profit()
-        # if theres no prior profit, the current total profit is the profit
-        # and the current profit will be the prior profit for next time
-        if not self.last_profit:
-            profit = total_profit
-            self.last_profit = profit
-
-        # there already is a profit so this times profit is the difference of
-        # this times total profit - last times total profit
-        else:
-            profit = total_profit - self.last_profit
-            self.last_profit = total_profit
-
-        return profit
+        return self.total_profit
 
     def get_profit_per_hour(self):
         """Gets the current hourly profit"""
@@ -197,8 +190,7 @@ class Statistics:
         data = {
             "top_items": self.get_special_items(),
             "bot_items": self.get_special_items(False),
-            "total_profit": (current_money - self.start_money, self.get_total_profit()),
-            "emptying_profit": profit,
+            "total_profit": int(self.get_total_profit(current_money - self.start_money)),
             "current_money": current_money,
             "session_time": self.get_session_time(),
             "empty_time": self.get_cycle_time(),
