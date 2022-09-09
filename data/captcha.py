@@ -91,8 +91,11 @@ class CaptchaSolver(TarkovBot):
 
         # wait for the green blinking and escape to close the captcha instantly
         if self.confirm():
+            start = time()
             while not Screen.captcha_succeeded(item_region):
                 self.sleep(0.1)
+                if self.has_timedout(start, 6):
+                    return
             self.press("esc")
             self.discord.send_captcha(target_item, self.get_time(start))
             return
