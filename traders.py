@@ -158,6 +158,8 @@ class VendorHandler(TarkovBot):
             for item in items:
                 points = self.locate_all_occurences(item)
                 if not points:
+                    if i == 0:
+                        self.move_to(1700, 500)
                     continue
                 for point in points:
                     # check if the sell field is nearly full

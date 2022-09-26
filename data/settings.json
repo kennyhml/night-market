@@ -6,7 +6,7 @@
     "item_searching": "Type out",
     "use_wishlist": false,
     "allowed_scrolls": 10,
-    "empty_inv_at": 50,
+    "empty_inv_at": 30,
     "post_discord": true,
     "discord_mention": false,
     "purchase_failsafe": true,

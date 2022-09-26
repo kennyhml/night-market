@@ -116,8 +116,12 @@ class Filter(TarkovBot):
     def confirm_search(self):
         """Confirm the filter"""
         self.move_to(611, 439)
+        c = 0
         while not self.items_listed():
             self.sleep(0.1)
+            c += 1
+            if c > 100:
+                raise TimeoutError
         self.click(0.2)
 
     def configurate(self):
