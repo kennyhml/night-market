@@ -10,7 +10,7 @@
     "post_discord": true,
     "discord_mention": false,
     "purchase_failsafe": true,
-    "discord_webhook": "https://discord.com/api/webhooks/1012067077512761374/Z5iQrJVYJ65zCH-CGTrBhGEnjCBjj5pp2JIOdvwpD9wacxqZzZtfkXlhSFi_fmKls-OU",
+    "discord_webhook": "",
     "discord_id": "",
     "tesseract_path": "C:/Program Files/Tesseract-OCR/tesseract.exe",
     "start_delay": 5,
