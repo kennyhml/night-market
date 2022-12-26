@@ -4,7 +4,6 @@ from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6 import QtGui
 from gui.login_ui import LoginUi
-import key_check as key
 import json
 import webbrowser
 
@@ -34,6 +33,9 @@ class Login(QMainWindow, LoginUi):
         )
 
     def validate_key(self):
+        return True
+
+
         with open("data\settings.json", "r") as json_file:
             config = json.load(json_file)
 

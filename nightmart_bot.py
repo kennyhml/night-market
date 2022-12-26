@@ -1,5 +1,4 @@
 
-from http.client import InvalidURL
 from threading import Thread
 import discord
 import json

@@ -9,7 +9,6 @@ from gui.main_ui import Ui_Form
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
 from data.items import Database
-import key_check
 import rdp
 from gui.login_ui_handle import app
 main_win = QtWidgets.QMainWindow()
@@ -56,10 +55,6 @@ class MainUi(QMainWindow, Ui_Form):
     def open_tab(self, index):
         """Opens a tab by index"""
         self.main_tab.setCurrentIndex(index)
-
-    def refresh_key(self):
-        if not key_check.check_key_valid_hwid():
-            sys.exit()
 
     def start_key_refresh_timer(self):
         """Starts a timer to check the key ever 10 minutes"""
